@@ -1,0 +1,82 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: var(--height-header);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #515154;
+}
+
+.inner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    margin-left: 121px;
+}
+
+.logo-item {
+    width: 173px;
+    height: 45px;
+}
+
+.button-list {
+    display: flex;
+}
+
+.button-user {
+    display: flex;
+    align-items: center;
+    margin-right: 200px;
+}
+
+.search-icon {
+    background: url(https://shopdunk.com/images/uploaded-source/icon/search-icon-1.png) left center no-repeat;
+    background-position: 60%;
+    padding: 30px 15px;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--white);
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 40px;
+}
+
+.cart {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-icon,
+.user-icon {
+    padding: 30px 15px;
+    margin-right: 10px;
+    font-size: 15px;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 0px 6px;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+    font-family: var(--font-family);
+    background-color: var(--primary);
+}
