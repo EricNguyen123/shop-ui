@@ -15,7 +15,7 @@ function Product({ directive, title }) {
                 <div className={cx('page-name')}>
                     <h1 className={cx('name')}>{title}</h1>
                 </div>
-                <BannerPage service={BannerPageService} name="iPhone" />
+                <BannerPage service={BannerPageService} name={title} />
             </div>
         </div>
     );
