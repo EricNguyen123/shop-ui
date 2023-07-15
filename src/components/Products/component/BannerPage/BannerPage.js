@@ -13,14 +13,14 @@ const B_INIT = 1;
 function BannerPage({ service, name }) {
     const [item, setItem] = useState(0);
     const [resItem, setResItem] = useState([]);
-    const [link, setLink] = useState(
-        'https://shopdunk.com/images/uploaded/LINH%20CHERRYYYYYYY/danh%20m%E1%BB%A5c%20iphone%20ipad%20t7-10.jpg',
-    );
+    const [link, setLink] = useState('');
     useEffect(() => {
         service
             .getBanner({ name: name })
             .then((data) => {
-                setResItem(data[0].links);
+                const res = data[0].links;
+                setLink(res[0]);
+                setResItem(res);
             })
             .catch((error) => {
                 console.log(error);
@@ -60,7 +60,7 @@ function BannerPage({ service, name }) {
     return (
         <div className={cx('wrapper')}>
             <FontAwesomeIcon className={cx('left-btn')} onClick={handleViewLeft} icon={faCircleChevronLeft} />
-            <Image className={cx('image')} src={link} />
+            {link && <Image className={cx('image')} src={link} />}
             <FontAwesomeIcon className={cx('right-btn')} onClick={handleViewRight} icon={faCircleChevronRight} />
         </div>
     );
