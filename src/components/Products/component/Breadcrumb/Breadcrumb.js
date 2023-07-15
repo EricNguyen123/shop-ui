@@ -9,7 +9,7 @@ function Breadcrumb({ directive, title }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content-path')}>
-                {directive ?? (
+                {directive && (
                     <div className={cx('item')}>
                         <Link to={config.routes.home} className={cx('itemName')}>
                             Trang chủ

@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 function Iphone() {
     return (
         <div className={cx('wrapper')}>
-            <Product directiev={true} title="iPhone" />
+            <Product directive={true} title="iPhone" />
         </div>
     );
 }
