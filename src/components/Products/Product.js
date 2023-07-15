@@ -3,7 +3,9 @@ import styles from './Product.module.scss';
 
 import Breadcrumb from './component/Breadcrumb';
 import BannerPage from './component/BannerPage';
+import SeriesProduct from './component/SeriesProduct';
 import * as BannerPageService from '~/services/BannerPageService';
+import * as SeriesService from '~/services/SeriesService';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +18,7 @@ function Product({ directive, title }) {
                     <h1 className={cx('name')}>{title}</h1>
                 </div>
                 <BannerPage service={BannerPageService} name={title} />
+                <SeriesProduct service={SeriesService} name={title} />
             </div>
         </div>
     );
