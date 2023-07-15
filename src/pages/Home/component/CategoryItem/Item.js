@@ -4,19 +4,34 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Image from '~/components/Image';
+import { useEffect, useState } from 'react';
+import * as EndowService from '~/services/EndowService';
 
 const cx = classNames.bind(styles);
 
 function Item({ data }) {
+    const [endow, setEndow] = useState([]);
+
+    const idEndow = data.productEndow;
+
+    useEffect(() => {
+        EndowService.getEndow({ id: idEndow })
+            .then((result) => {
+                setEndow(result);
+            })
+            .catch((error) => {
+                return error;
+            });
+    }, [idEndow]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('item')}>
                 <div className={cx('icon')}>
-                    <Image
-                        className={cx('icon-img')}
-                        src="https://shopdunk.com/images/uploaded/icon/chao-tan-sv.png"
-                        alt="ctsv"
-                    />
+                    {idEndow &&
+                        endow.map((result, index) => (
+                            <Image key={index} className={cx('icon-img')} src={result.link} alt="ctsv" />
+                        ))}
                 </div>
                 <div className={cx('item-img')}>
                     <Image className={cx('product')} src={data.color.popular} alt="product" />
@@ -26,7 +41,7 @@ function Item({ data }) {
                 </div>
                 <div className={cx('price')}>
                     <span className={cx('actual-price')}>{data.actualPrice}</span>
-                    <span className={cx('old-price')}>{data.oldPrice}</span>
+                    {data.oldPrice && <span className={cx('old-price')}>{data.oldPrice}</span>}
                 </div>
             </div>
         </div>

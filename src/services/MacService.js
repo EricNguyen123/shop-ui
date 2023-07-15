@@ -2,7 +2,7 @@ import * as httpRequest from '~/util/httpRequest';
 
 export const get = async ({ _page, _limit }) => {
     try {
-        const res = await httpRequest.get('iPhone', {
+        const res = await httpRequest.get('Mac', {
             params: {
                 _page,
                 _limit,

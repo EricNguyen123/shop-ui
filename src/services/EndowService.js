@@ -1,11 +1,10 @@
 import * as httpRequest from '~/util/httpRequest';
 
-export const get = async ({ _page, _limit }) => {
+export const getEndow = async ({ id }) => {
     try {
-        const res = await httpRequest.get('iPhone', {
+        const res = await httpRequest.get('endow', {
             params: {
-                _page,
-                _limit,
+                id,
             },
         });
         return res;

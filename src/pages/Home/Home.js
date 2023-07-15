@@ -5,7 +5,15 @@ import Banner from './component/Banner';
 import BannerSmall from './component/BannerSmall';
 import CategoryItem from './component/CategoryItem';
 import * as IphoneService from '~/services/IphoneService';
+import * as IpadService from '~/services/IpadService';
+import * as MacService from '~/services/MacService';
+import * as WatchService from '~/services/WatchService';
+import * as SoundService from '~/services/SoundService';
+import * as AccessoryService from '~/services/AccessoryService';
 import config from '~/config';
+import { Link } from 'react-router-dom';
+
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +25,43 @@ function Home() {
                 <BannerSmall className={cx('banner-small')} />
                 <div className={cx('item-list')}>
                     <CategoryItem nameService={IphoneService} title="iPhone" path={config.routes.iphone} />
+                    <CategoryItem nameService={IpadService} title="iPad" path={config.routes.ipad} />
+                    <CategoryItem nameService={MacService} title="Mac" path={config.routes.mac} />
+                    <CategoryItem nameService={WatchService} title="Watch" path={config.routes.watch} />
+                    <CategoryItem nameService={SoundService} title="Âm thanh" path={config.routes.soundpage} />
+                    <CategoryItem nameService={AccessoryService} title="Phụ kiện" path={config.routes.accessorypage} />
+                </div>
+                <div className={cx('banner-home-bottom')}>
+                    <div className={cx('topic-block')}>
+                        <div className={cx('topic-block-body')}>
+                            <p>
+                                <Link to="#">
+                                    <Image
+                                        className={cx('img-banner')}
+                                        src="https://shopdunk.com/images/uploaded/Trang%20ch%E1%BB%A7/2.jpeg"
+                                        alt="banner"
+                                    />
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className={cx('footer-newletter')}>
+                <div className={cx('heading-newletter')}>Đăng kí nhận tin</div>
+                <p>Thông tin sản phẩm mới nhất và chương trình khuyến mãi</p>
+                <div className={cx('newsletter-sub')}>
+                    <input
+                        className={cx('newsletter-subscribe-text')}
+                        placeholder="Email của bạn"
+                        aria-label="Đăng ký nhận bản tin của chúng tôi"
+                        type="email"
+                        name="NewsletterEmail"
+                    />
+                    <button type="button" className={cx('newsletter-subscribe-button')}>
+                        Đăng ký
+                    </button>
                 </div>
             </div>
         </div>

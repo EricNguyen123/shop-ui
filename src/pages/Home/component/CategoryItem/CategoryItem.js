@@ -16,7 +16,7 @@ function CategoryItem({ nameService, title, path }) {
     const [result, setResult] = useState([]);
     useEffect(() => {
         nameService
-            .getIphone({ _page: PAGE_INIT, _limit: LIMIT_INIT })
+            .get({ _page: PAGE_INIT, _limit: LIMIT_INIT })
             .then((data) => {
                 setResult(data);
             })
