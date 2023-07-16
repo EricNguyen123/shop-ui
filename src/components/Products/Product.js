@@ -20,7 +20,7 @@ function Product({ nameService, directive, title, path }) {
                 </div>
                 <BannerPage service={BannerPageService} name={title} />
                 <SeriesProduct service={SeriesService} name={title} path={path} />
-                <ListProduct service={nameService} />
+                <ListProduct service={nameService} path={path} />
             </div>
         </div>
     );
