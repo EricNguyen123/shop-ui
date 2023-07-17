@@ -5,6 +5,8 @@ import Breadcrumb from './component/Breadcrumb';
 import BannerPage from './component/BannerPage';
 import SeriesProduct from './component/SeriesProduct';
 import ListProduct from './component/ListProduct';
+import Description from './component/Description';
+import ProductReview from './component/ProductReview';
 import * as BannerPageService from '~/services/BannerPageService';
 import * as SeriesService from '~/services/SeriesService';
 
@@ -21,6 +23,8 @@ function Product({ nameService, directive, title, path }) {
                 <BannerPage service={BannerPageService} name={title} />
                 <SeriesProduct service={SeriesService} name={title} path={path} />
                 <ListProduct service={nameService} path={path} />
+                <Description name={title} />
+                <ProductReview />
             </div>
         </div>
     );

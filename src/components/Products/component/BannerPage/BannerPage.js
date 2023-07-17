@@ -6,6 +6,8 @@ import Image from '~/components/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+import PropTypes from 'prop-types';
+
 const cx = classNames.bind(styles);
 var timeOut;
 const B_INIT = 1;
@@ -65,5 +67,9 @@ function BannerPage({ service, name }) {
         </div>
     );
 }
+
+BannerPage.propTypes = {
+    name: PropTypes.string.isRequired,
+};
 
 export default BannerPage;

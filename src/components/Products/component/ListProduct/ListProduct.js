@@ -3,6 +3,8 @@ import styles from './ListProduct.module.scss';
 import CardItem from './CardItem';
 import { useEffect, useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 const cx = classNames.bind(styles);
 
 function ListProduct({ service, path }) {
@@ -27,5 +29,9 @@ function ListProduct({ service, path }) {
         </div>
     );
 }
+
+ListProduct.propTypes = {
+    path: PropTypes.node.isRequired,
+};
 
 export default ListProduct;

@@ -11,15 +11,15 @@ function Breadcrumb({ directive, title }) {
             <div className={cx('content-path')}>
                 {directive && (
                     <div className={cx('item')}>
+                        <span className={cx('deLimiter')}></span>
                         <Link to={config.routes.home} className={cx('itemName')}>
                             Trang chủ
                         </Link>
-                        <span className={cx('deLimiter')}>{'>'}</span>
                     </div>
                 )}
                 <div className={cx('item')}>
+                    <span className={cx('deLimiter')}>{'>'}</span>
                     <Link className={cx('itemName')}>{title}</Link>
-                    <span className={cx('deLimiter')}></span>
                 </div>
             </div>
         </div>

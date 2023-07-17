@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 import styles from './ButtonPage.module.scss';
 
+import PropTypes from 'prop-types';
+
 const cx = classNames.bind(styles);
 
 function ButtonPage({ title, link, onChangeView, activeBtn = false, noActiveBtn = false, className, checkActive }) {
@@ -26,5 +28,14 @@ function ButtonPage({ title, link, onChangeView, activeBtn = false, noActiveBtn 
         </div>
     );
 }
+
+ButtonPage.propTypes = {
+    title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    onChangeView: PropTypes.func,
+    activeBtn: PropTypes.bool,
+    noActiveBtn: PropTypes.bool,
+    checkActive: PropTypes.number,
+};
 
 export default ButtonPage;
