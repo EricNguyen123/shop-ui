@@ -9,4 +9,12 @@ export const get = async (path, option = []) => {
     return reponse.data;
 };
 
+export const post = async (path, data = {}) => {
+    let request;
+    if (Object.keys(data).length !== 0) {
+        request = await httpRequest.post(path, data);
+    }
+    return request.data;
+};
+
 export default httpRequest;

@@ -2,12 +2,35 @@ import classNames from 'classnames/bind';
 import styles from './AllRatingList.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import * as RatingService from '~/services/RatingService';
 
 const cx = classNames.bind(styles);
 
 function AllRatingList() {
     const [stars, setStars] = useState([true, true, true, true, true]);
+    const [name, setName] = useState('');
+    const [review, setReview] = useState('');
+    const [data, setData] = useState({ name: name, stars: stars, review: review, dateReview: '' });
+
+    useEffect(() => {
+        if (data.name.trim() !== '' && data.review.trim() !== '') {
+            const date = new Date();
+            var dd = date.getDate();
+            var mm = date.getMonth() + 1;
+            var yyyy = date.getFullYear();
+
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+
+            const dateReview = `${dd}/${mm}/${yyyy}`;
+
+            RatingService.post({ name: data.name, stars: data.stars, review: data.review, dateReview: dateReview });
+        }
+    }, [data]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('rating-list')}>
@@ -128,18 +151,34 @@ function AllRatingList() {
                 <div className={cx('input-name')}>
                     <label>Tên của bạn</label>
                     <div className={cx('inner-input-name')}>
-                        <input className={cx('input')} type="text" />
+                        <input
+                            className={cx('input')}
+                            type="text"
+                            onChange={(e) => {
+                                setName(e.target.value);
+                            }}
+                        />
                         <span className={cx('check-input')}>*</span>
                     </div>
                 </div>
                 <div className={cx('input-name')}>
                     <label>Đánh giá danh mục</label>
                     <div className={cx('inner-input-name')}>
-                        <textarea className={cx('input')} />
+                        <textarea
+                            className={cx('input')}
+                            onChange={(e) => {
+                                setReview(e.target.value);
+                            }}
+                        />
                         <span className={cx('check-input')}>*</span>
                     </div>
                 </div>
-                <div className={cx('button-sub')}>
+                <div
+                    className={cx('button-sub')}
+                    onClick={() => {
+                        setData({ name: name, stars: stars, review: review });
+                    }}
+                >
                     <span className={cx('sub')}>Gửi</span>
                 </div>
             </div>
