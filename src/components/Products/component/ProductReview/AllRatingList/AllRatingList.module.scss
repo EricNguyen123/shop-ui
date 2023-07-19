@@ -9,6 +9,7 @@
 }
 
 .rating-list {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -105,6 +106,10 @@
     transition: width 0.6s ease;
 }
 
+.review-page {
+    width: 100%;
+}
+
 .title-review {
     font-weight: 700;
     font-size: 30px;
@@ -170,19 +175,20 @@
 }
 
 .input-name {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 15px;
 }
 
-.input-name label {
+.input-name .label {
+    width: 100%;
     font-weight: 700;
     font-size: 13px;
     line-height: 18px;
     color: #515154;
-    width: 100px;
-    display: block;
+    display: flex;
     text-align: left;
     margin-bottom: 5px;
 }

@@ -10,9 +10,13 @@ const cx = classNames.bind(styles);
 
 function AllRatingList() {
     const [stars, setStars] = useState([true, true, true, true, true]);
+    const [nStars, setNStars] = useState(5);
     const [name, setName] = useState('');
     const [review, setReview] = useState('');
-    const [data, setData] = useState({ name: name, stars: stars, review: review, dateReview: '' });
+    const [data, setData] = useState({ name: name, stars: stars, nStars: nStars, review: review, dateReview: '' });
+    const [cmt, setCmt] = useState(0);
+
+    const [barStars, setBarStars] = useState([0, 0, 0, 0, 0]);
 
     useEffect(() => {
         if (data.name.trim() !== '' && data.review.trim() !== '') {
@@ -27,17 +31,41 @@ function AllRatingList() {
 
             const dateReview = `${dd}/${mm}/${yyyy}`;
 
-            RatingService.post({ name: data.name, stars: data.stars, review: data.review, dateReview: dateReview });
+            RatingService.post({
+                name: data.name,
+                stars: data.stars,
+                nStars: data.nStars,
+                review: data.review,
+                dateReview: dateReview,
+            }).catch((error) => {
+                return error;
+            });
         }
+        RatingService.get({ _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+            .then((res) => {
+                setCmt(res.length);
+                var tmp = [0, 0, 0, 0, 0];
+                res.map((item) => (tmp[item.data.nStars - 1] += 1));
+                var sum = 0;
+                tmp.forEach((i) => {
+                    sum += i;
+                });
+                tmp.map((item, index) => (tmp[index] = Math.round((item / sum) * 100)));
+                setBarStars(tmp);
+            })
+            .catch((error) => {
+                return error;
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('rating-list')}>
                 <div className={cx('rating-product')}>
-                    <p className={cx('rating-review')}>5</p>
+                    <p className={cx('rating-review')}>{cmt}</p>
                     <div className={cx('reivews')}>
-                        <span className={cx('re-content')}>5 đánh giá</span>
+                        <span className={cx('re-content')}>{cmt} đánh giá</span>
                     </div>
                 </div>
 
@@ -50,7 +78,7 @@ function AllRatingList() {
                             <div
                                 className={cx('bar')}
                                 role="progressbar"
-                                style={{ width: '100%' }}
+                                style={{ width: `${barStars[4]}%` }}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
                             ></div>
@@ -64,7 +92,7 @@ function AllRatingList() {
                             <div
                                 className={cx('bar')}
                                 role="progressbar"
-                                style={{ width: '0%' }}
+                                style={{ width: `${barStars[3]}%` }}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
                             ></div>
@@ -78,7 +106,7 @@ function AllRatingList() {
                             <div
                                 className={cx('bar')}
                                 role="progressbar"
-                                style={{ width: '0%' }}
+                                style={{ width: `${barStars[2]}%` }}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
                             ></div>
@@ -92,7 +120,7 @@ function AllRatingList() {
                             <div
                                 className={cx('bar')}
                                 role="progressbar"
-                                style={{ width: '0%' }}
+                                style={{ width: `${barStars[1]}%` }}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
                             ></div>
@@ -106,7 +134,7 @@ function AllRatingList() {
                             <div
                                 className={cx('bar')}
                                 role="progressbar"
-                                style={{ width: '0%' }}
+                                style={{ width: `${barStars[0]}%` }}
                                 aria-valuemin="0"
                                 aria-valuemax="100"
                             ></div>
@@ -137,6 +165,7 @@ function AllRatingList() {
                                         tmp.push(true);
                                     }
                                     setStars(tmp);
+                                    setNStars(5 - index);
                                 }}
                             >
                                 {star ? (
@@ -149,11 +178,12 @@ function AllRatingList() {
                     </div>
                 </div>
                 <div className={cx('input-name')}>
-                    <label>Tên của bạn</label>
+                    <div className={cx('label')}>Tên của bạn</div>
                     <div className={cx('inner-input-name')}>
                         <input
                             className={cx('input')}
                             type="text"
+                            value={name}
                             onChange={(e) => {
                                 setName(e.target.value);
                             }}
@@ -162,10 +192,11 @@ function AllRatingList() {
                     </div>
                 </div>
                 <div className={cx('input-name')}>
-                    <label>Đánh giá danh mục</label>
+                    <div className={cx('label')}>Đánh giá danh mục</div>
                     <div className={cx('inner-input-name')}>
                         <textarea
                             className={cx('input')}
+                            value={review}
                             onChange={(e) => {
                                 setReview(e.target.value);
                             }}
@@ -176,7 +207,13 @@ function AllRatingList() {
                 <div
                     className={cx('button-sub')}
                     onClick={() => {
-                        setData({ name: name, stars: stars, review: review });
+                        if (name.trim() !== '' && review.trim() !== '') {
+                            setData({ name: name, stars: stars, nStars: nStars, review: review });
+                            setName('');
+                            setReview('');
+                            setStars([true, true, true, true, true]);
+                            setNStars(5);
+                        }
                     }}
                 >
                     <span className={cx('sub')}>Gửi</span>
