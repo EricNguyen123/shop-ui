@@ -50,7 +50,7 @@ function AllRatingList() {
                 tmp.forEach((i) => {
                     sum += i;
                 });
-                tmp.map((item, index) => (tmp[index] = Math.round((item / sum) * 100)));
+                tmp.forEach((item, index) => (tmp[index] = Math.round((item / sum) * 100)));
                 setBarStars(tmp);
             })
             .catch((error) => {

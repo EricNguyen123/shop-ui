@@ -7,6 +7,7 @@ import SeriesProduct from './component/SeriesProduct';
 import ListProduct from './component/ListProduct';
 import Description from './component/Description';
 import ProductReview from './component/ProductReview';
+import Comments from './component/Comments';
 import * as BannerPageService from '~/services/BannerPageService';
 import * as SeriesService from '~/services/SeriesService';
 
@@ -25,6 +26,7 @@ function Product({ nameService, directive, title, path }) {
                 <ListProduct service={nameService} path={path} />
                 <Description name={title} />
                 <ProductReview />
+                <Comments />
             </div>
         </div>
     );
