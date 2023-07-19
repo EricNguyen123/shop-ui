@@ -25,8 +25,8 @@ function Product({ nameService, directive, title, path }) {
                 <SeriesProduct service={SeriesService} name={title} path={path} />
                 <ListProduct service={nameService} path={path} />
                 <Description name={title} />
-                <ProductReview />
-                <Comments />
+                <ProductReview title={title} />
+                <Comments title={title} />
             </div>
         </div>
     );

@@ -6,13 +6,13 @@ import AllReviewList from './AllReviewList';
 
 const cx = classNames.bind(styles);
 
-function ProductReview() {
+function ProductReview({ title }) {
     return (
         <div className={cx('wrapper')}>
             <p className={cx('title')}>Đánh giá danh mục</p>
             <div className={cx('container')}>
-                <AllRatingList />
-                <AllReviewList />
+                <AllRatingList title={title} />
+                <AllReviewList title={title} />
             </div>
         </div>
     );

@@ -1,5 +1,1 @@
-function Watch() {
-    return <h1>Watch</h1>;
-}
-
-export default Watch;
+export { default } from './Watch';

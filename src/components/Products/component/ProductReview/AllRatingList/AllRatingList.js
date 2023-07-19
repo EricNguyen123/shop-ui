@@ -8,7 +8,7 @@ import * as RatingService from '~/services/RatingService';
 
 const cx = classNames.bind(styles);
 
-function AllRatingList() {
+function AllRatingList({ title }) {
     const [stars, setStars] = useState([true, true, true, true, true]);
     const [nStars, setNStars] = useState(5);
     const [name, setName] = useState('');
@@ -32,6 +32,7 @@ function AllRatingList() {
             const dateReview = `${dd}/${mm}/${yyyy}`;
 
             RatingService.post({
+                title: title,
                 name: data.name,
                 stars: data.stars,
                 nStars: data.nStars,
@@ -41,7 +42,7 @@ function AllRatingList() {
                 return error;
             });
         }
-        RatingService.get({ _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+        RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
             .then((res) => {
                 setCmt(res.length);
                 var tmp = [0, 0, 0, 0, 0];
@@ -56,8 +57,7 @@ function AllRatingList() {
             .catch((error) => {
                 return error;
             });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
+    }, [data, title]);
 
     return (
         <div className={cx('wrapper')}>

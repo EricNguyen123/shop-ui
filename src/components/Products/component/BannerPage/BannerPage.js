@@ -16,11 +16,17 @@ function BannerPage({ service, name }) {
     const [item, setItem] = useState(0);
     const [resItem, setResItem] = useState([]);
     const [link, setLink] = useState('');
+    const [sumLink, setSumLink] = useState(B_INIT);
+    const [check, setCheck] = useState(true);
     useEffect(() => {
         service
             .getBanner({ name: name })
             .then((data) => {
                 const res = data[0].links;
+                if (res.length === 1) {
+                    setCheck(false);
+                }
+                setSumLink(res.length - 1);
                 setLink(res[0]);
                 setResItem(res);
             })
@@ -35,12 +41,12 @@ function BannerPage({ service, name }) {
             setItem(item - 1);
         } else {
             setLink(resItem[item]);
-            setItem(B_INIT);
+            setItem(sumLink);
         }
     };
 
     const handleViewRight = () => {
-        if (item < B_INIT) {
+        if (item < sumLink) {
             setLink(resItem[item]);
             setItem(item + 1);
         } else {
@@ -51,7 +57,7 @@ function BannerPage({ service, name }) {
 
     clearTimeout(timeOut);
     timeOut = setTimeout(() => {
-        if (item < B_INIT) {
+        if (item < sumLink) {
             setLink(resItem[item]);
             setItem(item + 1);
         } else {
@@ -61,9 +67,13 @@ function BannerPage({ service, name }) {
     }, 5000);
     return (
         <div className={cx('wrapper')}>
-            <FontAwesomeIcon className={cx('left-btn')} onClick={handleViewLeft} icon={faCircleChevronLeft} />
+            {check && (
+                <FontAwesomeIcon className={cx('left-btn')} onClick={handleViewLeft} icon={faCircleChevronLeft} />
+            )}
             {link && <Image className={cx('image')} src={link} />}
-            <FontAwesomeIcon className={cx('right-btn')} onClick={handleViewRight} icon={faCircleChevronRight} />
+            {check && (
+                <FontAwesomeIcon className={cx('right-btn')} onClick={handleViewRight} icon={faCircleChevronRight} />
+            )}
         </div>
     );
 }

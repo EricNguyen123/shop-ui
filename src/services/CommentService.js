@@ -1,9 +1,10 @@
 import * as httpRequest from '~/util/httpRequest';
 
-export const get = async ({ _sort, _order, _page, _limit }) => {
+export const get = async ({ title, _sort, _order, _page, _limit }) => {
     try {
         const res = await httpRequest.get('comment', {
             params: {
+                title: title,
                 _sort,
                 _order,
                 _page,
@@ -16,7 +17,7 @@ export const get = async ({ _sort, _order, _page, _limit }) => {
     }
 };
 
-export const post = async ({ name, phoneNumber, commentUser, dateComment }) => {
+export const post = async ({ title, name, phoneNumber, commentUser, dateComment }) => {
     try {
         const res = await httpRequest.post('comment', {
             data: {
@@ -25,6 +26,7 @@ export const post = async ({ name, phoneNumber, commentUser, dateComment }) => {
                 commentUser: commentUser,
                 dateComment: dateComment,
             },
+            title: title,
         });
         return res;
     } catch (error) {

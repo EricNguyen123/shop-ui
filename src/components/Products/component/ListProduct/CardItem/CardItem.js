@@ -115,7 +115,7 @@ function CardItem({ nameService, total, path }) {
                             title={null}
                             link={'https://shopdunk.com/Themes/SD/Content/images/last.png'}
                             onChangeView={() => {
-                                if (page > 1) {
+                                if (page < page_total) {
                                     setPage(page_total);
                                 }
                             }}

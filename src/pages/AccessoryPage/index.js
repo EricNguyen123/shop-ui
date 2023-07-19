@@ -1,5 +1,1 @@
-function AccessoryPage() {
-    return <h1>AccessoryPage</h1>;
-}
-
-export default AccessoryPage;
+export { default } from './AccessoryPage';

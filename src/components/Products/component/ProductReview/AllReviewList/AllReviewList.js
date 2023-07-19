@@ -14,19 +14,19 @@ const cx = classNames.bind(styles);
 const PAGE = 1;
 const LIMIT = 5;
 
-function AllReviewList() {
+function AllReviewList({ title }) {
     // const [page, setPage] = useState(PAGE);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        RatingService.get({ _sort: 'id', _order: 'desc', _page: PAGE, _limit: LIMIT })
+        RatingService.get({ title, _sort: 'id', _order: 'desc', _page: PAGE, _limit: LIMIT })
             .then((res) => {
                 setData(res);
             })
             .catch((error) => {
                 return error;
             });
-    }, []);
+    }, [title]);
 
     return (
         <div className={cx('wrapper')}>

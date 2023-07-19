@@ -1,5 +1,1 @@
-function Ipad() {
-    return <h1>Ipad</h1>;
-}
-
-export default Ipad;
+export { default } from './Ipad';

@@ -8,7 +8,7 @@ import * as CommentService from '~/services/CommentService';
 
 const cx = classNames.bind(styles);
 
-function ProductReview() {
+function ProductReview({ title }) {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [comment, setComment] = useState('');
@@ -18,7 +18,7 @@ function ProductReview() {
 
     useEffect(() => {
         if (!check) {
-            CommentService.get({ _sort: 'id', _order: 'asc', _page: 1, _limit: 10000 })
+            CommentService.get({ title, _sort: 'id', _order: 'asc', _page: 1, _limit: 10000 })
                 .then((res) => {
                     if (res.length !== 0) {
                         setCheck(true);
@@ -32,6 +32,7 @@ function ProductReview() {
         const fecthApi = async () => {
             if (data.name.trim() !== '' && data.phoneNumber.trim() !== '' && data.commentUser.trim() !== '') {
                 await CommentService.post({
+                    title: title,
                     name: data.name,
                     phoneNumber: data.phoneNumber,
                     commentUser: data.commentUser,
@@ -39,7 +40,7 @@ function ProductReview() {
                 }).catch((error) => {
                     return error;
                 });
-                await CommentService.get({ _sort: 'id', _order: 'asc', _page: 1, _limit: 10000 })
+                await CommentService.get({ title, _sort: 'id', _order: 'asc', _page: 1, _limit: 10000 })
                     .then((res) => {
                         setResult(res);
                     })
@@ -49,7 +50,7 @@ function ProductReview() {
             }
         };
         fecthApi();
-    }, [data, check]);
+    }, [data, check, title]);
 
     return (
         <div className={cx('wrapper')}>
