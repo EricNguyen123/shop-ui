@@ -3,6 +3,7 @@ import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import Tippy from '@tippyjs/react/headless';
 
 import Image from '~/components/Image';
 import config from '~/config';
@@ -28,7 +29,37 @@ function Header() {
                     <ButtonHeader path={config.routes.watch}>Watch</ButtonHeader>
                     <ButtonHeader path={config.routes.soundpage}>Âm thanh</ButtonHeader>
                     <ButtonHeader path={config.routes.accessorypage}>Phụ kiện</ButtonHeader>
-                    <ButtonHeader path={config.routes.servicepage}>Dịch vụ</ButtonHeader>
+                    <Tippy
+                        interactive
+                        offset={[0, 0]}
+                        placement="bottom-start"
+                        render={(props) => (
+                            <div className={cx('menu-sevice')} tabIndex="-1" {...props}>
+                                <div className={cx('menu-box')}>
+                                    <div className={cx('menu-item')}>
+                                        <span>Bảo hành uỷ quyền Apple (Shop Care)</span>
+                                    </div>
+                                    <div className={cx('menu-item')}>
+                                        <span>Trả góp</span>
+                                    </div>
+                                    <div className={cx('menu-item')}>
+                                        <span>Thu cũ đổi mới</span>
+                                    </div>
+                                    <div className={cx('menu-item')}>
+                                        <span>WorkShop</span>
+                                    </div>
+                                    <div className={cx('menu-item')}>
+                                        <span>MBTI</span>
+                                    </div>
+                                    <div className={cx('menu-item')}>
+                                        <span>Sim thẻ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    >
+                        <ButtonHeader path={config.routes.servicepage}>Dịch vụ</ButtonHeader>
+                    </Tippy>
                 </div>
                 <div className={cx('button-user')}>
                     <div className={cx('search-icon')}></div>

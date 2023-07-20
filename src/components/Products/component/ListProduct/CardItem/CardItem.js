@@ -13,7 +13,7 @@ var page_end = 5;
 
 const LIMIT_INIT = 12;
 
-function CardItem({ nameService, total, path }) {
+function CardItem({ nameService, total }) {
     const [page, setPage] = useState(1);
     const [result, setResult] = useState([]);
     const [check, setCheck] = useState(1);

@@ -2,13 +2,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 50;
     width: 100%;
     height: var(--height-header);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #515154;
+    background-color: var(--color-header);
 }
 
 .inner {
@@ -79,4 +79,37 @@
     color: var(--white);
     font-family: var(--font-family);
     background-color: var(--primary);
+}
+
+//Tippy menu service
+
+.menu-service {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 250%;
+}
+
+.menu-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-header);
+    border-radius: 0px 0px 5px 5px;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 16px;
+    line-height: 20px;
+    font-size: 15px;
+    color: #d2d2d7;
+    cursor: pointer;
+    border-top: 1px solid #727272;
+    &:hover {
+        color: #fff !important;
+        background-color: #626265;
+        text-decoration: none;
+        border-radius: 5px;
+    }
 }

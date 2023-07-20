@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const cx = classNames.bind(styles);
 
-function ListProduct({ service, path }) {
+function ListProduct({ service }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function ListProduct({ service, path }) {
 
     return (
         <div className={cx('list-product')}>
-            <CardItem nameService={service} total={total} path={path} />
+            <CardItem nameService={service} total={total} />
         </div>
     );
 }

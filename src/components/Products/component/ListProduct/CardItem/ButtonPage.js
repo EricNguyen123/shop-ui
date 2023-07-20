@@ -30,8 +30,8 @@ function ButtonPage({ title, link, onChangeView, activeBtn = false, noActiveBtn 
 }
 
 ButtonPage.propTypes = {
-    title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    link: PropTypes.string,
     onChangeView: PropTypes.func,
     activeBtn: PropTypes.bool,
     noActiveBtn: PropTypes.bool,
