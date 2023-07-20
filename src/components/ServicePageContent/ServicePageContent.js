@@ -3,6 +3,7 @@ import styles from './ServicePageContent.module.scss';
 
 import BannerPage from './component/BannerPage';
 import Description from './component/Description';
+import ListServices from './component/ListServices';
 
 import * as BannerPageService from '~/services/BannerPageService';
 
@@ -16,6 +17,7 @@ function ServicePage({ nameService, title }) {
                     <h1 className={cx('name')}>{title}</h1>
                 </div>
                 <BannerPage service={BannerPageService} name={title} />
+                <ListServices nameService={nameService} />
                 <Description name={title} />
             </div>
         </div>

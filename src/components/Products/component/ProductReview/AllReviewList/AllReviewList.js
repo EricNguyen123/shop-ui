@@ -12,7 +12,7 @@ import * as RatingService from '~/services/RatingService';
 const cx = classNames.bind(styles);
 
 const PAGE = 1;
-const LIMIT = 5;
+const LIMIT = 10000;
 
 function AllReviewList({ title }) {
     // const [page, setPage] = useState(PAGE);

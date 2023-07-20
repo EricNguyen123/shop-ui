@@ -47,11 +47,7 @@ function AllRatingList({ title }) {
                 setCmt(res.length);
                 var tmp = [0, 0, 0, 0, 0];
                 res.map((item) => (tmp[item.data.nStars - 1] += 1));
-                var sum = 0;
-                tmp.forEach((i) => {
-                    sum += i;
-                });
-                tmp.forEach((item, index) => (tmp[index] = Math.round((item / sum) * 100)));
+                tmp.forEach((item, index) => (tmp[index] = Math.round((item / res.length) * 100)));
                 setBarStars(tmp);
             })
             .catch((error) => {
@@ -59,11 +55,23 @@ function AllRatingList({ title }) {
             });
     }, [data, title]);
 
+    var starTB = 0;
+
+    barStars.forEach((e, index) => {
+        starTB += (e / 100) * (index + 1);
+    });
+
+    starTB = Math.ceil(starTB * 10) / 10;
+
+    if (isNaN(starTB)) {
+        starTB = 0;
+    }
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('rating-list')}>
                 <div className={cx('rating-product')}>
-                    <p className={cx('rating-review')}>{cmt}</p>
+                    <p className={cx('rating-review')}>{starTB}</p>
                     <div className={cx('reivews')}>
                         <span className={cx('re-content')}>{cmt} đánh giá</span>
                     </div>
