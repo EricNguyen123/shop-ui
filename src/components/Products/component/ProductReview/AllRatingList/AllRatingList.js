@@ -8,7 +8,7 @@ import * as RatingService from '~/services/RatingService';
 
 const cx = classNames.bind(styles);
 
-function AllRatingList({ title }) {
+function AllRatingList({ title, sendChildData }) {
     const [stars, setStars] = useState([true, true, true, true, true]);
     const [nStars, setNStars] = useState(5);
     const [name, setName] = useState('');
@@ -19,40 +19,45 @@ function AllRatingList({ title }) {
     const [barStars, setBarStars] = useState([0, 0, 0, 0, 0]);
 
     useEffect(() => {
-        if (data.name.trim() !== '' && data.review.trim() !== '') {
-            const date = new Date();
-            var dd = date.getDate();
-            var mm = date.getMonth() + 1;
-            var yyyy = date.getFullYear();
+        const fecthApi = async () => {
+            if (data.name.trim() !== '' && data.review.trim() !== '') {
+                const date = new Date();
+                var dd = date.getDate();
+                var mm = date.getMonth() + 1;
+                var yyyy = date.getFullYear();
 
-            if (mm < 10) {
-                mm = '0' + mm;
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+
+                const dateReview = `${dd}/${mm}/${yyyy}`;
+
+                await RatingService.post({
+                    title: title,
+                    name: data.name,
+                    stars: data.stars,
+                    nStars: data.nStars,
+                    review: data.review,
+                    dateReview: dateReview,
+                }).catch((error) => {
+                    return error;
+                });
             }
-
-            const dateReview = `${dd}/${mm}/${yyyy}`;
-
-            RatingService.post({
-                title: title,
-                name: data.name,
-                stars: data.stars,
-                nStars: data.nStars,
-                review: data.review,
-                dateReview: dateReview,
-            }).catch((error) => {
-                return error;
-            });
-        }
-        RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
-            .then((res) => {
-                setCmt(res.length);
-                var tmp = [0, 0, 0, 0, 0];
-                res.map((item) => (tmp[item.data.nStars - 1] += 1));
-                tmp.forEach((item, index) => (tmp[index] = Math.round((item / res.length) * 100)));
-                setBarStars(tmp);
-            })
-            .catch((error) => {
-                return error;
-            });
+            await RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+                .then((res) => {
+                    sendChildData(res);
+                    setCmt(res.length);
+                    var tmp = [0, 0, 0, 0, 0];
+                    res.map((item) => (tmp[item.data.nStars - 1] += 1));
+                    tmp.forEach((item, index) => (tmp[index] = Math.round((item / res.length) * 100)));
+                    setBarStars(tmp);
+                })
+                .catch((error) => {
+                    return error;
+                });
+        };
+        fecthApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data, title]);
 
     var starTB = 0;
@@ -216,6 +221,7 @@ function AllRatingList({ title }) {
                     className={cx('button-sub')}
                     onClick={() => {
                         if (name.trim() !== '' && review.trim() !== '') {
+                            // sendChildData(cmt + 1);
                             setData({ name: name, stars: stars, nStars: nStars, review: review });
                             setName('');
                             setReview('');

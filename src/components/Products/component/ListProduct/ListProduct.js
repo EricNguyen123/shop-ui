@@ -31,7 +31,7 @@ function ListProduct({ service }) {
 }
 
 ListProduct.propTypes = {
-    path: PropTypes.node.isRequired,
+    path: PropTypes.node,
 };
 
 export default ListProduct;
