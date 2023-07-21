@@ -6,6 +6,7 @@ import ServicePage from '~/pages/ServicePage';
 import SoundPage from '~/pages/SoundPage';
 import Watch from '~/pages/Watch';
 import AccessoryPage from '~/pages/AccessoryPage';
+import ProductItem from '~/pages/ProductItem';
 
 import config from '~/config';
 
@@ -41,6 +42,10 @@ const publicRoutes = [
     {
         path: config.routes.watch,
         component: Watch,
+    },
+    {
+        path: config.routes.productitem,
+        component: ProductItem,
     },
 ];
 

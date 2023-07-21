@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Item from './Item';
 import ButtonPage from './ButtonPage';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -56,9 +57,9 @@ function CardItem({ nameService, total }) {
         <div className={cx('wrapper')}>
             <div className={cx('category-box')}>
                 {result.map((data, index) => (
-                    <div key={index} className={cx('item-box')} to="#">
+                    <Link key={index} className={cx('item-box')} to={data.path}>
                         <Item data={data} />
-                    </div>
+                    </Link>
                 ))}
             </div>
             {page_total > 1 && (

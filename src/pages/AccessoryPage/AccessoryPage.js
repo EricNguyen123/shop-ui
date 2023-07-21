@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './AccessoryPage.module.scss';
-import Product from '~/components/Products/Product';
+import Product from '~/components/Products';
 import config from '~/config';
 import * as AccessoryService from '~/services/AccessoryService';
 

@@ -37,7 +37,9 @@ function Item({ data }) {
                     <Image className={cx('product')} src={data.color.popular} alt="product" />
                 </div>
                 <div className={cx('item-title')}>
-                    <Link className={cx('title')}>{data.name}</Link>
+                    <Link className={cx('title')} to={data.path}>
+                        {data.name}
+                    </Link>
                 </div>
                 <div className={cx('price')}>
                     <span className={cx('actual-price')}>{data.actualPrice}</span>

@@ -7,6 +7,7 @@ const routes = {
     soundpage: '/soundpage',
     servicepage: '/servicepage',
     accessorypage: '/accessorypage',
+    productitem: '/:category',
 };
 
 export default routes;
