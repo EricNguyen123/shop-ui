@@ -11,8 +11,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import React, { useRef, useState, useEffect } from 'react';
 
-import { SampleNextArrow, SamplePrevArrow } from './NextPrev';
-
 const cx = classNames.bind(styles);
 
 function ProductAssential() {
@@ -75,8 +73,7 @@ function ProductAssential() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
+        arrows: false,
     };
 
     const settingsSlider2 = {
@@ -176,14 +173,14 @@ function ProductAssential() {
                     </div>
                 </Slider>
                 <Slider
-                    className={cx('slick-img')}
+                    className={cx('slide-img')}
                     asNavFor={nav1}
                     ref={slider2Ref}
                     centerMode={true}
                     variableWidth={true}
                     {...settingsSlider2}
                 >
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -192,7 +189,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -201,7 +198,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -210,7 +207,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -219,7 +216,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -229,7 +226,7 @@ function ProductAssential() {
                         </div>
                     </div>
 
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -238,7 +235,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -247,7 +244,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
@@ -256,7 +253,7 @@ function ProductAssential() {
                             />
                         </div>
                     </div>
-                    <div className={cx('slick-list')}>
+                    <div className={cx('slide-list')}>
                         <div className={cx('slide-box')}>
                             <Image
                                 className={cx('img-slide')}
