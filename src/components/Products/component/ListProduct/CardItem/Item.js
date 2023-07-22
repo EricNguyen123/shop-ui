@@ -33,9 +33,9 @@ function Item({ data }) {
                             <Image key={index} className={cx('icon-img')} src={result.link} alt="ctsv" />
                         ))}
                 </div>
-                <div className={cx('item-img')}>
+                <Link className={cx('item-img')} to={data.path}>
                     <Image className={cx('product')} src={data.color.popular} alt="product" />
-                </div>
+                </Link>
                 <div className={cx('item-title')}>
                     <Link className={cx('title')} to={data.path}>
                         {data.name}
