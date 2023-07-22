@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from './ProductAssential.module.scss';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCircleChevronLeft, faCircleChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import Image from '~/components/Image';
 

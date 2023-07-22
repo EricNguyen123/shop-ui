@@ -1,0 +1,157 @@
+.wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 5px auto;
+}
+
+.inner {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.info {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-name {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.name {
+    font-size: 24px;
+    color: #1d1d1f;
+    font-weight: 700;
+    line-height: 36px;
+    padding: 0;
+    margin: 0;
+}
+
+.rating-star {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.review-box {
+    display: inline-block;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.rating {
+    width: 80px;
+    height: 15px;
+    background: url('https://shopdunk.com/images/uploaded-source/icon/star-unset.png') repeat space;
+}
+
+.review-links {
+    display: flex;
+    align-items: center;
+    color: #0066cc;
+}
+
+.links {
+    color: #0066cc;
+    padding-right: 5px;
+}
+
+.overview-btn {
+    margin: 0;
+    align-items: center;
+    display: flex;
+}
+
+.add-to-wishlist {
+    width: 100%;
+    margin: 0 auto 0px;
+}
+
+.button-2 {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding: 0px 24px;
+    text-align: left;
+    font-size: 14px;
+    color: #0066cc;
+    margin-left: 10px;
+    cursor: pointer;
+    background-image: url('https://shopdunk.com/images/uploaded-source/icon/compare-icon.png');
+}
+
+.storelocation-all {
+    position: relative;
+}
+
+.storelocation-ddl {
+    width: max-content;
+    height: 32px;
+    padding: 6px;
+    font-size: 14px !important;
+    color: #515154;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    margin-top: 12px;
+    min-height: 38px;
+    background-image: url('https://shopdunk.com/images/uploaded-source/icon/arrow-down.png');
+    background-size: 11px;
+    background-repeat: no-repeat;
+    background-position-x: 91%;
+    background-position-y: 15px;
+    -webkit-appearance: none;
+    margin: 20px 0 0;
+    padding-left: 16px;
+    padding-right: 32px;
+    min-width: 160px;
+    position: absolute;
+    top: -40px;
+    left: 80px;
+}
+
+.prices {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+.product-prices {
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+}
+
+.low-prices {
+    display: inline-block;
+    color: #0066cc;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.old-product-prices {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.old-prices {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    padding-left: 20px;
+}
