@@ -113,7 +113,7 @@
     background-position-x: 91%;
     background-position-y: 15px;
     -webkit-appearance: none;
-    margin: 20px 0 0;
+    margin-top: 20px;
     padding-left: 16px;
     padding-right: 32px;
     min-width: 160px;
@@ -154,4 +154,120 @@
     font-weight: 400;
     line-height: 28px;
     padding-left: 20px;
+}
+
+.attributes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 14px;
+}
+
+.attributes-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.name-attributes {
+    display: flex;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #444;
+}
+
+.label {
+    font-weight: 400;
+    font-size: 13px;
+    color: #515154;
+    line-height: 20px;
+    margin-bottom: 11px;
+}
+
+.value-attributes {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.value-item,
+.value-item-color {
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    padding: 8px 15.668px;
+    cursor: pointer;
+    min-width: 70px;
+    min-height: 38px;
+    margin-right: 12px;
+}
+
+.check-attr {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: center;
+    color: #86868b;
+    margin-left: 0;
+}
+
+.value-item-color {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    min-width: 28px;
+    min-height: 28px;
+    position: relative;
+}
+
+.attribute-square-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    padding: 2px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.attribute-square {
+    border-radius: 100%;
+    box-shadow: inset 1px 1px 2px rgb(0 0 0 / 10%);
+    border: unset !important;
+    display: inline-block !important;
+    width: 28px !important;
+    height: 28px !important;
+    border: 1px solid #444 !important;
+    cursor: pointer;
+    position: absolute;
+    top: -2px;
+    left: 0;
+}
+
+input[type='radio'] {
+    vertical-align: middle;
+    box-sizing: border-box;
+    padding: 0;
+    display: none;
+}
+
+.short-des {
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #ebebeb;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+.title {
+    padding: 16px 16px 12px 15px;
+    color: #1d1d1f;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: left;
 }

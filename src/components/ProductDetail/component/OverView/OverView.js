@@ -60,6 +60,55 @@ function OverView() {
                         <span className={cx('old-prices')}>34.990.000₫</span>
                     </div>
                 </div>
+                <div className={cx('attributes')}>
+                    <div className={cx('attributes-item')}>
+                        <div className={cx('name-attributes')}>
+                            <span className={cx('label')}>Dung lượng</span>
+                        </div>
+                        <div className={cx('value-attributes')}>
+                            <div className={cx('value-item')}>
+                                <Link to="/iphone14series">
+                                    <span className={cx('check-attr')}>128GB</span>
+                                </Link>
+                            </div>
+                            <div className={cx('value-item')}>
+                                <Link to="/iphone14series">
+                                    <span className={cx('check-attr')}>128GB</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('attributes-item')}>
+                        <div className={cx('name-attributes')}>
+                            <span className={cx('label')}>Màu sắc</span>
+                        </div>
+                        <div className={cx('value-attributes')}>
+                            <div className={cx('value-item-color')}>
+                                <label htmlFor="color-space-black">
+                                    <span className={cx('attribute-square-container')} title="Space Black">
+                                        <span className={cx('attribute-square')} style={{ backgroundColor: '#4C4B49' }}>
+                                            &nbsp;
+                                        </span>
+                                    </span>
+                                    <input id="color-space-black" type="radio" name="color" value="space-black" />
+                                </label>
+                            </div>
+                            <div className={cx('value-item-color')}>
+                                <label htmlFor="color-space-black">
+                                    <span className={cx('attribute-square-container')} title="Space Black">
+                                        <span className={cx('attribute-square')} style={{ backgroundColor: '#4C4B49' }}>
+                                            &nbsp;
+                                        </span>
+                                    </span>
+                                    <input id="color-space-black" type="radio" name="color" value="space-black" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={cx('short-des')}>
+                    <p className={cx('title')}>Khuyến mại</p>
+                </div>
             </div>
         </div>
     );
