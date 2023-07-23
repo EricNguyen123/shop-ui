@@ -6,6 +6,18 @@
     background-color: #fff;
     border-radius: 8px;
     margin: 5px auto;
+    margin-top: 0px;
+}
+
+.over-rivew {
+    width: 100%;
+    height: 720px;
+    overflow: overlay;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+    }
 }
 
 .inner {
@@ -328,4 +340,102 @@
 
 .ud_mo {
     padding: 12px 16px 12px 15px;
+}
+
+.popup-store {
+    width: 100%;
+    font-size: 13px;
+    color: #0066cc;
+    line-height: 14px;
+    padding-bottom: 20px;
+    display: block;
+    cursor: pointer;
+}
+
+.popup-icon {
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+.add-cart-button {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.add-to-cart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.add-click {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-size: 17px !important;
+    line-height: 25px !important;
+    background: #0066cc;
+    border-radius: 8px;
+    width: 100%;
+    height: 56px;
+    border: none;
+    padding: 0px 24px;
+    cursor: pointer;
+}
+
+.button-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.choose-btn {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 25px;
+    border: 2px solid #0066cc;
+    border-radius: 8px;
+    min-height: 56px;
+    width: 48.5%;
+    align-items: center;
+    display: flex;
+    color: #0066cc;
+    justify-content: center;
+}
+
+.product-policy {
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    padding: 15px 16px;
+    line-height: 20px;
+    margin-top: 17px;
+}
+
+.list-item {
+    list-style: none;
+}
+
+.item {
+    font-size: 13px;
+    line-height: 24px;
+    color: #515154;
+    display: flex;
+    align-items: center;
+}
+
+.item-icon {
+    font-size: 16px;
+    padding-right: 10px;
+    color: #0066cc;
+}
+
+.item-link {
+    color: #007edb;
+    user-select: none;
+    padding: 0px 5px;
 }

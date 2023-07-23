@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #fff;
 }
 
 .inner {
@@ -14,7 +15,11 @@
 
 .assential {
     width: 100%;
-    height: max-content;
     display: flex;
     margin-bottom: 20px;
+}
+
+.review-img {
+    margin-top: 19px;
+    margin-bottom: auto;
 }
