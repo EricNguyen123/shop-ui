@@ -15,8 +15,8 @@ function ProductDetail({ directive, title }) {
             <Breadcrumb directive={directive} title={title} />
             <div className={cx('inner')}>
                 <div className={cx('assential')}>
-                    <ProductAssential />
-                    <OverView />
+                    <ProductAssential className={cx('review-img')} />
+                    <OverView className={cx('review-content')} />
                 </div>
 
                 <ProductReview title={title} />

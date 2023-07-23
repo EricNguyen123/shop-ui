@@ -1,12 +1,16 @@
 import classNames from 'classnames/bind';
 import styles from './OverView.module.scss';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGift } from '@fortawesome/free-solid-svg-icons';
+
+import Gift from './Gift';
 
 const cx = classNames.bind(styles);
 
-function OverView() {
+function OverView({ className }) {
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', { [className]: className })}>
             <div className={cx('inner')}>
                 <div className={cx('info')}>
                     <div className={cx('product-name')}>
@@ -90,7 +94,13 @@ function OverView() {
                                             &nbsp;
                                         </span>
                                     </span>
-                                    <input id="color-space-black" type="radio" name="color" value="space-black" />
+                                    <input
+                                        className={cx('input-color')}
+                                        id="color-space-black"
+                                        type="radio"
+                                        name="color"
+                                        value="space-black"
+                                    />
                                 </label>
                             </div>
                             <div className={cx('value-item-color')}>
@@ -100,14 +110,69 @@ function OverView() {
                                             &nbsp;
                                         </span>
                                     </span>
-                                    <input id="color-space-black" type="radio" name="color" value="space-black" />
+                                    <input
+                                        className={cx('input-color')}
+                                        id="color-space-black"
+                                        type="radio"
+                                        name="color"
+                                        value="space-black"
+                                    />
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={cx('short-des')}>
-                    <p className={cx('title')}>Khuyến mại</p>
+                    <div className={cx('p-title')}>
+                        <FontAwesomeIcon className={cx('icon')} icon={faGift} />
+                        <p className={cx('title')}>Khuyến mại</p>
+                    </div>
+                    <div className={cx('inf-promotions')}>
+                        <ul className={cx('option-list')}>
+                            <li className={cx('option-item')}>
+                                <input
+                                    className={cx('input-option')}
+                                    id="buy-product"
+                                    type="radio"
+                                    name="buy"
+                                    value="buy"
+                                    checked="checked"
+                                />
+                                <label className={cx('label-option')} htmlFor="buy-product">
+                                    Mua thẳng
+                                </label>
+                            </li>
+                            <li className={cx('option-item')}>
+                                <input
+                                    className={cx('input-option')}
+                                    id="buy-product-buy-0"
+                                    type="radio"
+                                    name="buy"
+                                    value="buy-0"
+                                />
+                                <label className={cx('label-option')} htmlFor="buy-product-buy-9">
+                                    Trả góp 0%
+                                </label>
+                            </li>
+                            <li className={cx('option-item')}>
+                                <input
+                                    className={cx('input-option')}
+                                    id="buy-product-buy-vip"
+                                    type="radio"
+                                    name="buy"
+                                    value="buy-vip"
+                                />
+                                <label className={cx('label-option')} htmlFor="buy-product-buy-vip">
+                                    Giá ưu đãi mua kèm bảo hành kim cương, VIP
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className={cx('p-title', 'ud_mo')}>
+                        <FontAwesomeIcon className={cx('icon')} icon={faGift} />
+                        <p className={cx('title')}>Ưu đãi</p>
+                    </div>
+                    <Gift maxLength={126} />
                 </div>
             </div>
         </div>

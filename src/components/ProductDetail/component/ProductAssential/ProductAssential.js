@@ -11,7 +11,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
-function ProductAssential() {
+function ProductAssential({ className }) {
     const [nav1, setNav1] = useState(null);
     const [nav2, setNav2] = useState(null);
     const slider1Ref = useRef(null);
@@ -85,7 +85,7 @@ function ProductAssential() {
     };
 
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper', { [className]: className })}>
             <div className={cx('img-review')}>
                 <Slider className={cx('slider')} asNavFor={nav2} ref={slider1Ref} {...settingsSlider1}>
                     <div className={cx('picture')}>
