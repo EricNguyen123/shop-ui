@@ -67,6 +67,78 @@ const publicRoutes = [
         path: config.routes.iphoneSE,
         component: Iphone,
     },
+    {
+        path: config.routes.ipad10,
+        component: Ipad,
+    },
+    {
+        path: config.routes.ipad9,
+        component: Ipad,
+    },
+    {
+        path: config.routes.ipadair,
+        component: Ipad,
+    },
+    {
+        path: config.routes.ipadmini,
+        component: Ipad,
+    },
+    {
+        path: config.routes.ipadprom1,
+        component: Ipad,
+    },
+    {
+        path: config.routes.ipadprom2,
+        component: Ipad,
+    },
+    {
+        path: config.routes.imac,
+        component: Mac,
+    },
+    {
+        path: config.routes.macbookair,
+        component: Mac,
+    },
+    {
+        path: config.routes.macbookpro,
+        component: Mac,
+    },
+    {
+        path: config.routes.macmini,
+        component: Mac,
+    },
+    {
+        path: config.routes.macpro,
+        component: Mac,
+    },
+    {
+        path: config.routes.macstudio,
+        component: Mac,
+    },
+    {
+        path: config.routes.applewatchse,
+        component: Watch,
+    },
+    {
+        path: config.routes.applewatchseries3,
+        component: Watch,
+    },
+    {
+        path: config.routes.applewatchseries6,
+        component: Watch,
+    },
+    {
+        path: config.routes.applewatchseries7,
+        component: Watch,
+    },
+    {
+        path: config.routes.applewatchseries8,
+        component: Watch,
+    },
+    {
+        path: config.routes.applewatchultra,
+        component: Watch,
+    },
 ];
 
 const privateRoutes = [];

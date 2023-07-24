@@ -1,33 +1,15 @@
 import classNames from 'classnames/bind';
 import styles from './AllReviewList.module.scss';
-// import { useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 import Image from '~/components/Image';
 import images from '~/assets/images';
-// import * as RatingService from '~/services/RatingService';
 
 const cx = classNames.bind(styles);
 
-// const PAGE = 1;
-// const LIMIT = 10000;
-
-function AllReviewList({ title, data = [] }) {
-    // const [page, setPage] = useState(PAGE);
-    // const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     RatingService.get({ title, _sort: 'id', _order: 'desc', _page: PAGE, _limit: LIMIT })
-    //         .then((res) => {
-    //             setData(res);
-    //         })
-    //         .catch((error) => {
-    //             return error;
-    //         });
-    // }, [title]);
-
+function AllReviewList({ data = [] }) {
     return (
         <div className={cx('wrapper')}>
             {data.map((res, index) => (

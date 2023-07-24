@@ -15,10 +15,29 @@ function AllRatingList({ title, sendChildData }) {
     const [review, setReview] = useState('');
     const [data, setData] = useState({ name: name, stars: stars, nStars: nStars, review: review, dateReview: '' });
     const [cmt, setCmt] = useState(0);
+    const [check, setCheck] = useState(false);
 
     const [barStars, setBarStars] = useState([0, 0, 0, 0, 0]);
 
     useEffect(() => {
+        if (!check) {
+            RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+                .then((res) => {
+                    sendChildData(res);
+                    setCmt(res.length);
+                    var tmp = [0, 0, 0, 0, 0];
+                    if (res.length !== 0) {
+                        res.map((item) => (tmp[item.data.nStars - 1] += 1));
+                        tmp.forEach((item, index) => (tmp[index] = Math.round((item / res.length) * 100)));
+                    }
+
+                    setBarStars(tmp);
+                })
+                .catch((error) => {
+                    return error;
+                });
+        }
+
         const fecthApi = async () => {
             if (data.name.trim() !== '' && data.review.trim() !== '') {
                 const date = new Date();
@@ -42,19 +61,19 @@ function AllRatingList({ title, sendChildData }) {
                 }).catch((error) => {
                     return error;
                 });
+                await RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+                    .then((res) => {
+                        sendChildData(res);
+                        setCmt(res.length);
+                        var tmp = [0, 0, 0, 0, 0];
+                        res.map((item) => (tmp[item.data.nStars - 1] += 1));
+                        tmp.forEach((item, index) => (tmp[index] = Math.round((item / res.length) * 100)));
+                        setBarStars(tmp);
+                    })
+                    .catch((error) => {
+                        return error;
+                    });
             }
-            await RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
-                .then((res) => {
-                    sendChildData(res);
-                    setCmt(res.length);
-                    var tmp = [0, 0, 0, 0, 0];
-                    res.map((item) => (tmp[item.data.nStars - 1] += 1));
-                    tmp.forEach((item, index) => (tmp[index] = Math.round((item / res.length) * 100)));
-                    setBarStars(tmp);
-                })
-                .catch((error) => {
-                    return error;
-                });
         };
         fecthApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -227,6 +246,7 @@ function AllRatingList({ title, sendChildData }) {
                             setReview('');
                             setStars([true, true, true, true, true]);
                             setNStars(5);
+                            setCheck(true);
                         }
                     }}
                 >

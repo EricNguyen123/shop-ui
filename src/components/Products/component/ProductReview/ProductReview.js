@@ -17,7 +17,7 @@ function ProductReview({ title }) {
             <p className={cx('title')}>Đánh giá danh mục</p>
             <div className={cx('container')}>
                 <AllRatingList title={title} sendChildData={putOutData} />
-                <AllReviewList title={title} data={data} />
+                <AllReviewList data={data} />
             </div>
         </div>
     );

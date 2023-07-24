@@ -30,7 +30,7 @@ function Product({ nameService, directive, title, idName, path, onChangeView }) 
                     onChangeView={onChangeView}
                 />
                 <ListProduct service={nameService} category={title} idName={idName} />
-                <Description name={title} />
+                <Description name={idName} />
                 <ProductReview title={title} />
                 <Comments title={title} />
             </div>

@@ -21,7 +21,7 @@ function ProductReview({ title }) {
             CommentService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
                 .then((res) => {
                     if (res.length !== 0) {
-                        setCheck(true);
+                        // setCheck(true);
                         setResult(res);
                     }
                 })
@@ -29,6 +29,7 @@ function ProductReview({ title }) {
                     return error;
                 });
         }
+
         const fecthApi = async () => {
             if (data.name.trim() !== '' && data.phoneNumber.trim() !== '' && data.commentUser.trim() !== '') {
                 await CommentService.post({

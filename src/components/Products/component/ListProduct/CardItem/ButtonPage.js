@@ -30,7 +30,7 @@ function ButtonPage({ title, link, onChangeView, activeBtn = false, noActiveBtn 
 }
 
 ButtonPage.propTypes = {
-    title: PropTypes.string,
+    title: PropTypes.number,
     link: PropTypes.string,
     onChangeView: PropTypes.func,
     activeBtn: PropTypes.bool,
