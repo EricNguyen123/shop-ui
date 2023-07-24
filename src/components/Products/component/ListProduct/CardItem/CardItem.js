@@ -18,32 +18,33 @@ function CardItem({ nameService, total, category, idName }) {
     const [result, setResult] = useState([]);
     const [check, setCheck] = useState(1);
 
-    useEffect(() => {
-        if (idName !== category) {
-            nameService
-                .get({ category: category, _page: page, _limit: LIMIT_INIT })
-                .then((data) => {
-                    setCheck(page);
-                    setResult(data);
-                })
-                .catch((error) => {
-                    return error;
-                });
-        } else {
-            nameService
-                .getAll({ _page: page, _limit: LIMIT_INIT })
-                .then((data) => {
-                    setCheck(page);
-                    setResult(data);
-                })
-                .catch((error) => {
-                    return error;
-                });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [nameService, page, category]);
-
     const page_total = Math.ceil(total / LIMIT_INIT);
+
+    useEffect(() => {
+        if (page_total < page) {
+            setPage(1);
+        }
+
+        idName !== category
+            ? nameService
+                  .get({ category: category, _page: page, _limit: LIMIT_INIT })
+                  .then((data) => {
+                      setCheck(page);
+                      setResult(data);
+                  })
+                  .catch((error) => {
+                      return error;
+                  })
+            : nameService
+                  .getAll({ _page: page, _limit: LIMIT_INIT })
+                  .then((data) => {
+                      setCheck(page);
+                      setResult(data);
+                  })
+                  .catch((error) => {
+                      return error;
+                  });
+    }, [nameService, page, category, idName, page_total]);
 
     if (page_total < page_limit) {
         page_end = page_total;
