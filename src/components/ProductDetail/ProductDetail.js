@@ -7,6 +7,7 @@ import Comments from './component/Comments';
 import ProductAssential from './component/ProductAssential';
 import OverView from './component/OverView';
 import CrossSells from './component/CrossSells';
+import TabDetail from './component/TabDetail';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,7 @@ function ProductDetail({ directive, title }) {
                     <OverView className={cx('review-content')} />
                 </div>
                 <CrossSells />
+                <TabDetail />
                 <ProductReview title={title} />
                 <Comments title={title} />
             </div>
