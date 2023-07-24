@@ -47,6 +47,26 @@ const publicRoutes = [
         path: config.routes.productitem,
         component: ProductItem,
     },
+    {
+        path: config.routes.iphone11series,
+        component: Iphone,
+    },
+    {
+        path: config.routes.iphone12series,
+        component: Iphone,
+    },
+    {
+        path: config.routes.iphone13series,
+        component: Iphone,
+    },
+    {
+        path: config.routes.iphone14series,
+        component: Iphone,
+    },
+    {
+        path: config.routes.iphoneSE,
+        component: Iphone,
+    },
 ];
 
 const privateRoutes = [];

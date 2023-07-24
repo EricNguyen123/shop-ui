@@ -13,21 +13,32 @@ var page_end = 5;
 
 const LIMIT_INIT = 12;
 
-function CardItem({ nameService, total }) {
+function CardItem({ nameService, total, category, idName }) {
     const [page, setPage] = useState(1);
     const [result, setResult] = useState([]);
     const [check, setCheck] = useState(1);
     useEffect(() => {
-        nameService
-            .get({ _page: page, _limit: LIMIT_INIT })
-            .then((data) => {
-                setCheck(page);
-                setResult(data);
-            })
-            .catch((error) => {
-                return error;
-            });
-    }, [nameService, page]);
+        idName !== category
+            ? nameService
+                  .get({ category: category, _page: page, _limit: LIMIT_INIT })
+                  .then((data) => {
+                      setCheck(page);
+                      setResult(data);
+                  })
+                  .catch((error) => {
+                      return error;
+                  })
+            : nameService
+                  .getAll({ _page: page, _limit: LIMIT_INIT })
+                  .then((data) => {
+                      setCheck(page);
+                      setResult(data);
+                  })
+                  .catch((error) => {
+                      return error;
+                  });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [nameService, page, category]);
 
     const page_total = Math.ceil(total / LIMIT_INIT);
 

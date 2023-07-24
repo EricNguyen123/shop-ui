@@ -13,7 +13,7 @@ import * as SeriesService from '~/services/SeriesService';
 
 const cx = classNames.bind(styles);
 
-function Product({ nameService, directive, title, path }) {
+function Product({ nameService, directive, title, idName, path, onChangeView }) {
     return (
         <div className={cx('wrapper')}>
             <Breadcrumb directive={directive} title={title} />
@@ -21,9 +21,15 @@ function Product({ nameService, directive, title, path }) {
                 <div className={cx('page-name')}>
                     <h1 className={cx('name')}>{title}</h1>
                 </div>
-                <BannerPage service={BannerPageService} name={title} />
-                <SeriesProduct service={SeriesService} name={title} path={path} />
-                <ListProduct service={nameService} />
+                {title === idName && <BannerPage service={BannerPageService} name={title} />}
+                <SeriesProduct
+                    service={SeriesService}
+                    name={title}
+                    path={path}
+                    idName={idName}
+                    onChangeView={onChangeView}
+                />
+                <ListProduct service={nameService} category={title} idName={idName} />
                 <Description name={title} />
                 <ProductReview title={title} />
                 <Comments title={title} />

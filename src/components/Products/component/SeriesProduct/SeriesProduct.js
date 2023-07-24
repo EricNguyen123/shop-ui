@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function SeriesProduct({ service, name, path }) {
+function SeriesProduct({ service, name, path, onChangeView, idName }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -23,7 +23,13 @@ function SeriesProduct({ service, name, path }) {
         <div className={cx('wrapper')}>
             <div className={cx('series-menu')}>
                 <div className={cx('series-btn')}>
-                    <NavLink className={(nav) => cx('series-name', { active: nav.isActive })} to={path}>
+                    <NavLink
+                        className={(nav) => cx('series-name', { active: nav.isActive })}
+                        to={path}
+                        onClick={() => {
+                            onChangeView({ title: idName });
+                        }}
+                    >
                         <span className={cx('active-s')}>Tất cả</span>
                         <span className={cx('no-active-s')}>Tất cả</span>
                     </NavLink>
@@ -31,7 +37,13 @@ function SeriesProduct({ service, name, path }) {
 
                 {data.map((res, index) => (
                     <div key={index} className={cx('series-btn')}>
-                        <NavLink className={(nav) => cx('series-name', { active: nav.isActive })} to={res.path}>
+                        <NavLink
+                            className={(nav) => cx('series-name', { active: nav.isActive })}
+                            to={res.path}
+                            onClick={() => {
+                                onChangeView({ title: res.title });
+                            }}
+                        >
                             <span className={cx('active-s')}>{res.title}</span>
                             <span className={cx('no-active-s')}>{res.title}</span>
                         </NavLink>
