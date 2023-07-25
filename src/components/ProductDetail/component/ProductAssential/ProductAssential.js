@@ -46,7 +46,7 @@ function ProductAssential({ className, dataImg }) {
               .slick-next::before {
                 content: '→';
                 font-size: 30px;
-                color: #515154;;
+                color: #515154;
               }
             `;
             this.appendChild(style);
@@ -58,12 +58,12 @@ function ProductAssential({ className, dataImg }) {
               .slick-prev::before {
                 content: '←';
                 font-size: 30px;
-                color: #515154;;
+                color: #515154;
               }
             `;
             this.appendChild(style);
         });
-    }, []);
+    }, [dataImg]);
 
     const settingsSlider1 = {
         dots: false,
