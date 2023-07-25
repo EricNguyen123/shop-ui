@@ -9,7 +9,7 @@ import * as EndowService from '~/services/EndowService';
 
 const cx = classNames.bind(styles);
 
-function Item({ data }) {
+function Item({ data, namePath }) {
     const [endow, setEndow] = useState([]);
 
     const idEndow = data.productEndow;
@@ -33,11 +33,11 @@ function Item({ data }) {
                             <Image key={index} className={cx('icon-img')} src={result.link} alt="ctsv" />
                         ))}
                 </div>
-                <Link className={cx('item-img')} to={data.path}>
+                <Link className={cx('item-img')} to={`/${namePath}/${data.path}`}>
                     <Image className={cx('product')} src={data.color.popular} alt="product" />
                 </Link>
                 <div className={cx('item-title')}>
-                    <Link className={cx('title')} to={data.path}>
+                    <Link className={cx('title')} to={`/${namePath}/${data.path}`}>
                         {data.name}
                     </Link>
                 </div>

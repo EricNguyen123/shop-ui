@@ -29,11 +29,11 @@ export const getAll = async ({ _page, _limit }) => {
     }
 };
 
-export const getItem = async ({ id }) => {
+export const getItem = async ({ name, path }) => {
     try {
-        const res = await httpRequest.get('iPhone', {
+        const res = await httpRequest.get(name, {
             params: {
-                id: id,
+                path: path,
             },
         });
         return res;

@@ -72,7 +72,7 @@ function CardItem({ nameService, total, category, idName }) {
             <div className={cx('category-box')}>
                 {result.map((data, index) => (
                     <div key={index} className={cx('item-box')}>
-                        <Item data={data} />
+                        <Item data={data} namePath={idName} />
                     </div>
                 ))}
             </div>

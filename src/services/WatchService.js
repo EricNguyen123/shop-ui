@@ -28,3 +28,16 @@ export const getAll = async ({ _page, _limit }) => {
         console.log(error);
     }
 };
+
+export const getItem = async ({ id }) => {
+    try {
+        const res = await httpRequest.get('Watch', {
+            params: {
+                id: id,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

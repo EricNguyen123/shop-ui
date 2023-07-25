@@ -35,7 +35,7 @@ function CategoryItem({ nameService, title, path }) {
             <div className={cx('category-box')}>
                 {result.map((data, index) => (
                     <div key={index} className={cx('item-box')}>
-                        <Item data={data} />
+                        <Item data={data} namePath={title} />
                     </div>
                 ))}
             </div>

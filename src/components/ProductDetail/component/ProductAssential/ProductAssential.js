@@ -11,7 +11,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
-function ProductAssential({ className }) {
+function ProductAssential({ className, dataImg }) {
     const [nav1, setNav1] = useState(null);
     const [nav2, setNav2] = useState(null);
     const slider1Ref = useRef(null);
@@ -88,87 +88,13 @@ function ProductAssential({ className }) {
         <div className={cx('wrapper', { [className]: className })}>
             <div className={cx('img-review')}>
                 <Slider className={cx('slider')} asNavFor={nav2} ref={slider1Ref} {...settingsSlider1}>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
+                    {dataImg.map((link, index) => (
+                        <div key={index} className={cx('picture')}>
+                            <div className={cx('picture-box')}>
+                                <Image className={cx('img')} src={link} alt="" />
+                            </div>
                         </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('picture')}>
-                        <div className={cx('picture-box')}>
-                            <Image
-                                className={cx('img')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
+                    ))}
                 </Slider>
                 <Slider
                     className={cx('slide-img')}
@@ -178,88 +104,13 @@ function ProductAssential({ className }) {
                     variableWidth={true}
                     {...settingsSlider2}
                 >
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
+                    {dataImg.map((link, index) => (
+                        <div key={index} className={cx('slide-list')}>
+                            <div className={cx('slide-box')}>
+                                <Image className={cx('img-slide')} src={link} alt="" />
+                            </div>
                         </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018665_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
-                    <div className={cx('slide-list')}>
-                        <div className={cx('slide-box')}>
-                            <Image
-                                className={cx('img-slide')}
-                                src="https://shopdunk.com/images/thumbs/0018663_deep-purple_550.jpeg"
-                                alt=""
-                            />
-                        </div>
-                    </div>
+                    ))}
                 </Slider>
             </div>
         </div>

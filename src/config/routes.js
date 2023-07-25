@@ -30,7 +30,7 @@ const routes = {
     soundpage: '/soundpage',
     servicepage: '/servicepage',
     accessorypage: '/accessorypage',
-    productitem: '/:category',
+    productitem: '/:namePath/:category',
 };
 
 export default routes;
