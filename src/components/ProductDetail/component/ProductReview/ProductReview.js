@@ -7,10 +7,11 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function ProductReview({ title }) {
+function ProductReview({ title, newUserReview }) {
     const [data, setData] = useState([]);
     const putOutData = (childData) => {
         setData(childData);
+        newUserReview(childData.length);
     };
     return (
         <div className={cx('wrapper')}>

@@ -9,9 +9,11 @@ import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function OverView({ className, data }) {
+function OverView({ className, data, colorNew, userReview }) {
     const [attributes, setAttributes] = useState([]);
-    const [colorChoose, setColorChoose] = useState('space-black');
+    const [colorChoose, setColorChoose] = useState(data.colorPopular);
+    const [capacity, setCapacity] = useState(data.capacity);
+    const [promotions, setPromotions] = useState('Mua thẳng');
 
     useEffect(() => {
         setAttributes(data.attributes);
@@ -30,8 +32,8 @@ function OverView({ className, data }) {
             }
         }
     }
+    console.log(promotions);
 
-    console.log(colorChoose);
     return (
         <div className={cx('wrapper', { [className]: className })}>
             <div className={cx('over-rivew')}>
@@ -45,7 +47,7 @@ function OverView({ className, data }) {
                                 <div className={cx('rating')}></div>
                             </div>
                             <div className={cx('review-links')}>
-                                <Link className={cx('links')}>168 đánh giá</Link>
+                                <Link className={cx('links')}>{userReview} đánh giá</Link>
                                 <span className={cx('separator')}>|</span>
                             </div>
                             <div className={cx('overview-btn')}>
@@ -98,13 +100,33 @@ function OverView({ className, data }) {
                                           </div>
 
                                           <div className={cx('value-attributes')}>
-                                              {item.value.map((e, index) => (
-                                                  <div key={index} className={cx('value-item')}>
-                                                      <Link to="/iphone14series">
-                                                          <span className={cx('check-attr')}>{e}</span>
-                                                      </Link>
-                                                  </div>
-                                              ))}
+                                              {item.value.map((e, index) =>
+                                                  capacity === e ? (
+                                                      <div
+                                                          key={index}
+                                                          className={cx('value-item', 'value-item-active')}
+                                                          onClick={() => {
+                                                              setCapacity(e);
+                                                          }}
+                                                      >
+                                                          <Link to="#">
+                                                              <span className={cx('check-attr')}>{e}</span>
+                                                          </Link>
+                                                      </div>
+                                                  ) : (
+                                                      <div
+                                                          key={index}
+                                                          className={cx('value-item')}
+                                                          onClick={() => {
+                                                              setCapacity(e);
+                                                          }}
+                                                      >
+                                                          <Link to="#">
+                                                              <span className={cx('check-attr')}>{e}</span>
+                                                          </Link>
+                                                      </div>
+                                                  ),
+                                              )}
                                           </div>
                                       </div>
                                   ))
@@ -120,22 +142,44 @@ function OverView({ className, data }) {
                                         {colorBoard.value.map((color, index) => (
                                             <div key={index} className={cx('value-item-color')}>
                                                 <label htmlFor={`color-${color}`}>
-                                                    <span className={cx('attribute-square-container')} title={color}>
+                                                    {colorChoose === color ? (
                                                         <span
-                                                            className={cx('attribute-square')}
-                                                            style={{ backgroundColor: `var(--${color})` }}
+                                                            className={cx(
+                                                                'attribute-square-container',
+                                                                'attribute-square-container-active',
+                                                            )}
+                                                            title={color}
                                                         >
-                                                            &nbsp;
+                                                            <span
+                                                                className={cx('attribute-square')}
+                                                                style={{ backgroundColor: `var(--${color})` }}
+                                                            >
+                                                                &nbsp;
+                                                            </span>
                                                         </span>
-                                                    </span>
+                                                    ) : (
+                                                        <span
+                                                            className={cx('attribute-square-container')}
+                                                            title={color}
+                                                        >
+                                                            <span
+                                                                className={cx('attribute-square')}
+                                                                style={{ backgroundColor: `var(--${color})` }}
+                                                            >
+                                                                &nbsp;
+                                                            </span>
+                                                        </span>
+                                                    )}
                                                     <input
                                                         className={cx('input-color')}
                                                         id={`color-${color}`}
                                                         type="radio"
                                                         name="color"
+                                                        checked={colorChoose === color}
                                                         value={color}
                                                         onChange={() => {
                                                             setColorChoose(color);
+                                                            colorNew(color);
                                                         }}
                                                     />
                                                 </label>
@@ -159,8 +203,11 @@ function OverView({ className, data }) {
                                         id="buy-product"
                                         type="radio"
                                         name="buy"
-                                        value="buy"
-                                        // checked="checked"
+                                        value="Mua thẳng"
+                                        defaultChecked
+                                        onChange={(e) => {
+                                            setPromotions(e.target.value);
+                                        }}
                                     />
                                     <label className={cx('label-option')} htmlFor="buy-product">
                                         Mua thẳng
@@ -172,7 +219,10 @@ function OverView({ className, data }) {
                                         id="buy-product-buy-0"
                                         type="radio"
                                         name="buy"
-                                        value="buy-0"
+                                        value="Trả góp 0%"
+                                        onChange={(e) => {
+                                            setPromotions(e.target.value);
+                                        }}
                                     />
                                     <label className={cx('label-option')} htmlFor="buy-product-buy-9">
                                         Trả góp 0%
@@ -184,7 +234,10 @@ function OverView({ className, data }) {
                                         id="buy-product-buy-vip"
                                         type="radio"
                                         name="buy"
-                                        value="buy-vip"
+                                        value="Giá ưu đãi mua kèm bảo hành kim cương, VIP"
+                                        onChange={(e) => {
+                                            setPromotions(e.target.value);
+                                        }}
                                     />
                                     <label className={cx('label-option')} htmlFor="buy-product-buy-vip">
                                         Giá ưu đãi mua kèm bảo hành kim cương, VIP

@@ -74,11 +74,17 @@ function ProductAssential({ className, dataImg }) {
         arrows: false,
     };
 
+    let imgLength = 5;
+
+    if (dataImg.length < 5) {
+        imgLength = dataImg.length;
+    }
+
     const settingsSlider2 = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
+        slidesToShow: imgLength,
         slidesToScroll: 1,
         swipeToSlide: false,
         focusOnSelect: true,

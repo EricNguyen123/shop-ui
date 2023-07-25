@@ -15,23 +15,39 @@ const cx = classNames.bind(styles);
 
 function ProductDetail({ directive, title, item }) {
     const [imgs, setImgs] = useState([]);
+    const [colorNew, setColorNew] = useState('');
+    const [userReview, setUserReview] = useState(0);
     useEffect(() => {
-        const dataImgs = item.color.listColor.find((data) => data.colorName === 'space-black');
+        let colorUse = item.colorPopular;
+        if (colorNew !== '') {
+            colorUse = colorNew;
+        }
+        const dataImgs = item.color.listColor.find((data) => data.colorName === colorUse);
         setImgs(dataImgs.img);
-    }, [item.color.listColor]);
-
+    }, [item.color.listColor, item.colorPopular, colorNew]);
+    const handleImg = (colorNew) => {
+        setColorNew(colorNew);
+    };
+    const handleUserReview = (x) => {
+        setUserReview(x);
+    };
     return (
         <div className={cx('wrapper')}>
             <Breadcrumb directive={directive} title={title} />
             <div className={cx('inner')}>
                 <div className={cx('assential')}>
                     <ProductAssential className={cx('review-img')} dataImg={imgs} />
-                    <OverView className={cx('review-content')} data={item} />
+                    <OverView
+                        className={cx('review-content')}
+                        data={item}
+                        colorNew={handleImg}
+                        userReview={userReview}
+                    />
                 </div>
                 <CrossSells />
                 <TabDetail />
                 <Description name={item.nameBlog} />
-                <ProductReview title={title} />
+                <ProductReview title={title} newUserReview={handleUserReview} />
                 <Comments title={title} />
             </div>
         </div>
