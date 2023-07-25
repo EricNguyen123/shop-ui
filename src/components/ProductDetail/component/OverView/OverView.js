@@ -5,17 +5,40 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck, faGift, faRepeat } from '@fortawesome/free-solid-svg-icons';
 
 import Gift from './Gift';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function OverView({ className }) {
+function OverView({ className, data }) {
+    const [attributes, setAttributes] = useState([]);
+    const [colorChoose, setColorChoose] = useState('space-black');
+
+    useEffect(() => {
+        setAttributes(data.attributes);
+    }, [data]);
+    let colorBoard, itemBoard;
+
+    if (attributes.length >= 1) {
+        colorBoard = attributes.find((e) => e.name === 'Màu sắc');
+        if (!colorBoard) {
+            itemBoard = attributes;
+        } else {
+            if (attributes.length === 1) {
+                itemBoard = false;
+            } else {
+                itemBoard = attributes.slice(0, attributes.length - 1);
+            }
+        }
+    }
+
+    console.log(colorChoose);
     return (
         <div className={cx('wrapper', { [className]: className })}>
             <div className={cx('over-rivew')}>
                 <div className={cx('inner')}>
                     <div className={cx('info')}>
                         <div className={cx('product-name')}>
-                            <h1 className={cx('name')}>Iphone 14 Pro Max 128GB</h1>
+                            <h1 className={cx('name')}>{data.name}</h1>
                         </div>
                         <div className={cx('rating-star')}>
                             <div className={cx('review-box')}>
@@ -59,76 +82,70 @@ function OverView({ className }) {
                     </div>
                     <div className={cx('prices')}>
                         <div className={cx('product-prices')}>
-                            <span className={cx('low-prices')}>25.990.000₫</span>
+                            <span className={cx('low-prices')}>{data.actualPrice}</span>
                         </div>
                         <div className={cx('old-product-prices')}>
-                            <span className={cx('old-prices')}>34.990.000₫</span>
+                            <span className={cx('old-prices')}>{data.oldPrice}</span>
                         </div>
                     </div>
-                    <div className={cx('attributes')}>
-                        <div className={cx('attributes-item')}>
-                            <div className={cx('name-attributes')}>
-                                <span className={cx('label')}>Dung lượng</span>
-                            </div>
-                            <div className={cx('value-attributes')}>
-                                <div className={cx('value-item')}>
-                                    <Link to="/iphone14series">
-                                        <span className={cx('check-attr')}>128GB</span>
-                                    </Link>
+                    {attributes.length >= 1 && (
+                        <div className={cx('attributes')}>
+                            {itemBoard
+                                ? itemBoard.map((item, index) => (
+                                      <div key={index} className={cx('attributes-item')}>
+                                          <div className={cx('name-attributes')}>
+                                              <span className={cx('label')}>{item.name}</span>
+                                          </div>
+
+                                          <div className={cx('value-attributes')}>
+                                              {item.value.map((e, index) => (
+                                                  <div key={index} className={cx('value-item')}>
+                                                      <Link to="/iphone14series">
+                                                          <span className={cx('check-attr')}>{e}</span>
+                                                      </Link>
+                                                  </div>
+                                              ))}
+                                          </div>
+                                      </div>
+                                  ))
+                                : undefined}
+
+                            {colorBoard && (
+                                <div className={cx('attributes-item')}>
+                                    <div className={cx('name-attributes')}>
+                                        <span className={cx('label')}>{colorBoard.name}</span>
+                                    </div>
+
+                                    <div className={cx('value-attributes')}>
+                                        {colorBoard.value.map((color, index) => (
+                                            <div key={index} className={cx('value-item-color')}>
+                                                <label htmlFor={`color-${color}`}>
+                                                    <span className={cx('attribute-square-container')} title={color}>
+                                                        <span
+                                                            className={cx('attribute-square')}
+                                                            style={{ backgroundColor: `var(--${color})` }}
+                                                        >
+                                                            &nbsp;
+                                                        </span>
+                                                    </span>
+                                                    <input
+                                                        className={cx('input-color')}
+                                                        id={`color-${color}`}
+                                                        type="radio"
+                                                        name="color"
+                                                        value={color}
+                                                        onChange={() => {
+                                                            setColorChoose(color);
+                                                        }}
+                                                    />
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className={cx('value-item')}>
-                                    <Link to="/iphone14series">
-                                        <span className={cx('check-attr')}>128GB</span>
-                                    </Link>
-                                </div>
-                            </div>
+                            )}
                         </div>
-                        <div className={cx('attributes-item')}>
-                            <div className={cx('name-attributes')}>
-                                <span className={cx('label')}>Màu sắc</span>
-                            </div>
-                            <div className={cx('value-attributes')}>
-                                <div className={cx('value-item-color')}>
-                                    <label htmlFor="color-space-black">
-                                        <span className={cx('attribute-square-container')} title="Space Black">
-                                            <span
-                                                className={cx('attribute-square')}
-                                                style={{ backgroundColor: '#4C4B49' }}
-                                            >
-                                                &nbsp;
-                                            </span>
-                                        </span>
-                                        <input
-                                            className={cx('input-color')}
-                                            id="color-space-black"
-                                            type="radio"
-                                            name="color"
-                                            value="space-black"
-                                        />
-                                    </label>
-                                </div>
-                                <div className={cx('value-item-color')}>
-                                    <label htmlFor="color-space-black">
-                                        <span className={cx('attribute-square-container')} title="Space Black">
-                                            <span
-                                                className={cx('attribute-square')}
-                                                style={{ backgroundColor: '#4C4B49' }}
-                                            >
-                                                &nbsp;
-                                            </span>
-                                        </span>
-                                        <input
-                                            className={cx('input-color')}
-                                            id="color-space-black"
-                                            type="radio"
-                                            name="color"
-                                            value="space-black"
-                                        />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    )}
                     <div className={cx('short-des')}>
                         <div className={cx('p-title')}>
                             <FontAwesomeIcon className={cx('icon')} icon={faGift} />
@@ -143,7 +160,7 @@ function OverView({ className }) {
                                         type="radio"
                                         name="buy"
                                         value="buy"
-                                        checked="checked"
+                                        // checked="checked"
                                     />
                                     <label className={cx('label-option')} htmlFor="buy-product">
                                         Mua thẳng

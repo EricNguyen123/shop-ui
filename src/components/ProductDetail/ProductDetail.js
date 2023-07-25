@@ -26,7 +26,7 @@ function ProductDetail({ directive, title, item }) {
             <div className={cx('inner')}>
                 <div className={cx('assential')}>
                     <ProductAssential className={cx('review-img')} dataImg={imgs} />
-                    <OverView className={cx('review-content')} />
+                    <OverView className={cx('review-content')} data={item} />
                 </div>
                 <CrossSells />
                 <TabDetail />
