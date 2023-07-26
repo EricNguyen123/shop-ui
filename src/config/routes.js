@@ -54,6 +54,7 @@ const routes = {
     apple_TV: '/apple_TV',
     dong_ho_garmin: '/dong_ho_garmin',
     productitem: '/:namePath/:category',
+    cart: '/cart',
 };
 
 export default routes;

@@ -7,6 +7,7 @@ import SoundPage from '~/pages/SoundPage';
 import Watch from '~/pages/Watch';
 import AccessoryPage from '~/pages/AccessoryPage';
 import ProductItem from '~/pages/ProductItem';
+import Cart from '~/pages/Cart';
 
 import config from '~/config';
 
@@ -14,6 +15,10 @@ const publicRoutes = [
     {
         path: config.routes.home,
         component: Home,
+    },
+    {
+        path: config.routes.cart,
+        component: Cart,
     },
     {
         path: config.routes.ipad,

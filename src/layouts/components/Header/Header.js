@@ -63,10 +63,10 @@ function Header() {
                 </div>
                 <div className={cx('button-user')}>
                     <div className={cx('search-icon')}></div>
-                    <div className={cx('cart')}>
+                    <Link className={cx('cart')} to={config.routes.cart}>
                         <FontAwesomeIcon className={cx('cart-icon')} icon={faCartShopping} />
                         <span className={cx('badge')}>12</span>
-                    </div>
+                    </Link>
                     <FontAwesomeIcon className={cx('user-icon')} icon={faUser} />
                 </div>
             </div>
