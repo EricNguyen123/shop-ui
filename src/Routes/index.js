@@ -139,6 +139,98 @@ const publicRoutes = [
         path: config.routes.applewatchultra,
         component: Watch,
     },
+    {
+        path: config.routes.airpods,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.airpods_pro,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.audio_technica,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.beats,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.earpods,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.google,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.harman_kardon,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.jabra,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.jbl,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.marshall,
+        component: SoundPage,
+    },
+    {
+        path: config.routes.apple_TV,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.balo_tui_chong_soc,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.bao_da_op_lung,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.but_apple_pencil,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.chuot_ban_phim,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.cuong_luc_bao_ve,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.day_deo_apple_watch,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.dong_ho_garmin,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.may_anh,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.may_doc_sach,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.sac_cap,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.sac_du_phong,
+        component: AccessoryPage,
+    },
+    {
+        path: config.routes.air_tags,
+        component: AccessoryPage,
+    },
 ];
 
 const privateRoutes = [];

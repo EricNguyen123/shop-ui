@@ -30,6 +30,15 @@ export const getAll = async ({ _page, _limit }) => {
 };
 
 export const getItem = async ({ name, path }) => {
+    switch (name) {
+        case 'Âm thanh':
+            name = 'Sound';
+            break;
+        case 'Phụ kiện':
+            name = 'Accessory';
+            break;
+        default:
+    }
     try {
         const res = await httpRequest.get(name, {
             params: {
