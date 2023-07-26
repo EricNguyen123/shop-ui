@@ -78,6 +78,8 @@ function ProductAssential({ className, dataImg }) {
 
     if (dataImg.length < 5) {
         imgLength = dataImg.length;
+    } else if (dataImg.length === 5) {
+        imgLength = 4;
     }
 
     const settingsSlider2 = {
