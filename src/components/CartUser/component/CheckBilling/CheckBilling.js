@@ -131,10 +131,210 @@ function CheckBilling() {
                                 </span>
                                 <span></span>
                             </div>
+                            <div className={cx('inputs', 'district')}>
+                                <label htmlFor="BillingNewAddress_CountyId">Quận, huyện:</label>
+                                <select
+                                    data-trigger="county-select"
+                                    id="BillingNewAddress_CountyId"
+                                    name="BillingNewAddress.CountyId"
+                                ></select>
+                                <span
+                                    id="states-loading-progress"
+                                    style={{ display: 'none' }}
+                                    className={cx('please-wait')}
+                                >
+                                    Chờ đợi...
+                                </span>
+                                <span></span>
+                            </div>
+                            <div className={cx('all-receive-store')} style={{ display: 'none' }}>
+                                <div className={cx('choose-area-store')}>
+                                    <div className={cx('select-receive-store')}>
+                                        <select
+                                            autoComplete="on"
+                                            name="select_receive_store"
+                                            id="js__apply_now"
+                                        ></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={cx('all-receive-home')} style={{ display: 'block' }}>
+                                <div className={cx('inputs', 'home')}>
+                                    <label htmlFor="BillingNewAddress_Address1">Địa chỉ cụ thể:</label>
+                                    <input
+                                        type="text"
+                                        id="BillingNewAddress_Address1"
+                                        name="BillingNewAddress.Address1"
+                                    />
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div className={cx('bill-company')}>
+                                <div className={cx('checkbox-bill-company')}>
+                                    <input
+                                        id="sl_bill_company"
+                                        type="checkbox"
+                                        name="sl_bill_company"
+                                        style={{
+                                            display: 'block',
+                                            marginRight: '10px',
+                                            padding: '0px',
+                                            width: '16px',
+                                            height: '16px',
+                                            color: '#1d1d1f',
+                                            verticalAlign: 'middle',
+                                            boxSizing: 'border-box',
+                                        }}
+                                    />
+                                    <label
+                                        htmlFor="sl_bill_company"
+                                        style={{
+                                            color: '#1d1d1f',
+                                            marginBottom: '0.5rem',
+                                            display: 'inline-block',
+                                        }}
+                                    >
+                                        Xuất hoá đơn công ty
+                                    </label>
+                                </div>
+                                <fieldset className={cx('answer')} style={{ display: 'none' }}>
+                                    <input type="text" id="fn_company" name="fn_company" placeholder="Tên công ty" />
+                                    <input
+                                        type="text"
+                                        id="f_add_company"
+                                        name="f_add_company"
+                                        placeholder="Địa chỉ công ty"
+                                    />
+                                    <input
+                                        type="text"
+                                        id="f_tax_company"
+                                        name="f_tax_company"
+                                        placeholder="Mã số thuế"
+                                    />
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className={cx('checkout-payment-load')}></div>
+                <div className={cx('checkout-payment-load')}>
+                    <div className={cx('payment-method')}>
+                        <div className={cx('title-payment')}>Thông tin thanh toán</div>
+                        <div className={cx('notice-payment')} style={{ textAlign: 'left' }}>
+                            Quý khách vui lòng lựa chọn các hình thức thanh toán dưới đây:
+                        </div>
+                        <ul className={cx('method-list')}>
+                            <li style={{ display: 'block' }}>
+                                <div className={cx('method-name')}>
+                                    <div className={cx('payment-detail')}>
+                                        <div className={cx('align-items-center')}>
+                                            <input
+                                                id="paymentmethod_0"
+                                                type="radio"
+                                                name="paymentmethod"
+                                                value="Payments.Kredivo"
+                                            />
+                                        </div>
+                                        <div className={cx('payment-logo')}>
+                                            <label htmlFor="paymentmethod_0">
+                                                <img
+                                                    src="https://shopdunk.com/Plugins/Payments.Kredivo/logo.jpg"
+                                                    alt="Thanh toán Kredivo"
+                                                    width="36px"
+                                                    height="36px"
+                                                />
+                                            </label>
+                                        </div>
+                                        <div className={cx('item_paymentmethod')} style={{ width: '100%' }}>
+                                            <label htmlFor="paymentmethod_0">Thanh toán Kredivo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style={{ display: 'block' }}>
+                                <div className={cx('method-name')}>
+                                    <div className={cx('payment-detail')}>
+                                        <div className={cx('align-items-center')}>
+                                            <input
+                                                id="paymentmethod_0"
+                                                type="radio"
+                                                name="paymentmethod"
+                                                value="Payments.Kredivo"
+                                            />
+                                        </div>
+                                        <div className={cx('payment-logo')}>
+                                            <label htmlFor="paymentmethod_0">
+                                                <img
+                                                    src="https://shopdunk.com/Plugins/Payments.Onepay/logo.jpg"
+                                                    alt="Thanh toán OnePay"
+                                                    width="36px"
+                                                    height="36px"
+                                                />
+                                            </label>
+                                        </div>
+                                        <div className={cx('item_paymentmethod')} style={{ width: '100%' }}>
+                                            <label htmlFor="paymentmethod_0">Thanh toán OnePay</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style={{ display: 'block' }}>
+                                <div className={cx('method-name')}>
+                                    <div className={cx('payment-detail')}>
+                                        <div className={cx('align-items-center')}>
+                                            <input
+                                                id="paymentmethod_0"
+                                                type="radio"
+                                                name="paymentmethod"
+                                                value="Payments.Kredivo"
+                                            />
+                                        </div>
+                                        <div className={cx('payment-logo')}>
+                                            <label htmlFor="paymentmethod_0">
+                                                <img
+                                                    src="https://shopdunk.com/Plugins/Payments.Payoo/logo.jpg"
+                                                    alt="Thanh toán Payoo"
+                                                    width="36px"
+                                                    height="36px"
+                                                />
+                                            </label>
+                                        </div>
+                                        <div className={cx('item_paymentmethod')} style={{ width: '100%' }}>
+                                            <label htmlFor="paymentmethod_0">Thanh toán Payoo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style={{ display: 'block' }}>
+                                <div className={cx('method-name')}>
+                                    <div className={cx('payment-detail')}>
+                                        <div className={cx('align-items-center')}>
+                                            <input
+                                                id="paymentmethod_0"
+                                                type="radio"
+                                                name="paymentmethod"
+                                                value="Payments.Kredivo"
+                                                defaultChecked
+                                            />
+                                        </div>
+                                        <div className={cx('payment-logo')}>
+                                            <label htmlFor="paymentmethod_0">
+                                                <img
+                                                    src="https://shopdunk.com/Plugins/Payments.VietQr/logo.jpg"
+                                                    alt="Chuyển khoản ngân hàng"
+                                                    width="36px"
+                                                    height="36px"
+                                                />
+                                            </label>
+                                        </div>
+                                        <div className={cx('item_paymentmethod')} style={{ width: '100%' }}>
+                                            <label htmlFor="paymentmethod_0">Chuyển khoản ngân hàng</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     );
