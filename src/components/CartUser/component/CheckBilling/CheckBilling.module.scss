@@ -1,0 +1,196 @@
+.wrapper {
+    width: 100%;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: #1d1d1f;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.content-not-login {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-not-login p {
+    margin-top: 0;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 0;
+    color: #1d1d1f;
+    margin-right: 40px;
+}
+
+.login-link-btn {
+    min-width: 163px;
+    background: #0066cc;
+    border-radius: 8px;
+    padding: 11px 30px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 18px;
+    color: #ffffff;
+}
+
+.checkout-billing-load {
+    display: block;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px 20px;
+}
+
+.checkout-data {
+    position: relative;
+    margin: 0 0 40px;
+    margin-bottom: 0;
+}
+
+.enter-address {
+    height: max-content;
+    padding: 8px 0 0;
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.inputs {
+    position: relative;
+    margin: 0 0 15px;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 0;
+    &::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+.input-name input[type='text'] {
+    font-size: 15px;
+    width: 100% !important;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    height: 48px;
+    min-height: 40px;
+    max-width: 100%;
+    background-color: #fff;
+    padding: 8px;
+    padding-left: 16px !important;
+    vertical-align: middle;
+}
+
+.input-phone-number {
+    width: 49%;
+    float: left;
+    text-align: left;
+}
+
+.input-phone-number input[type='tel'] {
+    font-size: 15px;
+    width: 100% !important;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    height: 48px;
+    min-height: 40px;
+    max-width: 100%;
+    background-color: #fff;
+    padding: 8px;
+    padding-left: 16px !important;
+    vertical-align: middle;
+}
+
+.input-email {
+    width: 49%;
+    float: right;
+    text-align: left;
+}
+
+.input-email input[type='email'] {
+    font-size: 15px;
+    width: 100% !important;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    height: 48px;
+    min-height: 40px;
+    max-width: 100%;
+    background-color: #fff;
+    padding: 8px;
+    padding-left: 16px !important;
+    vertical-align: middle;
+}
+
+.title-receive-method {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 21px;
+    color: #1d1d1f;
+    display: block;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.receive-method {
+    display: flex;
+    align-items: baseline;
+}
+
+.receive-method input {
+    margin-right: 5px;
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+}
+
+.inputs label {
+    width: 100px;
+    display: block;
+    text-align: left;
+    font-weight: 400;
+    font-size: 15px;
+    color: #1d1d1f;
+    margin-bottom: 5px;
+}
+
+.space {
+    width: 30px;
+}
+
+.province {
+    width: 49%;
+    float: left;
+    text-align: left;
+}
+
+.inputs select {
+    width: 100% !important;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    height: 48px;
+    min-height: 40px;
+    max-width: 100%;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('https://shopdunk.com/images/uploaded-source/icon/arrow-down.png');
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position-x: 97%;
+    background-position-y: 20px;
+    padding-left: 15px;
+}
+
+.please-wait {
+    background: url('https://shopdunk.com//Themes/SD/Content/images/ajax-loader-small.gif') no-repeat;
+    padding-left: 20px;
+    font-size: 14px;
+}
