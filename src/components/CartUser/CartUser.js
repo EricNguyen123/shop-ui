@@ -3,6 +3,7 @@ import styles from './CartUser.module.scss';
 import Breadcrumb from './component/Breadcrumb';
 import CartDetail from './component/CartDetail';
 import CheckBilling from './component/CheckBilling';
+import CartFooter from './component/CartFooter';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,9 @@ function CartUser() {
                             <CartDetail />
                             <CheckBilling />
                         </div>
-                        <div className={cx('row')}></div>
+                        <div className={cx('row')}>
+                            <CartFooter />
+                        </div>
                     </div>
                 </div>
             </div>
