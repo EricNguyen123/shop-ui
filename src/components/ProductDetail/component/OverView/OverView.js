@@ -1,11 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './OverView.module.scss';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCircleCheck, faGift, faRepeat } from '@fortawesome/free-solid-svg-icons';
 
 import Gift from './Gift';
-import { useEffect, useState } from 'react';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -14,9 +15,20 @@ function OverView({ className, data, colorNew, userReview }) {
     const [colorChoose, setColorChoose] = useState(data.colorPopular);
     const [capacity, setCapacity] = useState(data.capacity);
     const [promotions, setPromotions] = useState('Mua thẳng');
+    const [storeArea, setStoreArea] = useState('Khu vực miền Bắc');
+    const [upOptions, setUpOptions] = useState(true);
+
+    // localStorage.clear();
+    const path = useParams();
 
     useEffect(() => {
         setAttributes(data.attributes);
+
+        const changeUpOptions = localStorage.getItem('upOptions');
+        if (changeUpOptions !== null && JSON.parse(changeUpOptions) === true) {
+            setUpOptions(false);
+            localStorage.removeItem('upOptions');
+        }
     }, [data]);
     let colorBoard, itemBoard;
 
@@ -32,7 +44,67 @@ function OverView({ className, data, colorNew, userReview }) {
             }
         }
     }
-    console.log(promotions);
+
+    const handleBuy = () => {
+        const item = {
+            id: Math.floor(Math.random() * 10 ** 6),
+            namePath: path.namePath,
+            category: path.category,
+            storeArea: storeArea,
+            img: data.color.popular,
+            name: data.name,
+            capacity: capacity,
+            color: colorChoose,
+            promotions: promotions,
+            price: data.actualPrice,
+            quantity: 1,
+        };
+        let Items = [item];
+        const userID = localStorage.getItem('sessionID');
+        if (userID === null) {
+            const randomID = Math.floor(Math.random() * 10 ** 8);
+            localStorage.setItem('sessionID', randomID);
+        }
+        const dataItems = localStorage.getItem('dataItems');
+        if (dataItems === null) {
+            localStorage.setItem('dataItems', JSON.stringify(Items));
+        } else {
+            Items = JSON.parse(dataItems);
+            let checkItem = false;
+            for (let e of Items) {
+                if (
+                    e.name === item.name &&
+                    e.capacity === item.capacity &&
+                    e.color === item.color &&
+                    upOptions === true
+                ) {
+                    e.quantity += 1;
+                    checkItem = true;
+                    break;
+                } else if (
+                    e.name === item.name &&
+                    e.capacity === item.capacity &&
+                    e.color === item.color &&
+                    upOptions === false
+                ) {
+                    checkItem = true;
+                    break;
+                } else if (e.id === JSON.parse(localStorage.getItem('idChange')) && upOptions === false) {
+                    e.capacity = item.capacity;
+                    e.color = item.color;
+                    e.promotions = item.promotions;
+                    e.price = item.price;
+                    e.storeArea = item.storeArea;
+                    checkItem = true;
+                    break;
+                }
+            }
+            if (checkItem === false) {
+                Items.push(item);
+            }
+        }
+        localStorage.setItem('dataItems', JSON.stringify(Items));
+    };
 
     return (
         <div className={cx('wrapper', { [className]: className })}>
@@ -70,6 +142,9 @@ function OverView({ className, data, colorNew, userReview }) {
                                     id="product_attribute_2256"
                                     aria-invalid="false"
                                     defaultValue="5962"
+                                    onChange={(e) => {
+                                        setStoreArea(e.target.value);
+                                    }}
                                 >
                                     <option value="0">Vui lòng chọn</option>
                                     <option data-attr-value="5962" value="5962">
@@ -257,7 +332,11 @@ function OverView({ className, data, colorNew, userReview }) {
                     </Link>
                     <div className={cx('add-cart-button')}>
                         <div className={cx('add-to-cart')}>
-                            <button className={cx('add-click')}>Mua ngay</button>
+                            <Link to={config.routes.cart}>
+                                <button className={cx('add-click')} onClick={handleBuy}>
+                                    {upOptions === true ? <span>Mua ngay</span> : <span>Cập nhật</span>}
+                                </button>
+                            </Link>
                         </div>
                         <div className={cx('button-bottom')}>
                             <Link className={cx('choose-btn')}>Trả góp</Link>

@@ -4,26 +4,38 @@ import Breadcrumb from './component/Breadcrumb';
 import CartDetail from './component/CartDetail';
 import CheckBilling from './component/CheckBilling';
 import CartFooter from './component/CartFooter';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function CartUser() {
+    const [data, setData] = useState([]);
+    const dataItems = localStorage.getItem('dataItems');
+    useEffect(() => {
+        if (dataItems !== null) {
+            setData(JSON.parse(dataItems));
+        }
+    }, [dataItems]);
+
     return (
         <div className={cx('wrapper')}>
             <Breadcrumb directive={true} title="Giỏ hàng" />
             <div className={cx('inner')}>
-                {/* <div className={cx('no-data')}>Giỏ hàng của bạn đang trống!</div> */}
-                <div className={cx('order-content')}>
-                    <div className={cx('form')}>
-                        <div className={cx('shoping-cart-inf')}>
-                            <CartDetail />
-                            <CheckBilling />
-                        </div>
-                        <div className={cx('row')}>
-                            <CartFooter />
+                {dataItems === null ? (
+                    <div className={cx('no-data')}>Giỏ hàng của bạn đang trống!</div>
+                ) : (
+                    <div className={cx('order-content')}>
+                        <div className={cx('form')}>
+                            <div className={cx('shoping-cart-inf')}>
+                                <CartDetail dataItems={data} />
+                                <CheckBilling />
+                            </div>
+                            <div className={cx('row')}>
+                                <CartFooter />
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
