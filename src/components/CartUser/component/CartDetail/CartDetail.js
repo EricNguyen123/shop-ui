@@ -3,12 +3,13 @@ import styles from './CartDetail.module.scss';
 import { Link } from 'react-router-dom';
 import Image from '~/components/Image';
 import { useEffect, useState } from 'react';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function CartDetail({ dataItems }) {
+function CartDetail({ dataItems, handleView }) {
     const [Items, setItems] = useState(dataItems);
-
+    console.log(Items);
     useEffect(() => {
         setItems(dataItems);
     }, [dataItems]);
@@ -22,11 +23,17 @@ function CartDetail({ dataItems }) {
         if (newQuantity === 0) {
             handleRemoveFromCart(item.id);
         } else {
+            let price = item.price;
+            price = price.slice(0, price.length - 1);
+            price = price.replaceAll('.', '');
             const newDataItems = Items.map((dataItem) =>
-                dataItem.id === item.id ? { ...dataItem, quantity: newQuantity } : dataItem,
+                dataItem.id === item.id
+                    ? { ...dataItem, quantity: newQuantity, totalItem: newQuantity * price }
+                    : dataItem,
             );
             setItems(newDataItems);
             localStorage.setItem('dataItems', JSON.stringify(newDataItems));
+            handleView(localStorage.getItem('dataItems'));
         }
     };
 
@@ -34,9 +41,11 @@ function CartDetail({ dataItems }) {
         const newDataItems = Items.filter((dataItem) => dataItem.id !== itemId);
         setItems(newDataItems);
         if (newDataItems.length === 0) {
+            handleView(null);
             localStorage.removeItem('dataItems');
         } else {
             localStorage.setItem('dataItems', JSON.stringify(newDataItems));
+            handleView(localStorage.getItem('dataItems'));
         }
     };
 
@@ -70,12 +79,14 @@ function CartDetail({ dataItems }) {
                                 <tr key={index}>
                                     {/* <td className={cx('sku')}>SKU</td> */}
                                     <td className={cx('product-picture')}>
-                                        <Link className={cx('link-img-item')}>
+                                        <Link className={cx('link-img-item')} to={`/${item.namePath}/${item.category}`}>
                                             <Image className={cx('item-img')} src={item.img} alt={item.name} />
                                         </Link>
                                     </td>
                                     <td className={cx('product')}>
-                                        <Link className={cx('item-name')}>{item.name}</Link>
+                                        <Link className={cx('item-name')} to={`/${item.namePath}/${item.category}`}>
+                                            {item.name}
+                                        </Link>
                                         <div className={cx('attributes')}>
                                             Khu vực: {item.storeArea}
                                             <br />
@@ -164,10 +175,17 @@ function CartDetail({ dataItems }) {
                                             type="checkbox"
                                             name="removefromcart"
                                             id="removefromcart"
-                                            value="111724"
+                                            value={item.id}
                                             aria-label="Tẩy"
                                         />
-                                        <button type="button" name="updatecart" className={cx('remove-btn')}></button>
+                                        <button
+                                            type="button"
+                                            name="updatecart"
+                                            className={cx('remove-btn')}
+                                            onClick={() => {
+                                                handleRemoveFromCart(item.id);
+                                            }}
+                                        ></button>
                                     </td>
                                 </tr>
                             ))}
@@ -176,12 +194,23 @@ function CartDetail({ dataItems }) {
                 </div>
                 <div className={cx('cart-options')}>
                     <div className={cx('common-button')}>
-                        <button type="submit" name="updatecart" id="updatecart" className={cx('update-cart-button')}>
+                        <button
+                            type="submit"
+                            name="updatecart"
+                            id="updatecart"
+                            className={cx('update-cart-button')}
+                            onClick={() => {
+                                handleView(localStorage.getItem('dataItems'));
+                            }}
+                        >
                             Cập nhật giỏ hàng
                         </button>
-                        <button type="submit" name="continueshopping" className={cx('continue-shopping-button')}>
-                            Tiếp tục mua sắm
-                        </button>
+
+                        <Link to={config.routes.home}>
+                            <button type="submit" name="continueshopping" className={cx('continue-shopping-button')}>
+                                Tiếp tục mua sắm
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

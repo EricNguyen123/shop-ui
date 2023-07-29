@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function CartFooter() {
+function CartFooter({ totalAll }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('sidebar-cart')}>
@@ -45,7 +45,7 @@ function CartFooter() {
                                         <label>Tổng phụ:</label>
                                     </td>
                                     <td className={cx('cart-total-right')}>
-                                        <span className={cx('value-summary')}>25.990.000₫</span>
+                                        <span className={cx('value-summary')}>{totalAll}</span>
                                     </td>
                                 </tr>
                                 <tr className={cx('order-total')}>
@@ -53,7 +53,7 @@ function CartFooter() {
                                         <label>Tổng cộng:</label>
                                     </td>
                                     <td className={cx('cart-total-right')}>
-                                        <span className={cx('value-summary')}>25.990.000₫</span>
+                                        <span className={cx('value-summary')}>{totalAll}</span>
                                     </td>
                                 </tr>
                             </tbody>

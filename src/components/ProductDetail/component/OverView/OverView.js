@@ -52,6 +52,9 @@ function OverView({ className, data, colorNew, userReview }) {
     }
 
     const handleBuy = () => {
+        let priceItem = data.actualPrice;
+        priceItem = priceItem.slice(0, priceItem.length - 1);
+        priceItem = priceItem.replaceAll('.', '');
         const item = {
             id: Math.floor(Math.random() * 10 ** 6),
             namePath: path.namePath,
@@ -64,6 +67,7 @@ function OverView({ className, data, colorNew, userReview }) {
             promotions: promotions,
             price: data.actualPrice,
             quantity: 1,
+            totalItem: Number(priceItem),
         };
         let Items = [item];
         const userID = localStorage.getItem('sessionID');
@@ -79,15 +83,18 @@ function OverView({ className, data, colorNew, userReview }) {
             let checkItem = false;
             for (let e of Items) {
                 if (
+                    e.id === JSON.parse(localStorage.getItem('idChange')) &&
                     e.name === item.name &&
                     e.capacity === item.capacity &&
                     e.color === item.color &&
                     upOptions === true
                 ) {
                     e.quantity += 1;
+                    e.totalItem = e.quantity * Number(priceItem);
                     checkItem = true;
                     break;
                 } else if (
+                    e.id === JSON.parse(localStorage.getItem('idChange')) &&
                     e.name === item.name &&
                     e.capacity === item.capacity &&
                     e.color === item.color &&
@@ -101,6 +108,7 @@ function OverView({ className, data, colorNew, userReview }) {
                     e.promotions = item.promotions;
                     e.price = item.price;
                     e.storeArea = item.storeArea;
+                    e.totalItem = e.quantity * Number(priceItem);
                     checkItem = true;
                     break;
                 }

@@ -10,32 +10,24 @@ const cx = classNames.bind(styles);
 
 function CartUser() {
     const [data, setData] = useState([]);
-    // const dataItems = localStorage.getItem('dataItems');
     const [dataItems, setDataItems] = useState(localStorage.getItem('dataItems'));
-    const [dataItemsChanged, setDataItemsChanged] = useState(false);
+    const [totalAll, setTotalAll] = useState(0);
 
     useEffect(() => {
         if (dataItems !== null) {
-            setData(JSON.parse(dataItems));
+            const JSONData = JSON.parse(dataItems);
+            setData(JSONData);
+
+            let total = 0;
+            JSONData.forEach((element) => {
+                total += element.totalItem;
+            });
+            setTotalAll(total);
         }
-        window.addEventListener('storage', handleLocalStorageChange);
-        return () => {
-            window.removeEventListener('storage', handleLocalStorageChange);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dataItems]);
 
-    useEffect(() => {
-        if (dataItemsChanged) {
-            setDataItems(localStorage.getItem('dataItems'));
-            setDataItemsChanged(false);
-        }
-    }, [dataItemsChanged]);
-
-    const handleLocalStorageChange = (event) => {
-        if (event.key === 'dataItems') {
-            setDataItemsChanged(true);
-        }
+    const handleView = (e) => {
+        setDataItems(e);
     };
 
     return (
@@ -48,11 +40,11 @@ function CartUser() {
                     <div className={cx('order-content')}>
                         <div className={cx('form')}>
                             <div className={cx('shoping-cart-inf')}>
-                                <CartDetail dataItems={data} />
+                                <CartDetail dataItems={data} handleView={handleView} />
                                 <CheckBilling />
                             </div>
                             <div className={cx('row')}>
-                                <CartFooter />
+                                <CartFooter totalAll={totalAll} />
                             </div>
                         </div>
                     </div>
