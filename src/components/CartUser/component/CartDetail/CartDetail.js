@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 
 function CartDetail({ dataItems }) {
     const [Items, setItems] = useState(dataItems);
+
     useEffect(() => {
         setItems(dataItems);
     }, [dataItems]);
@@ -16,14 +17,29 @@ function CartDetail({ dataItems }) {
         localStorage.setItem('upOptions', JSON.stringify(true));
         localStorage.setItem('idChange', JSON.stringify(e.id));
     };
-    const handleReduce = (e) => {
-        if (e.quantity > 1) {
-            e.quantity -= 1;
+
+    const handleQuantityChange = (item, newQuantity) => {
+        if (newQuantity === 0) {
+            handleRemoveFromCart(item.id);
         } else {
-            const newData = Items.filter((x) => x.id !== e.id);
-            dataItems = newData;
+            const newDataItems = Items.map((dataItem) =>
+                dataItem.id === item.id ? { ...dataItem, quantity: newQuantity } : dataItem,
+            );
+            setItems(newDataItems);
+            localStorage.setItem('dataItems', JSON.stringify(newDataItems));
         }
     };
+
+    const handleRemoveFromCart = (itemId) => {
+        const newDataItems = Items.filter((dataItem) => dataItem.id !== itemId);
+        setItems(newDataItems);
+        if (newDataItems.length === 0) {
+            localStorage.removeItem('dataItems');
+        } else {
+            localStorage.setItem('dataItems', JSON.stringify(newDataItems));
+        }
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('cart-detail')}>
@@ -71,7 +87,7 @@ function CartDetail({ dataItems }) {
                                             <Link
                                                 className={cx('edit-link')}
                                                 to={`/${item.namePath}/${item.category}`}
-                                                onClick={handleOption(item)}
+                                                onClick={() => handleOption(item)}
                                             >
                                                 Sửa
                                             </Link>
@@ -90,7 +106,7 @@ function CartDetail({ dataItems }) {
                                                 viewBox="0 0 11 11"
                                                 fill="none"
                                                 xmlns="http://www.w3.org/2000/svg"
-                                                onClick={handleReduce(item)}
+                                                onClick={() => handleQuantityChange(item, item.quantity - 1)}
                                             >
                                                 <g clipPath="url(#clip0_10158_65576)">
                                                     <path
@@ -109,8 +125,9 @@ function CartDetail({ dataItems }) {
                                                 name="itemquantity"
                                                 id="itemquantity"
                                                 type="text"
-                                                defaultValue={item.quantity}
+                                                value={item.quantity}
                                                 aria-label="Số lượng"
+                                                onChange={(e) => handleQuantityChange(item, e.target.value)}
                                             />
                                             <svg
                                                 className={cx('icon-quantity')}
@@ -120,6 +137,7 @@ function CartDetail({ dataItems }) {
                                                 viewBox="0 0 12 13"
                                                 fill="none"
                                                 xmlns="http://www.w3.org/2000/svg"
+                                                onClick={() => handleQuantityChange(item, item.quantity + 1)}
                                             >
                                                 <g clipPath="url(#clip0_10158_65579)">
                                                     <path

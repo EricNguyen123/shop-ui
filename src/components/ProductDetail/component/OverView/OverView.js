@@ -112,6 +112,7 @@ function OverView({ className, data, colorNew, userReview }) {
         localStorage.setItem('dataItems', JSON.stringify(Items));
         if (upOptions === false) {
             localStorage.setItem('fromCart', JSON.stringify(true));
+            localStorage.removeItem('upOptions');
         }
     };
 

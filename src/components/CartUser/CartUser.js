@@ -10,12 +10,30 @@ const cx = classNames.bind(styles);
 
 function CartUser() {
     const [data, setData] = useState([]);
-    const dataItems = localStorage.getItem('dataItems');
+    // const dataItems = localStorage.getItem('dataItems');
+    const [dataItems, setDataItems] = useState(localStorage.getItem('dataItems'));
+    const [dataItemsChanged, setDataItemsChanged] = useState(false);
+
     useEffect(() => {
         if (dataItems !== null) {
             setData(JSON.parse(dataItems));
         }
-    }, [dataItems]);
+        if (dataItemsChanged) {
+            setDataItems(localStorage.getItem('dataItems'));
+        }
+        window.addEventListener('storage', handleLocalStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleLocalStorageChange);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dataItems, dataItemsChanged]);
+
+    const handleLocalStorageChange = (event) => {
+        if (event.key === 'dataItems') {
+            // setDataItems(localStorage.getItem('dataItems'));
+            setDataItemsChanged(true);
+        }
+    };
 
     return (
         <div className={cx('wrapper')}>
