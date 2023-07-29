@@ -18,19 +18,22 @@ function CartUser() {
         if (dataItems !== null) {
             setData(JSON.parse(dataItems));
         }
-        if (dataItemsChanged) {
-            setDataItems(localStorage.getItem('dataItems'));
-        }
         window.addEventListener('storage', handleLocalStorageChange);
         return () => {
             window.removeEventListener('storage', handleLocalStorageChange);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dataItems, dataItemsChanged]);
+    }, [dataItems]);
+
+    useEffect(() => {
+        if (dataItemsChanged) {
+            setDataItems(localStorage.getItem('dataItems'));
+            setDataItemsChanged(false);
+        }
+    }, [dataItemsChanged]);
 
     const handleLocalStorageChange = (event) => {
         if (event.key === 'dataItems') {
-            // setDataItems(localStorage.getItem('dataItems'));
             setDataItemsChanged(true);
         }
     };
