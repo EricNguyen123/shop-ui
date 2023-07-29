@@ -2,13 +2,27 @@ import classNames from 'classnames/bind';
 import styles from './CartDetail.module.scss';
 import { Link } from 'react-router-dom';
 import Image from '~/components/Image';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function CartDetail({ dataItems }) {
+    const [Items, setItems] = useState(dataItems);
+    useEffect(() => {
+        setItems(dataItems);
+    }, [dataItems]);
+
     const handleOption = (e) => {
         localStorage.setItem('upOptions', JSON.stringify(true));
         localStorage.setItem('idChange', JSON.stringify(e.id));
+    };
+    const handleReduce = (e) => {
+        if (e.quantity > 1) {
+            e.quantity -= 1;
+        } else {
+            const newData = Items.filter((x) => x.id !== e.id);
+            dataItems = newData;
+        }
     };
     return (
         <div className={cx('wrapper')}>
@@ -36,7 +50,7 @@ function CartDetail({ dataItems }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {dataItems.map((item, index) => (
+                            {Items.map((item, index) => (
                                 <tr key={index}>
                                     {/* <td className={cx('sku')}>SKU</td> */}
                                     <td className={cx('product-picture')}>
@@ -76,6 +90,7 @@ function CartDetail({ dataItems }) {
                                                 viewBox="0 0 11 11"
                                                 fill="none"
                                                 xmlns="http://www.w3.org/2000/svg"
+                                                onClick={handleReduce(item)}
                                             >
                                                 <g clipPath="url(#clip0_10158_65576)">
                                                     <path

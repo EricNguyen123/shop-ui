@@ -29,6 +29,12 @@ function OverView({ className, data, colorNew, userReview }) {
             setUpOptions(false);
             localStorage.removeItem('upOptions');
         }
+
+        const fromCart = localStorage.getItem('fromCart');
+        if (fromCart !== null && JSON.parse(fromCart) === true) {
+            setUpOptions(true);
+            localStorage.removeItem('fromCart');
+        }
     }, [data]);
     let colorBoard, itemBoard;
 
@@ -104,6 +110,9 @@ function OverView({ className, data, colorNew, userReview }) {
             }
         }
         localStorage.setItem('dataItems', JSON.stringify(Items));
+        if (upOptions === false) {
+            localStorage.setItem('fromCart', JSON.stringify(true));
+        }
     };
 
     return (
