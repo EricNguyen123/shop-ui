@@ -23,17 +23,15 @@ function OverView({ className, data, colorNew, userReview }) {
 
     useEffect(() => {
         setAttributes(data.attributes);
-
-        const changeUpOptions = localStorage.getItem('upOptions');
-        if (changeUpOptions !== null && JSON.parse(changeUpOptions) === true) {
-            setUpOptions(false);
-            localStorage.removeItem('upOptions');
-        }
-
         const fromCart = localStorage.getItem('fromCart');
         if (fromCart !== null && JSON.parse(fromCart) === true) {
             setUpOptions(true);
             localStorage.removeItem('fromCart');
+        }
+        const changeUpOptions = localStorage.getItem('upOptions');
+        if (changeUpOptions !== null && JSON.parse(changeUpOptions) === true) {
+            setUpOptions(false);
+            localStorage.removeItem('upOptions');
         }
     }, [data]);
     let colorBoard, itemBoard;

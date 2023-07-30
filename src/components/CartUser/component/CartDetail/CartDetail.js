@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 function CartDetail({ dataItems, handleView }) {
     const [Items, setItems] = useState(dataItems);
-    console.log(Items);
+
     useEffect(() => {
         setItems(dataItems);
     }, [dataItems]);

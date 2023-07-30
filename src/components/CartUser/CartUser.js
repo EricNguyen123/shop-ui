@@ -19,10 +19,15 @@ function CartUser() {
             setData(JSONData);
 
             let total = 0;
+            let quantity = 0;
             JSONData.forEach((element) => {
                 total += element.totalItem;
+                quantity += element.quantity;
             });
             setTotalAll(total);
+            localStorage.setItem('quantity', JSON.stringify(quantity));
+        } else {
+            localStorage.removeItem('quantity');
         }
     }, [dataItems]);
 

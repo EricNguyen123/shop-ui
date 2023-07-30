@@ -1,10 +1,34 @@
 import classNames from 'classnames/bind';
 import styles from './CartFooter.module.scss';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function CartFooter({ totalAll }) {
+    const [total, setTotal] = useState('0');
+    useEffect(() => {
+        let totalString = totalAll.toString();
+        let x = '';
+        let totalResult = '';
+        let i = totalString.length;
+        while (totalString !== '') {
+            if (x !== '') {
+                totalResult = '.' + totalResult;
+            }
+            if (i < 3) {
+                x = totalString.slice(0, i);
+                totalString = '';
+            } else {
+                x = totalString.slice(i - 3, i);
+                i -= 3;
+                totalString = totalString.slice(0, i);
+            }
+
+            totalResult = x + totalResult;
+        }
+        setTotal(totalResult);
+    }, [totalAll]);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('sidebar-cart')}>
@@ -45,7 +69,7 @@ function CartFooter({ totalAll }) {
                                         <label>Tổng phụ:</label>
                                     </td>
                                     <td className={cx('cart-total-right')}>
-                                        <span className={cx('value-summary')}>{totalAll}</span>
+                                        <span className={cx('value-summary')}>{total}</span>
                                     </td>
                                 </tr>
                                 <tr className={cx('order-total')}>
@@ -53,7 +77,7 @@ function CartFooter({ totalAll }) {
                                         <label>Tổng cộng:</label>
                                     </td>
                                     <td className={cx('cart-total-right')}>
-                                        <span className={cx('value-summary')}>{totalAll}</span>
+                                        <span className={cx('value-summary')}>{total}</span>
                                     </td>
                                 </tr>
                             </tbody>

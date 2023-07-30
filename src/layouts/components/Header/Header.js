@@ -8,10 +8,38 @@ import Tippy from '@tippyjs/react/headless';
 import Image from '~/components/Image';
 import config from '~/config';
 import ButtonHeader from '~/layouts/components/ButtonHeader';
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from '~/hook';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const [badge, setBadge] = useState(0);
+    // const [JSONQuantity, setSONQuantity] = useState(localStorage.getItem('quantity'));
+
+    // useEffect(() => {
+    //     if (JSONQuantity !== null) {
+    //         setBadge(JSON.parse(JSONQuantity));
+    //     }
+    //     window.addEventListener('storage', handleLocalStorageChange);
+    //     return () => {
+    //         window.removeEventListener('storage', handleLocalStorageChange);
+    //     };
+    // }, [JSONQuantity]);
+
+    // const handleLocalStorageChange = (event) => {
+    //     if (event.key === 'quantity') {
+    //         setSONQuantity(localStorage.getItem('quantity'));
+    //     }
+    // };
+
+    const [storedValue, setStoredValue] = useLocalStorage('quantity', 0);
+
+    useEffect(() => {
+        setBadge(storedValue);
+        setStoredValue(JSON.parse(localStorage.getItem('quantity')));
+    }, [setStoredValue, storedValue]);
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -65,7 +93,7 @@ function Header() {
                     <div className={cx('search-icon')}></div>
                     <Link className={cx('cart')} to={config.routes.cart}>
                         <FontAwesomeIcon className={cx('cart-icon')} icon={faCartShopping} />
-                        <span className={cx('badge')}>12</span>
+                        <span className={cx('badge')}>{badge}</span>
                     </Link>
                     <FontAwesomeIcon className={cx('user-icon')} icon={faUser} />
                 </div>
