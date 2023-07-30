@@ -4,6 +4,7 @@ import Breadcrumb from './component/Breadcrumb';
 import CartDetail from './component/CartDetail';
 import CheckBilling from './component/CheckBilling';
 import CartFooter from './component/CartFooter';
+import Loader from '~/components/Loader';
 import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
@@ -12,6 +13,7 @@ function CartUser() {
     const [data, setData] = useState([]);
     const [dataItems, setDataItems] = useState(localStorage.getItem('dataItems'));
     const [totalAll, setTotalAll] = useState(0);
+    const [loading, setLoading] = useState(0);
 
     useEffect(() => {
         if (dataItems !== null) {
@@ -29,14 +31,23 @@ function CartUser() {
         } else {
             localStorage.removeItem('quantity');
         }
+        if (localStorage.getItem('clickButton') !== null) {
+            window.location.reload();
+            localStorage.removeItem('clickButton');
+        }
     }, [dataItems]);
 
     const handleView = (e) => {
         setDataItems(e);
     };
 
+    const handleLoading = (e) => {
+        setLoading(e);
+    };
+
     return (
         <div className={cx('wrapper')}>
+            {loading === 1 && <Loader />}
             <Breadcrumb directive={true} title="Giỏ hàng" />
             <div className={cx('inner')}>
                 {dataItems === null ? (
@@ -45,7 +56,7 @@ function CartUser() {
                     <div className={cx('order-content')}>
                         <div className={cx('form')}>
                             <div className={cx('shoping-cart-inf')}>
-                                <CartDetail dataItems={data} handleView={handleView} />
+                                <CartDetail dataItems={data} handleView={handleView} handleLoading={handleLoading} />
                                 <CheckBilling />
                             </div>
                             <div className={cx('row')}>

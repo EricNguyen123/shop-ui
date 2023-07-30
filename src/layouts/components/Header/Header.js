@@ -9,36 +9,28 @@ import Image from '~/components/Image';
 import config from '~/config';
 import ButtonHeader from '~/layouts/components/ButtonHeader';
 import { useEffect, useState } from 'react';
-import { useLocalStorage } from '~/hook';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [badge, setBadge] = useState(0);
-    // const [JSONQuantity, setSONQuantity] = useState(localStorage.getItem('quantity'));
-
-    // useEffect(() => {
-    //     if (JSONQuantity !== null) {
-    //         setBadge(JSON.parse(JSONQuantity));
-    //     }
-    //     window.addEventListener('storage', handleLocalStorageChange);
-    //     return () => {
-    //         window.removeEventListener('storage', handleLocalStorageChange);
-    //     };
-    // }, [JSONQuantity]);
-
-    // const handleLocalStorageChange = (event) => {
-    //     if (event.key === 'quantity') {
-    //         setSONQuantity(localStorage.getItem('quantity'));
-    //     }
-    // };
-
-    const [storedValue, setStoredValue] = useLocalStorage('quantity', 0);
+    const [JSONQuantity, setSONQuantity] = useState(localStorage.getItem('quantity'));
 
     useEffect(() => {
-        setBadge(storedValue);
-        setStoredValue(JSON.parse(localStorage.getItem('quantity')));
-    }, [setStoredValue, storedValue]);
+        if (JSONQuantity !== null) {
+            setBadge(JSON.parse(JSONQuantity));
+        }
+        window.addEventListener('storage', handleLocalStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleLocalStorageChange);
+        };
+    }, [JSONQuantity]);
+
+    const handleLocalStorageChange = (event) => {
+        if (event.key === 'quantity') {
+            setSONQuantity(localStorage.getItem('quantity'));
+        }
+    };
 
     return (
         <header className={cx('wrapper')}>

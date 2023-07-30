@@ -10,14 +10,14 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function OverView({ className, data, colorNew, userReview }) {
+function OverView({ className, data, colorNew, userReview, handleLoading }) {
     const [attributes, setAttributes] = useState([]);
     const [colorChoose, setColorChoose] = useState(data.colorPopular);
     const [capacity, setCapacity] = useState(data.capacity);
     const [promotions, setPromotions] = useState('Mua thẳng');
     const [storeArea, setStoreArea] = useState('Khu vực miền Bắc');
     const [upOptions, setUpOptions] = useState(true);
-
+    const [reloading, setReloading] = useState(false);
     // localStorage.clear();
     const path = useParams();
 
@@ -81,7 +81,6 @@ function OverView({ className, data, colorNew, userReview }) {
             let checkItem = false;
             for (let e of Items) {
                 if (
-                    e.id === JSON.parse(localStorage.getItem('idChange')) &&
                     e.name === item.name &&
                     e.capacity === item.capacity &&
                     e.color === item.color &&
@@ -119,6 +118,19 @@ function OverView({ className, data, colorNew, userReview }) {
         if (upOptions === false) {
             localStorage.setItem('fromCart', JSON.stringify(true));
             localStorage.removeItem('upOptions');
+        }
+        localStorage.setItem('clickButton', JSON.stringify(true));
+    };
+
+    const handleLinkBuy = (event) => {
+        event.preventDefault();
+        const linkUrl = event.currentTarget.getAttribute('href');
+        if (!reloading) {
+            setReloading(true);
+            handleLoading(1);
+            setTimeout(() => {
+                window.location.href = linkUrl;
+            }, 3000);
         }
     };
 
@@ -348,7 +360,7 @@ function OverView({ className, data, colorNew, userReview }) {
                     </Link>
                     <div className={cx('add-cart-button')}>
                         <div className={cx('add-to-cart')}>
-                            <Link to={config.routes.cart}>
+                            <Link to={config.routes.cart} onClick={handleLinkBuy}>
                                 <button className={cx('add-click')} onClick={handleBuy}>
                                     {upOptions === true ? <span>Mua ngay</span> : <span>Cập nhật</span>}
                                 </button>

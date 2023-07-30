@@ -7,8 +7,9 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function CartDetail({ dataItems, handleView }) {
+function CartDetail({ dataItems, handleView, handleLoading }) {
     const [Items, setItems] = useState(dataItems);
+    const [reloading, setReloading] = useState(false);
 
     useEffect(() => {
         setItems(dataItems);
@@ -35,6 +36,7 @@ function CartDetail({ dataItems, handleView }) {
             localStorage.setItem('dataItems', JSON.stringify(newDataItems));
             handleView(localStorage.getItem('dataItems'));
         }
+        handleReload();
     };
 
     const handleRemoveFromCart = (itemId) => {
@@ -46,6 +48,17 @@ function CartDetail({ dataItems, handleView }) {
         } else {
             localStorage.setItem('dataItems', JSON.stringify(newDataItems));
             handleView(localStorage.getItem('dataItems'));
+        }
+        handleReload();
+    };
+
+    const handleReload = () => {
+        if (!reloading) {
+            setReloading(true);
+            handleLoading(1);
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
         }
     };
 
@@ -201,6 +214,7 @@ function CartDetail({ dataItems, handleView }) {
                             className={cx('update-cart-button')}
                             onClick={() => {
                                 handleView(localStorage.getItem('dataItems'));
+                                handleReload();
                             }}
                         >
                             Cập nhật giỏ hàng

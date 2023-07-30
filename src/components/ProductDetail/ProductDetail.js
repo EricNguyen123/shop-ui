@@ -10,6 +10,7 @@ import CrossSells from './component/CrossSells';
 import TabDetail from './component/TabDetail';
 import Description from './component/Description';
 import { useEffect, useState } from 'react';
+import Loader from '~/components/Loader';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,8 @@ function ProductDetail({ directive, title, item }) {
     const [imgs, setImgs] = useState([]);
     const [colorNew, setColorNew] = useState('');
     const [userReview, setUserReview] = useState(0);
+    const [loading, setLoading] = useState(0);
+
     useEffect(() => {
         let colorUse = item.colorPopular;
         if (colorNew !== '') {
@@ -31,8 +34,14 @@ function ProductDetail({ directive, title, item }) {
     const handleUserReview = (x) => {
         setUserReview(x);
     };
+
+    const handleLoading = (e) => {
+        setLoading(e);
+    };
+
     return (
         <div className={cx('wrapper')}>
+            {loading === 1 && <Loader />}
             <Breadcrumb directive={directive} title={title} />
             <div className={cx('inner')}>
                 <div className={cx('assential')}>
@@ -42,6 +51,7 @@ function ProductDetail({ directive, title, item }) {
                         data={item}
                         colorNew={handleImg}
                         userReview={userReview}
+                        handleLoading={handleLoading}
                     />
                 </div>
                 <CrossSells />
