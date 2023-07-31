@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Product.module.scss';
 
-import Breadcrumb from './component/Breadcrumb';
+import Breadcrumb from '~/components/Breadcrumb';
 import BannerPage from './component/BannerPage';
 import SeriesProduct from './component/SeriesProduct';
 import ListProduct from './component/ListProduct';

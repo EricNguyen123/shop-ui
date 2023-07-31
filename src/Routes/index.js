@@ -8,6 +8,7 @@ import Watch from '~/pages/Watch';
 import AccessoryPage from '~/pages/AccessoryPage';
 import ProductItem from '~/pages/ProductItem';
 import Cart from '~/pages/Cart';
+import Register from '~/pages/Register';
 
 import config from '~/config';
 
@@ -235,6 +236,10 @@ const publicRoutes = [
     {
         path: config.routes.air_tags,
         component: AccessoryPage,
+    },
+    {
+        path: config.routes.register,
+        component: Register,
     },
 ];
 

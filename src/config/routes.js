@@ -55,6 +55,7 @@ const routes = {
     dong_ho_garmin: '/dong_ho_garmin',
     productitem: '/:namePath/:category',
     cart: '/cart',
+    register: '/register',
 };
 
 export default routes;

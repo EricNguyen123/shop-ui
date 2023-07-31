@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './CartUser.module.scss';
-import Breadcrumb from './component/Breadcrumb';
+import Breadcrumb from '~/components/Breadcrumb';
 import CartDetail from './component/CartDetail';
 import CheckBilling from './component/CheckBilling';
 import CartFooter from './component/CartFooter';

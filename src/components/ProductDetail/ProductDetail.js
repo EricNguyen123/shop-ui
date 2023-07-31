@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './ProductDetail.module.scss';
 
-import Breadcrumb from './component/Breadcrumb';
+import Breadcrumb from '~/components/Breadcrumb';
 import ProductReview from './component/ProductReview';
 import Comments from './component/Comments';
 import ProductAssential from './component/ProductAssential';

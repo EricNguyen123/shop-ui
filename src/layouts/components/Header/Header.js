@@ -87,7 +87,36 @@ function Header() {
                         <FontAwesomeIcon className={cx('cart-icon')} icon={faCartShopping} />
                         <span className={cx('badge')}>{badge}</span>
                     </Link>
-                    <FontAwesomeIcon className={cx('user-icon')} icon={faUser} />
+
+                    <Tippy
+                        interactive
+                        offset={[60, -74]}
+                        placement="bottom-end"
+                        render={(props) => (
+                            <div className={cx('menu-user')} tabIndex="-1" {...props}>
+                                <div className={cx('menu-box-user')}>
+                                    <div className={cx('menu-item-user')}>
+                                        <Link className={cx('register')} to={config.routes.register}>
+                                            Tạo tài khoản ngay
+                                        </Link>
+                                    </div>
+                                    <div className={cx('menu-item-user')}>
+                                        <Link className={cx('login')}>Đăng nhập</Link>
+                                    </div>
+                                    <div className={cx('menu-item-user')}>
+                                        <Link className={cx('wishlist')}>Danh sách yêu thích</Link>
+                                    </div>
+                                    <div className={cx('menu-item-user')}>
+                                        <Link className={cx('cart')}>Giỏ hàng</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    >
+                        <div>
+                            <FontAwesomeIcon className={cx('user-icon')} icon={faUser} />
+                        </div>
+                    </Tippy>
                 </div>
             </div>
         </header>

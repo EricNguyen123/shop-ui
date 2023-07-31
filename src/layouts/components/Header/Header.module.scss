@@ -113,3 +113,35 @@
         border-radius: 5px;
     }
 }
+
+.menu-user {
+    min-width: 248px;
+    position: absolute;
+    top: 55px;
+    right: 0px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 8px 0;
+    text-align: left;
+    box-shadow: -2px 3px 20px 0px #000000a1;
+}
+
+.menu-item-user {
+    display: block;
+    text-align: left;
+    border-bottom: 1px solid #d2d2d7;
+    margin: 0 32px;
+    line-height: 45px;
+    text-transform: none;
+}
+
+.register,
+.login,
+.wishlist,
+.cart {
+    font-size: 14px;
+    color: #1d1d1f;
+    &:hover {
+        color: #0066cc !important;
+    }
+}
