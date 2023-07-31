@@ -71,7 +71,7 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
         const userID = localStorage.getItem('sessionID');
         if (userID === null) {
             const randomID = Math.floor(Math.random() * 10 ** 8);
-            localStorage.setItem('sessionID', randomID);
+            localStorage.setItem('sessionID', JSON.stringify(randomID));
         }
         const dataItems = localStorage.getItem('dataItems');
         if (dataItems === null) {

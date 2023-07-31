@@ -14,6 +14,7 @@ function CartUser() {
     const [dataItems, setDataItems] = useState(localStorage.getItem('dataItems'));
     const [totalAll, setTotalAll] = useState(0);
     const [loading, setLoading] = useState(0);
+    const [billing, setBilling] = useState({});
 
     useEffect(() => {
         if (dataItems !== null) {
@@ -45,6 +46,10 @@ function CartUser() {
         setLoading(e);
     };
 
+    const handleBilling = (e) => {
+        setBilling(e);
+    };
+
     return (
         <div className={cx('wrapper')}>
             {loading === 1 && <Loader />}
@@ -57,10 +62,15 @@ function CartUser() {
                         <div className={cx('form')}>
                             <div className={cx('shoping-cart-inf')}>
                                 <CartDetail dataItems={data} handleView={handleView} handleLoading={handleLoading} />
-                                <CheckBilling />
+                                <CheckBilling handleBilling={handleBilling} />
                             </div>
                             <div className={cx('row')}>
-                                <CartFooter totalAll={totalAll} />
+                                <CartFooter
+                                    totalAll={totalAll}
+                                    billing={billing}
+                                    data={data}
+                                    handleLoading={handleLoading}
+                                />
                             </div>
                         </div>
                     </div>

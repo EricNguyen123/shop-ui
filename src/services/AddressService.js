@@ -1,10 +1,10 @@
 import * as httpRequest from '~/util/httpRequest';
 
-export const get = async ({ id }) => {
+export const get = async ({ name }) => {
     try {
         const res = await httpRequest.get('address', {
             params: {
-                id: id,
+                name: name,
             },
         });
         return res;

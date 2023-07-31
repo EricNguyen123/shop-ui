@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
-function CheckBilling() {
+function CheckBilling({ handleBilling }) {
     const [dataUser, setDataUser] = useState({});
     const [nameUser, setNameUser] = useState('');
     const [emailUser, setEmailUser] = useState('');
@@ -25,6 +25,60 @@ function CheckBilling() {
     const [addressCompany, setAddressCompany] = useState('');
     const [taxCompany, setTaxCompany] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('Payments.VietQr');
+
+    useEffect(() => {
+        if (
+            nameUser !== '' &&
+            emailUser !== '' &&
+            phoneUser !== '' &&
+            province !== '' &&
+            district !== '' &&
+            (shop !== '' || addressUser !== '') &&
+            paymentMethod !== ''
+        ) {
+            handleBilling(dataUser);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [addressUser, dataUser, district, emailUser, nameUser, paymentMethod, phoneUser, province, shop]);
+
+    useEffect(() => {
+        if (
+            nameUser !== '' &&
+            emailUser !== '' &&
+            phoneUser !== '' &&
+            province !== '' &&
+            district !== '' &&
+            (shop !== '' || addressUser !== '') &&
+            paymentMethod !== ''
+        ) {
+            setDataUser({
+                nameUser: nameUser,
+                emailUser: emailUser,
+                phoneUser: phoneUser,
+                province: province,
+                district: district,
+                shop: shop,
+                addressUser: addressUser,
+                nameCompany: nameCompany,
+                addressCompany: addressCompany,
+                taxCompany: taxCompany,
+                paymentMethod: paymentMethod,
+            });
+        }
+    }, [
+        addressCompany,
+        addressUser,
+        district,
+        emailUser,
+        nameCompany,
+        nameUser,
+        paymentMethod,
+        phoneUser,
+        province,
+        shop,
+        taxCompany,
+    ]);
+
     useEffect(() => {
         AddressService.getAll()
             .then((res) => {
@@ -36,7 +90,7 @@ function CheckBilling() {
     }, []);
 
     useEffect(() => {
-        AddressService.get({ id: province })
+        AddressService.get({ name: province })
             .then((res) => {
                 setDistrictData(res[0].district);
             })
@@ -49,7 +103,7 @@ function CheckBilling() {
         let data = undefined;
         if (districtData !== undefined) {
             data = districtData.find((d) => {
-                return Number(d.id) === Number(district);
+                return d.name === district;
             });
         }
         if (data !== undefined) {
@@ -143,7 +197,7 @@ function CheckBilling() {
                                 >
                                     <option value="0">Chọn tỉnh, thành phố</option>
                                     {provinceData.map((res, index) => (
-                                        <option key={index} value={res.id}>
+                                        <option key={index} value={res.name}>
                                             {res.name}
                                         </option>
                                     ))}
@@ -171,7 +225,7 @@ function CheckBilling() {
                                         <>
                                             <option value="0">Mời bạn chọn quận/huyện</option>
                                             {districtData.map((res, index) => (
-                                                <option key={index} value={res.id}>
+                                                <option key={index} value={res.name}>
                                                     {res.name}
                                                 </option>
                                             ))}
@@ -205,7 +259,7 @@ function CheckBilling() {
                                                 <>
                                                     <option value="0">Mời bạn chọn địa chỉ cửa hàng</option>
                                                     {shopData.map((res, index) => (
-                                                        <option key={index} value={res.id}>
+                                                        <option key={index} value={res.name}>
                                                             {res.name}
                                                         </option>
                                                     ))}

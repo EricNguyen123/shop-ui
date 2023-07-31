@@ -2,11 +2,16 @@ import classNames from 'classnames/bind';
 import styles from './CartFooter.module.scss';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import * as BillingService from '~/services/BillingService';
+import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
-function CartFooter({ totalAll }) {
+function CartFooter({ totalAll, billing, data, handleLoading }) {
     const [total, setTotal] = useState('0');
+    const [checkout, setCheckout] = useState(false);
+    const [note, setNote] = useState(false);
+    const [reloading, setReloading] = useState(false);
     useEffect(() => {
         let totalString = totalAll.toString();
         let x = '';
@@ -27,8 +32,39 @@ function CartFooter({ totalAll }) {
 
             totalResult = x + totalResult;
         }
+        totalResult = totalResult + '₫';
         setTotal(totalResult);
     }, [totalAll]);
+    useEffect(() => {
+        if (checkout === true) {
+            setCheckout(false);
+            const sessionID = JSON.parse(localStorage.getItem('sessionID'));
+            BillingService.post({ dataUser: billing, dataProduct: data, total: total, sessionID: sessionID }).catch(
+                (error) => {
+                    return error;
+                },
+            );
+        }
+    }, [billing, checkout, data, total]);
+    const handleReload = () => {
+        if (!reloading) {
+            setReloading(true);
+            handleLoading(1);
+            setTimeout(() => {
+                if ($('#termsofservice').is(':checked')) {
+                    setCheckout(true);
+                    setNote(false);
+                    localStorage.removeItem('dataItems');
+                    localStorage.removeItem('quantity');
+                    window.location.reload();
+                } else {
+                    setNote(true);
+                    handleLoading(0);
+                    setReloading(false);
+                }
+            }, 2000);
+        }
+    };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('sidebar-cart')}>
@@ -124,10 +160,18 @@ function CartFooter({ totalAll }) {
                             name="checkout"
                             value="checkout"
                             className={cx('checkout-button')}
+                            onClick={() => {
+                                handleReload();
+                            }}
                         >
                             Tiến hành đặt hàng
                         </button>
                     </div>
+                    {note && (
+                        <div className={cx('note-ck')}>
+                            (*) Quý khách vui lòng đồng ý với điều khoản và dịch vụ của website.
+                        </div>
+                    )}
                     <div className={cx('note-ck')}>(*) Phí phụ thu sẽ được tính khi bạn tiến hành thanh toán.</div>
                     <div className={cx('addon-buttons')}></div>
                 </div>
