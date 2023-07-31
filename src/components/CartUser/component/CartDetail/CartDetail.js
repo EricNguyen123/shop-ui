@@ -58,7 +58,19 @@ function CartDetail({ dataItems, handleView, handleLoading }) {
             handleLoading(1);
             setTimeout(() => {
                 window.location.reload();
-            }, 3000);
+            }, 2000);
+        }
+    };
+
+    const handleLinkBuy = (event) => {
+        event.preventDefault();
+        const linkUrl = event.currentTarget.getAttribute('href');
+        if (!reloading) {
+            setReloading(true);
+            handleLoading(1);
+            setTimeout(() => {
+                window.location.href = linkUrl;
+            }, 2000);
         }
     };
 
@@ -220,7 +232,7 @@ function CartDetail({ dataItems, handleView, handleLoading }) {
                             Cập nhật giỏ hàng
                         </button>
 
-                        <Link to={config.routes.home}>
+                        <Link to={config.routes.home} onClick={handleLinkBuy}>
                             <button type="submit" name="continueshopping" className={cx('continue-shopping-button')}>
                                 Tiếp tục mua sắm
                             </button>

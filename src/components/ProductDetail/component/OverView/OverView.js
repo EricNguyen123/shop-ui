@@ -130,7 +130,7 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
             handleLoading(1);
             setTimeout(() => {
                 window.location.href = linkUrl;
-            }, 3000);
+            }, 2000);
         }
     };
 

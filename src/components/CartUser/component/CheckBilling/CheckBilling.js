@@ -1,10 +1,62 @@
 import classNames from 'classnames/bind';
 import styles from './CheckBilling.module.scss';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import * as AddressService from '~/services/AddressService';
+import $ from 'jquery';
 
 const cx = classNames.bind(styles);
 
 function CheckBilling() {
+    const [dataUser, setDataUser] = useState({});
+    const [nameUser, setNameUser] = useState('');
+    const [emailUser, setEmailUser] = useState('');
+    const [phoneUser, setPhoneUser] = useState('');
+    const [receive, setReceive] = useState('0');
+    const [province, setProvince] = useState('');
+    const [district, setDistrict] = useState('');
+    const [shop, setShop] = useState('');
+    const [provinceData, setProvinceData] = useState([]);
+    const [districtData, setDistrictData] = useState(undefined);
+    const [shopData, setShopData] = useState(undefined);
+    const [addressUser, setAddressUser] = useState('');
+    const [checkBillCompany, setCheckBillCompany] = useState(false);
+    const [nameCompany, setNameCompany] = useState('');
+    const [addressCompany, setAddressCompany] = useState('');
+    const [taxCompany, setTaxCompany] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('Payments.VietQr');
+    useEffect(() => {
+        AddressService.getAll()
+            .then((res) => {
+                setProvinceData(res);
+            })
+            .catch((error) => {
+                return error;
+            });
+    }, []);
+
+    useEffect(() => {
+        AddressService.get({ id: province })
+            .then((res) => {
+                setDistrictData(res[0].district);
+            })
+            .catch((error) => {
+                return error;
+            });
+    }, [province]);
+
+    useEffect(() => {
+        let data = undefined;
+        if (districtData !== undefined) {
+            data = districtData.find((d) => {
+                return Number(d.id) === Number(district);
+            });
+        }
+        if (data !== undefined) {
+            setShopData(data.shop);
+        }
+    }, [district, districtData]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('title')}>Thông tin thanh toán</div>
@@ -22,6 +74,10 @@ function CheckBilling() {
                                     type="text"
                                     id="BillingNewAddress_FirstName"
                                     name="BillingNewAddress.FirstName"
+                                    value={nameUser}
+                                    onChange={(e) => {
+                                        setNameUser(e.target.value);
+                                    }}
                                 />
                             </div>
                             <div className={cx('inputs', 'input-phone-number')}>
@@ -30,6 +86,10 @@ function CheckBilling() {
                                     type="tel"
                                     id="BillingNewAddress_PhoneNumber"
                                     name="BillingNewAddress.PhoneNumber"
+                                    value={phoneUser}
+                                    onChange={(e) => {
+                                        setPhoneUser(e.target.value);
+                                    }}
                                 />
                             </div>
                             <div className={cx('inputs', 'input-email')}>
@@ -38,14 +98,35 @@ function CheckBilling() {
                                     type="email"
                                     id="BillingNewAddress_Email"
                                     name="BillingNewAddress.Email"
+                                    value={emailUser}
+                                    onChange={(e) => {
+                                        setEmailUser(e.target.value);
+                                    }}
                                 />
                             </div>
                             <div className={cx('title-receive-method')}>Hình thức nhận hàng</div>
                             <div className={cx('inputs', 'receive-method')}>
-                                <input type="radio" id="receive-store" name="receive" value="0" defaultChecked />
+                                <input
+                                    type="radio"
+                                    id="receive-store"
+                                    name="receive"
+                                    value="0"
+                                    defaultChecked
+                                    onChange={(e) => {
+                                        setReceive(e.target.value);
+                                    }}
+                                />
                                 <label htmlFor="receive-store">Nhận tại cửa hàng</label>
                                 <span className={cx('space')}></span>
-                                <input type="radio" id="receive-home" name="receive" value="1" />
+                                <input
+                                    type="radio"
+                                    id="receive-home"
+                                    name="receive"
+                                    value="1"
+                                    onChange={(e) => {
+                                        setReceive(e.target.value);
+                                    }}
+                                />
                                 <label htmlFor="receive-home">Giao tận nơi</label>
                             </div>
                             <div className={cx('inputs', 'province')}>
@@ -56,71 +137,16 @@ function CheckBilling() {
                                     data-loading="#states-loading-progress"
                                     id="BillingNewAddress_StateProvinceId"
                                     name="BillingNewAddress.StateProvinceId"
+                                    onChange={(e) => {
+                                        setProvince(e.target.value);
+                                    }}
                                 >
                                     <option value="0">Chọn tỉnh, thành phố</option>
-                                    <option value="1755">Hà Nội</option>
-                                    <option value="1756">Thành phố Hồ Chí Minh</option>
-                                    <option value="1757">Đà Nẵng</option>
-                                    <option value="1758">Hải Phòng</option>
-                                    <option value="1759">Cần Thơ</option>
-                                    <option value="1812">An Giang</option>
-                                    <option value="1805">Bà Rịa - Vũng Tàu</option>
-                                    <option value="1816">Bạc Liêu</option>
-                                    <option value="1773">Bắc Giang</option>
-                                    <option value="1762">Bắc Kạn</option>
-                                    <option value="1776">Bắc Ninh</option>
-                                    <option value="1808">Bến Tre</option>
-                                    <option value="1803">Bình Dương</option>
-                                    <option value="1791">Bình Định</option>
-                                    <option value="1801">Bình Phước</option>
-                                    <option value="1795">Bình Thuận</option>
-                                    <option value="1817">Cà Mau</option>
-                                    <option value="1761">Cao Bằng</option>
-                                    <option value="1798">Đắk Lắk</option>
-                                    <option value="1799">Đắk Nông</option>
-                                    <option value="1765">Điện Biên</option>
-                                    <option value="1804">Đồng Nai</option>
-                                    <option value="1811">Đồng Tháp</option>
-                                    <option value="1797">Gia Lai</option>
-                                    <option value="1760">Hà Giang</option>
-                                    <option value="1780">Hà Nam</option>
-                                    <option value="1785">Hà Tĩnh</option>
-                                    <option value="1777">Hải Dương</option>
-                                    <option value="1814">Hậu Giang</option>
-                                    <option value="1769">Hòa Bình</option>
-                                    <option value="1778">Hưng Yên</option>
-                                    <option value="1813">Kiên Giang</option>
-                                    <option value="1796">Kon Tum</option>
-                                    <option value="1793">Khánh Hòa</option>
-                                    <option value="1766">Lai Châu</option>
-                                    <option value="1771">Lạng Sơn</option>
-                                    <option value="1764">Lào Cai</option>
-                                    <option value="1800">Lâm Đồng</option>
-                                    <option value="1806">Long An</option>
-                                    <option value="1781">Nam Định</option>
-                                    <option value="1782">Ninh Bình</option>
-                                    <option value="1794">Ninh Thuận</option>
-                                    <option value="1784">Nghệ An</option>
-                                    <option value="1774">Phú Thọ</option>
-                                    <option value="1792">Phú Yên</option>
-                                    <option value="1786">Quảng Bình</option>
-                                    <option value="1789">Quảng Nam</option>
-                                    <option value="1772">Quảng Ninh</option>
-                                    <option value="1790">Quảng Ngãi</option>
-                                    <option value="1787">Quảng Trị</option>
-                                    <option value="1815">Sóc Trăng</option>
-                                    <option value="1767">Sơn La</option>
-                                    <option value="1802">Tây Ninh</option>
-                                    <option value="1807">Tiền Giang</option>
-                                    <option value="1763">Tuyên Quang</option>
-                                    <option value="1779">Thái Bình</option>
-                                    <option value="1770">Thái Nguyên</option>
-                                    <option value="1783">Thanh Hóa</option>
-                                    <option value="1788">Thừa Thiên Huế</option>
-                                    <option value="1809">Trà Vinh</option>
-                                    <option value="1810">Vĩnh Long</option>
-                                    <option value="1775">Vĩnh Phúc</option>
-                                    <option value="1768">Yên Bái</option>
+                                    {provinceData.map((res, index) => (
+                                        <option key={index} value={res.id}>
+                                            {res.name}
+                                        </option>
+                                    ))}
                                 </select>
                                 <span
                                     id="states-loading-progress"
@@ -137,7 +163,21 @@ function CheckBilling() {
                                     data-trigger="county-select"
                                     id="BillingNewAddress_CountyId"
                                     name="BillingNewAddress.CountyId"
-                                ></select>
+                                    onChange={(e) => {
+                                        setDistrict(e.target.value);
+                                    }}
+                                >
+                                    {districtData !== undefined && (
+                                        <>
+                                            <option value="0">Mời bạn chọn quận/huyện</option>
+                                            {districtData.map((res, index) => (
+                                                <option key={index} value={res.id}>
+                                                    {res.name}
+                                                </option>
+                                            ))}
+                                        </>
+                                    )}
+                                </select>
                                 <span
                                     id="states-loading-progress"
                                     style={{ display: 'none' }}
@@ -147,24 +187,46 @@ function CheckBilling() {
                                 </span>
                                 <span></span>
                             </div>
-                            <div className={cx('all-receive-store')} style={{ display: 'none' }}>
+                            <div
+                                className={cx('all-receive-store')}
+                                style={{ display: receive === '0' ? 'block' : 'none' }}
+                            >
                                 <div className={cx('choose-area-store')}>
                                     <div className={cx('select-receive-store')}>
                                         <select
                                             autoComplete="on"
                                             name="select_receive_store"
                                             id="js__apply_now"
-                                        ></select>
+                                            onChange={(e) => {
+                                                setShop(e.target.value);
+                                            }}
+                                        >
+                                            {shopData !== undefined && (
+                                                <>
+                                                    <option value="0">Mời bạn chọn địa chỉ cửa hàng</option>
+                                                    {shopData.map((res, index) => (
+                                                        <option key={index} value={res.id}>
+                                                            {res.name}
+                                                        </option>
+                                                    ))}
+                                                </>
+                                            )}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div className={cx('all-receive-home')} style={{ display: 'block' }}>
+                            <div
+                                className={cx('all-receive-home')}
+                                style={{ display: receive === '0' ? 'none' : 'block' }}
+                            >
                                 <div className={cx('inputs', 'home')}>
                                     <label htmlFor="BillingNewAddress_Address1">Địa chỉ cụ thể:</label>
                                     <input
                                         type="text"
                                         id="BillingNewAddress_Address1"
                                         name="BillingNewAddress.Address1"
+                                        value={addressUser}
+                                        onChange={(e) => setAddressUser(e.target.value)}
                                     />
                                     <span></span>
                                 </div>
@@ -185,6 +247,11 @@ function CheckBilling() {
                                             verticalAlign: 'middle',
                                             boxSizing: 'border-box',
                                         }}
+                                        onChange={() => {
+                                            $('#sl_bill_company').is(':checked')
+                                                ? setCheckBillCompany(true)
+                                                : setCheckBillCompany(false);
+                                        }}
                                     />
                                     <label
                                         htmlFor="sl_bill_company"
@@ -197,19 +264,39 @@ function CheckBilling() {
                                         Xuất hoá đơn công ty
                                     </label>
                                 </div>
-                                <fieldset className={cx('answer')} style={{ display: 'none' }}>
-                                    <input type="text" id="fn_company" name="fn_company" placeholder="Tên công ty" />
+                                <fieldset
+                                    className={cx('answer')}
+                                    style={{ display: checkBillCompany ? 'block' : 'none' }}
+                                >
+                                    <input
+                                        type="text"
+                                        id="fn_company"
+                                        name="fn_company"
+                                        placeholder="Tên công ty"
+                                        value={nameCompany}
+                                        onChange={(e) => {
+                                            setNameCompany(e.target.value);
+                                        }}
+                                    />
                                     <input
                                         type="text"
                                         id="f_add_company"
                                         name="f_add_company"
                                         placeholder="Địa chỉ công ty"
+                                        value={addressCompany}
+                                        onChange={(e) => {
+                                            setAddressCompany(e.target.value);
+                                        }}
                                     />
                                     <input
                                         type="text"
                                         id="f_tax_company"
                                         name="f_tax_company"
                                         placeholder="Mã số thuế"
+                                        value={taxCompany}
+                                        onChange={(e) => {
+                                            setTaxCompany(e.target.value);
+                                        }}
                                     />
                                 </fieldset>
                             </div>
@@ -232,6 +319,9 @@ function CheckBilling() {
                                                 type="radio"
                                                 name="paymentmethod"
                                                 value="Payments.Kredivo"
+                                                onChange={(e) => {
+                                                    setPaymentMethod(e.target.value);
+                                                }}
                                             />
                                         </div>
                                         <div className={cx('payment-logo')}>
@@ -258,7 +348,10 @@ function CheckBilling() {
                                                 id="paymentmethod_0"
                                                 type="radio"
                                                 name="paymentmethod"
-                                                value="Payments.Kredivo"
+                                                value="Payments..Onepay"
+                                                onChange={(e) => {
+                                                    setPaymentMethod(e.target.value);
+                                                }}
                                             />
                                         </div>
                                         <div className={cx('payment-logo')}>
@@ -285,7 +378,10 @@ function CheckBilling() {
                                                 id="paymentmethod_0"
                                                 type="radio"
                                                 name="paymentmethod"
-                                                value="Payments.Kredivo"
+                                                value="Payments.Payoo"
+                                                onChange={(e) => {
+                                                    setPaymentMethod(e.target.value);
+                                                }}
                                             />
                                         </div>
                                         <div className={cx('payment-logo')}>
@@ -312,7 +408,10 @@ function CheckBilling() {
                                                 id="paymentmethod_0"
                                                 type="radio"
                                                 name="paymentmethod"
-                                                value="Payments.Kredivo"
+                                                value="Payments.VietQr"
+                                                onChange={(e) => {
+                                                    setPaymentMethod(e.target.value);
+                                                }}
                                                 defaultChecked
                                             />
                                         </div>
