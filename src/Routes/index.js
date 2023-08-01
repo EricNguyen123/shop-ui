@@ -9,6 +9,7 @@ import AccessoryPage from '~/pages/AccessoryPage';
 import ProductItem from '~/pages/ProductItem';
 import Cart from '~/pages/Cart';
 import Register from '~/pages/Register';
+import Login from '~/pages/Login';
 
 import config from '~/config';
 
@@ -240,6 +241,10 @@ const publicRoutes = [
     {
         path: config.routes.register,
         component: Register,
+    },
+    {
+        path: config.routes.login,
+        component: Login,
     },
 ];
 

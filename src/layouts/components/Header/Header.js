@@ -101,7 +101,9 @@ function Header() {
                                         </Link>
                                     </div>
                                     <div className={cx('menu-item-user')}>
-                                        <Link className={cx('login')}>Đăng nhập</Link>
+                                        <Link className={cx('login')} to={config.routes.login}>
+                                            Đăng nhập
+                                        </Link>
                                     </div>
                                     <div className={cx('menu-item-user')}>
                                         <Link className={cx('wishlist')}>Danh sách yêu thích</Link>

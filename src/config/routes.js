@@ -56,6 +56,7 @@ const routes = {
     productitem: '/:namePath/:category',
     cart: '/cart',
     register: '/register',
+    login: '/login',
 };
 
 export default routes;
