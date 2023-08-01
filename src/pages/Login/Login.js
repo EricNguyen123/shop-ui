@@ -3,10 +3,45 @@ import styles from './Login.module.scss';
 import Breadcrumb from '~/components/Breadcrumb';
 import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import * as DataUserService from '~/services/DataUserService';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    const [checkLogin, setCheckLogin] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [checkSubmit, setCheckSubmit] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [token, setToken] = useState('');
+    useEffect(() => {
+        if (checkSubmit && userName !== '' && password !== '') {
+            DataUserService.getLogin({ userName: userName, password: password })
+                .then((res) => {
+                    if (res.length === 0) {
+                        setCheckLogin(true);
+                    } else {
+                        setSuccess(true);
+                        setToken(res.id);
+                    }
+                })
+                .catch((error) => {
+                    return error;
+                });
+        }
+    }, [checkSubmit, password, userName]);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const linkUrl = e.currentTarget.getAttribute('href');
+        if (success) {
+            localStorage.setItem('token', token);
+            setSuccess(false);
+            window.location.href = linkUrl;
+        }
+    };
     return (
         <div className={cx('wrapper')}>
             <Breadcrumb directive={true} title="Đăng nhập" />
@@ -28,6 +63,14 @@ function Login() {
                         </div>
                         <div className={cx('returning-wrapper')}>
                             <form>
+                                {checkLogin && (
+                                    <div className={cx('validation-summary-errors')}>
+                                        Thông tin đăng nhập không đúng. Vui lòng thử lại.
+                                        <ul>
+                                            <li>Tài khoản không hoạt động</li>
+                                        </ul>
+                                    </div>
+                                )}
                                 <div className={cx('page-title')}>
                                     <h1>Đăng nhập</h1>
                                 </div>
@@ -36,10 +79,14 @@ function Login() {
                                         <label htmlFor="Username">Tên đăng nhập:</label>
                                         <input
                                             className={cx('username')}
-                                            autofocus=""
+                                            autoFocus=""
                                             type="text"
                                             id="Username"
                                             name="Username"
+                                            value={userName}
+                                            onChange={(e) => {
+                                                setUserName(e.target.value);
+                                            }}
                                         />
                                         <span
                                             className={cx('field-validation-valid')}
@@ -54,6 +101,10 @@ function Login() {
                                             type="password"
                                             id="Password"
                                             name="Password"
+                                            value={password}
+                                            onChange={(e) => {
+                                                setPassword(e.target.value);
+                                            }}
                                         />
                                         <span
                                             className={cx('field-validation-valid')}
@@ -76,15 +127,26 @@ function Login() {
                                         </span>
                                     </div>
                                     <div className={cx('buttons')}>
-                                        <button type="submit" className={cx('login-button')}>
-                                            Đăng nhập
-                                        </button>
+                                        <Link to={config.routes.home} onClick={handleLogin}>
+                                            <button
+                                                type="submit"
+                                                className={cx('login-button')}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    setCheckSubmit(true);
+                                                }}
+                                            >
+                                                Đăng nhập
+                                            </button>
+                                        </Link>
                                     </div>
                                     <div className={cx('buttons-forgot')}>
                                         <label> Bạn chưa có tài khoản? </label>
-                                        <button type="button" className={cx('register-button')}>
-                                            Tạo tài khoản ngay
-                                        </button>
+                                        <Link to={config.routes.register}>
+                                            <button type="button" className={cx('register-button')}>
+                                                Tạo tài khoản ngay
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </form>

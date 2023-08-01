@@ -14,22 +14,44 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const [badge, setBadge] = useState(0);
-    const [JSONQuantity, setSONQuantity] = useState(localStorage.getItem('quantity'));
+    const [JSONQuantity, setJSONQuantity] = useState(localStorage.getItem('quantity'));
+    const [checkLogin, setCheckLogin] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
     useEffect(() => {
         if (JSONQuantity !== null) {
             setBadge(JSON.parse(JSONQuantity));
         }
+        if (token !== null) {
+            setCheckLogin(true);
+        }
         window.addEventListener('storage', handleLocalStorageChange);
         return () => {
             window.removeEventListener('storage', handleLocalStorageChange);
         };
-    }, [JSONQuantity]);
+    }, [JSONQuantity, token]);
 
     const handleLocalStorageChange = (event) => {
         if (event.key === 'quantity') {
-            setSONQuantity(localStorage.getItem('quantity'));
+            setJSONQuantity(localStorage.getItem('quantity'));
         }
+        if (event.key === 'token') {
+            setToken(localStorage.getItem('token'));
+        }
+    };
+
+    const handleLogout = (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        setCheckLogin(false);
+        const linkUrl = event.currentTarget.getAttribute('href');
+        window.location.href = linkUrl;
+    };
+
+    const handleUser = (event) => {
+        event.preventDefault();
+        const linkUrl = event.currentTarget.getAttribute('href');
+        window.location.href = linkUrl;
     };
 
     return (
@@ -91,33 +113,53 @@ function Header() {
                     <Tippy
                         interactive
                         offset={[60, -74]}
+                        delay={[0, 600]}
                         placement="bottom-end"
                         render={(props) => (
                             <div className={cx('menu-user')} tabIndex="-1" {...props}>
                                 <div className={cx('menu-box-user')}>
-                                    <div className={cx('menu-item-user')}>
-                                        <Link className={cx('register')} to={config.routes.register}>
-                                            Tạo tài khoản ngay
-                                        </Link>
-                                    </div>
-                                    <div className={cx('menu-item-user')}>
-                                        <Link className={cx('login')} to={config.routes.login}>
-                                            Đăng nhập
-                                        </Link>
-                                    </div>
-                                    <div className={cx('menu-item-user')}>
-                                        <Link className={cx('wishlist')}>Danh sách yêu thích</Link>
-                                    </div>
-                                    <div className={cx('menu-item-user')}>
-                                        <Link className={cx('cart')}>Giỏ hàng</Link>
-                                    </div>
+                                    {!checkLogin && (
+                                        <>
+                                            <div className={cx('menu-item-user')}>
+                                                <Link className={cx('register')} to={config.routes.register}>
+                                                    Tạo tài khoản ngay
+                                                </Link>
+                                            </div>
+                                            <div className={cx('menu-item-user')}>
+                                                <Link className={cx('login')} to={config.routes.login}>
+                                                    Đăng nhập
+                                                </Link>
+                                            </div>
+                                        </>
+                                    )}
+                                    {checkLogin && (
+                                        <>
+                                            <div className={cx('menu-item-user')}>
+                                                <Link className={cx('wishlist')}>Danh sách yêu thích</Link>
+                                            </div>
+                                            <div className={cx('menu-item-user')}>
+                                                <Link className={cx('cart')} to={config.routes.cart}>
+                                                    Giỏ hàng
+                                                </Link>
+                                            </div>
+                                            <div className={cx('menu-item-user')}>
+                                                <Link
+                                                    className={cx('logout')}
+                                                    to={config.routes.home}
+                                                    onClick={handleLogout}
+                                                >
+                                                    Đăng xuất
+                                                </Link>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         )}
                     >
-                        <div>
+                        <Link to={!checkLogin ? config.routes.login : config.routes.user} onClick={handleUser}>
                             <FontAwesomeIcon className={cx('user-icon')} icon={faUser} />
-                        </div>
+                        </Link>
                     </Tippy>
                 </div>
             </div>

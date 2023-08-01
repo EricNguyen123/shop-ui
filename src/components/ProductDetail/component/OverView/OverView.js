@@ -18,7 +18,7 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
     const [storeArea, setStoreArea] = useState('Khu vực miền Bắc');
     const [upOptions, setUpOptions] = useState(true);
     const [reloading, setReloading] = useState(false);
-    localStorage.clear();
+
     const path = useParams();
 
     useEffect(() => {

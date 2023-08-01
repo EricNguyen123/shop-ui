@@ -133,13 +133,13 @@ col {
     gap: 20px;
 }
 
-.icon-quantity {
+.cart-quantity-input .icon-quantity {
     cursor: pointer;
     overflow: hidden;
     vertical-align: middle;
 }
 
-.cart-quantity-input > input {
+.cart-quantity-input input[type='text'] {
     background-color: #f5f5f7;
     border-radius: 8px;
     text-align: center;

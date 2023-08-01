@@ -10,6 +10,7 @@ import ProductItem from '~/pages/ProductItem';
 import Cart from '~/pages/Cart';
 import Register from '~/pages/Register';
 import Login from '~/pages/Login';
+import User from '~/pages/User';
 
 import config from '~/config';
 
@@ -245,6 +246,10 @@ const publicRoutes = [
     {
         path: config.routes.login,
         component: Login,
+    },
+    {
+        path: config.routes.user,
+        component: User,
     },
 ];
 

@@ -57,6 +57,7 @@ const routes = {
     cart: '/cart',
     register: '/register',
     login: '/login',
+    user: '/user',
 };
 
 export default routes;

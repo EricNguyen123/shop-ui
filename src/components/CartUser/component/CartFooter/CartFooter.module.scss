@@ -52,11 +52,12 @@
 }
 
 .coupon-code {
+    display: flex;
     text-align: left;
     overflow: hidden;
 }
 
-.discount-coupon-code {
+.coupon-code .discount-coupon-code {
     border-radius: 8px 0 0 8px;
     margin: 0 -1px 0 0;
     margin-left: 4px;
@@ -70,7 +71,7 @@
     color: #777;
 }
 
-.apply-discount-coupon-code-button {
+.coupon-code .apply-discount-coupon-code-button {
     border-radius: 0 8px 8px 0;
     margin-left: 0;
     float: left;
