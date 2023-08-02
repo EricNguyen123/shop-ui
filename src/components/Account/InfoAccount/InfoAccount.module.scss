@@ -1,0 +1,211 @@
+.wrapper {
+    margin-top: 90px;
+    padding-bottom: 100px;
+    padding-left: 40px;
+    width: 70.7%;
+    float: right;
+    box-sizing: border-box;
+}
+
+.page-title-wrapper {
+    border-bottom: 1px solid #cacaca;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.page-title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    margin: 0;
+}
+
+.des {
+    margin-top: 10px;
+}
+
+.box-account-information {
+    display: flex;
+    margin: 0 -30px;
+    flex-wrap: wrap;
+}
+
+.login-information {
+    width: 50%;
+    padding: 0 30px;
+    margin-bottom: 40px;
+}
+
+.form-edit-account {
+    width: 100%;
+}
+
+.fieldset {
+    margin-bottom: 0;
+    border: 0;
+    margin: 0 0 16px;
+    padding: 0;
+    letter-spacing: -0.31em;
+}
+
+.fieldset > * {
+    letter-spacing: normal;
+}
+
+.fieldset > .field {
+    box-sizing: border-box;
+    margin: 0 0 16px;
+}
+
+.legend {
+    display: block;
+    width: 100%;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    margin: 0 0 25px;
+}
+
+.fieldset > .legend {
+    padding: 0;
+    box-sizing: border-box;
+    float: left;
+}
+
+.legend + div {
+    clear: both;
+}
+
+.login-information p {
+    display: block;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    color: #000;
+}
+
+.box-information span {
+    margin-right: 10px;
+}
+
+.box-information {
+    strong {
+        font-weight: 600;
+    }
+}
+
+.choice {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.fieldset > .choice {
+    position: relative;
+}
+
+.fieldset > .field input[type='checkbox'][id] {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    margin: 2px 5.5px 0 0;
+    top: 2px;
+    border: #000;
+}
+.field > .label {
+    display: block;
+    position: relative;
+    min-height: 18px;
+    padding-left: 30px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.fieldset > .field:after {
+    content: '';
+    display: table;
+}
+
+.password {
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+.field:not(.choice) > .label {
+    padding: 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 10px;
+    display: block;
+    box-sizing: border-box;
+}
+
+.box-account-information .fieldset > .required > .label::after {
+    content: '*';
+    color: #e40a0a;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 0 4px;
+    line-height: 19px;
+}
+
+.password .control {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-text {
+    order: 0;
+    z-index: 2;
+    color: #000;
+    background: #f1f1f1;
+    background-clip: padding-box;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+    font-size: 15px;
+    height: 48px;
+    line-height: 1.5;
+    padding: 0 15px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.password-strength-meter {
+    height: auto;
+    line-height: 20px;
+    padding: 5px 15px;
+    font-size: 13px;
+    display: none;
+    background-color: #f4f4f4;
+    position: relative;
+    z-index: 1;
+}
+
+.actions-toolbar > .primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.actions-toolbar .action {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    border: 1px solid #0066cc;
+    background: #0066cc;
+    padding: 13px;
+    margin: 0 0 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}

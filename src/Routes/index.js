@@ -247,12 +247,34 @@ const publicRoutes = [
         path: config.routes.login,
         component: Login,
     },
+];
+
+const privateRoutes = [
+    ...publicRoutes,
     {
         path: config.routes.user,
         component: User,
     },
+    {
+        path: config.routes.account,
+        component: User,
+    },
+    {
+        path: config.routes.orderHistory,
+        component: User,
+    },
+    {
+        path: config.routes.deliveryAddress,
+        component: User,
+    },
+    {
+        path: config.routes.favoriteProducts,
+        component: User,
+    },
+    {
+        path: config.routes.giftYour,
+        component: User,
+    },
 ];
-
-const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };

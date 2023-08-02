@@ -157,7 +157,7 @@ function Header() {
                             </div>
                         )}
                     >
-                        <Link to={!checkLogin ? config.routes.login : config.routes.user} onClick={handleUser}>
+                        <Link to={!checkLogin ? config.routes.login : config.routes.account} onClick={handleUser}>
                             <FontAwesomeIcon className={cx('user-icon')} icon={faUser} />
                         </Link>
                     </Tippy>

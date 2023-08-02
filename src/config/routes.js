@@ -58,6 +58,11 @@ const routes = {
     register: '/register',
     login: '/login',
     user: '/user',
+    account: '/account',
+    orderHistory: '/order_history',
+    deliveryAddress: '/delivery_address',
+    favoriteProducts: '/favorite_products',
+    giftYour: '/gift_your',
 };
 
 export default routes;
