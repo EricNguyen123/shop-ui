@@ -24,3 +24,17 @@ export const getLogin = async ({ userName, password }) => {
         console.log(error);
     }
 };
+
+export const getUser = async ({ id }) => {
+    try {
+        const res = await httpRequest.get('dataUsers', {
+            params: {
+                id: id,
+            },
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

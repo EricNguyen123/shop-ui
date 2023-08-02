@@ -209,3 +209,187 @@
     box-sizing: border-box;
     cursor: pointer;
 }
+
+.personal-information {
+    width: 50%;
+    padding: 0 30px;
+}
+
+.field-group-name {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -10px;
+}
+
+.field-name-lastname {
+    order: -1;
+}
+
+.field-group-name > .field {
+    width: 50%;
+    padding: 0 10px;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.field-group-name > .required > .label:after {
+    content: '*';
+    color: #e40a0a;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0 0 0 4px;
+}
+
+.field:not(.choice) > .label {
+    line-height: 19px;
+}
+
+.field-group-name > .field .input-text {
+    font-weight: 700;
+    color: #000;
+    background: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #e4e4e4;
+    border-radius: 8px;
+    font-size: 15px;
+    height: 48px;
+    line-height: 1.5;
+    padding: 0 15px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.email {
+    display: block !important;
+}
+.control {
+    width: 100%;
+    position: relative;
+}
+
+.fieldset > .field:not(.choice) .control {
+    float: none;
+}
+
+.email input[type='checkbox'] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    top: 2px;
+}
+
+.email input[type='checkbox'] + label {
+    color: #525252;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+    margin: 0;
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    z-index: 10;
+}
+
+.email input[type='checkbox'] + label .cancel {
+    display: none;
+}
+
+.email .disabled {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.email .input-text {
+    font-weight: 500;
+    color: #000;
+    background: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #e4e4e4;
+    border-radius: 8px;
+    font-size: 15px;
+    height: 48px;
+    line-height: 1.5;
+    padding: 0 15px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.field-gender .control {
+    padding-top: 5px;
+}
+
+.field-gender .control label {
+    margin-right: 53px;
+    cursor: pointer;
+    color: #333;
+}
+
+.control input[type='radio']:checked {
+    border-color: #000;
+    background: #000;
+    box-shadow: inset 0 0 0 3px #fff;
+}
+
+.control input[type='radio'] {
+    vertical-align: top;
+    margin: 0 8px 0 0;
+    width: 18px;
+    height: 18px;
+    appearance: none;
+    border: 1px solid #9b9b9b;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.label-note {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    margin-bottom: 16px;
+}
+
+.field-birthday .control {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.field-birthday .control select {
+    width: calc((100% - 60px) / 3);
+    width: -moz-calc((100% - 60px)/3);
+    width: -webkit-calc((100% - 60px)/3);
+    width: -o-calc((100% - 60px)/3);
+    background-position: right 10px center;
+}
+
+.fieldset .field select {
+    background-color: #ffffff;
+    border: 1px solid #e4e4e4;
+    background-position: right 20px center;
+    background-repeat: no-repeat;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxNiAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuOTk5OTggOUM3Ljc0OTA3IDkgNy40OTgxOSA4LjkwMzk2IDcuMzA2OSA4LjcxMjI5TDEuMjg3MiAyLjY3Nzc2QzAuOTA0MjY3IDIuMjkzODggMC45MDQyNjcgMS42NzE1IDEuMjg3MiAxLjI4Nzc5QzEuNjY5OTcgMC45MDQwNzEgMi4yOTA3MSAwLjkwNDA3MSAyLjY3MzY3IDEuMjg3NzlMNy45OTk5OCA2LjYyNzQ4TDEzLjMyNjMgMS4yODc5N0MxMy43MDkyIDAuOTA0MjU3IDE0LjMyOTkgMC45MDQyNTcgMTQuNzEyNyAxLjI4Nzk3QzE1LjA5NTggMS42NzE2OSAxNS4wOTU4IDIuMjk0MDcgMTQuNzEyNyAyLjY3Nzk0TDguNjkzMDYgOC43MTI0OEM4LjUwMTY3IDguOTA0MTggOC4yNTA3OSA5IDcuOTk5OTggOVoiIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjAuNSIvPgo8L3N2Zz4K);
+    appearance: none;
+    color: #000;
+    border-radius: 8px;
+    font-size: 15px;
+    height: 48px;
+    line-height: 1.5;
+    padding: 5.5px 12px 4px;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    &:disabled {
+        opacity: 0.5;
+    }
+}

@@ -24,7 +24,7 @@ function Login() {
                         setCheckLogin(true);
                     } else {
                         setSuccess(true);
-                        setToken(res.id);
+                        setToken(res[0].id);
                     }
                 })
                 .catch((error) => {

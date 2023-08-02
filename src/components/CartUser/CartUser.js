@@ -15,6 +15,19 @@ function CartUser() {
     const [totalAll, setTotalAll] = useState(0);
     const [loading, setLoading] = useState(0);
     const [billing, setBilling] = useState({});
+    const [userLogin, setUserLogin] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token !== null) {
+            setUserLogin(true);
+        }
+
+        window.addEventListener('storage', handleLocalStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleLocalStorageChange);
+        };
+    }, []);
 
     useEffect(() => {
         if (dataItems !== null) {
@@ -50,6 +63,15 @@ function CartUser() {
         setBilling(e);
     };
 
+    const handleLocalStorageChange = (event) => {
+        if (event.key === 'token') {
+            const token = localStorage.getItem('token');
+            if (token !== null) {
+                setUserLogin(true);
+            }
+        }
+    };
+
     return (
         <div className={cx('wrapper')}>
             {loading === 1 && <Loader />}
@@ -62,7 +84,7 @@ function CartUser() {
                         <div className={cx('form')}>
                             <div className={cx('shoping-cart-inf')}>
                                 <CartDetail dataItems={data} handleView={handleView} handleLoading={handleLoading} />
-                                <CheckBilling handleBilling={handleBilling} />
+                                <CheckBilling handleBilling={handleBilling} userLogin={userLogin} />
                             </div>
                             <div className={cx('row')}>
                                 <CartFooter

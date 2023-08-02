@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as AddressService from '~/services/AddressService';
 import $ from 'jquery';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function CheckBilling({ handleBilling }) {
+function CheckBilling({ handleBilling, userLogin }) {
     const [dataUser, setDataUser] = useState({});
     const [nameUser, setNameUser] = useState('');
     const [emailUser, setEmailUser] = useState('');
@@ -43,25 +44,25 @@ function CheckBilling({ handleBilling }) {
 
     useEffect(() => {
         if (
-            nameUser !== '' &&
-            emailUser !== '' &&
-            phoneUser !== '' &&
+            nameUser.trim() !== '' &&
+            emailUser.trim() !== '' &&
+            phoneUser.trim() !== '' &&
             province !== '' &&
             district !== '' &&
-            (shop !== '' || addressUser !== '') &&
+            (shop !== '' || addressUser.trim() !== '') &&
             paymentMethod !== ''
         ) {
             setDataUser({
-                nameUser: nameUser,
-                emailUser: emailUser,
-                phoneUser: phoneUser,
+                nameUser: nameUser.trim(),
+                emailUser: emailUser.trim(),
+                phoneUser: phoneUser.trim(),
                 province: province,
                 district: district,
                 shop: shop,
-                addressUser: addressUser,
-                nameCompany: nameCompany,
-                addressCompany: addressCompany,
-                taxCompany: taxCompany,
+                addressUser: addressUser.trim(),
+                nameCompany: nameCompany.trim(),
+                addressCompany: addressCompany.trim(),
+                taxCompany: taxCompany.trim(),
                 paymentMethod: paymentMethod,
             });
         }
@@ -114,10 +115,16 @@ function CheckBilling({ handleBilling }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('title')}>Thông tin thanh toán</div>
-            <div className={cx('content-not-login')}>
-                <p>Đăng nhập ngay để nhận được “điểm thưởng” hấp dẫn khi mua hàng thành công các sản phẩm tại Shop</p>
-                <Link className={cx('login-link-btn')}>Đăng nhập ngay</Link>
-            </div>
+            {!userLogin && (
+                <div className={cx('content-not-login')}>
+                    <p>
+                        Đăng nhập ngay để nhận được “điểm thưởng” hấp dẫn khi mua hàng thành công các sản phẩm tại Shop
+                    </p>
+                    <Link className={cx('login-link-btn')} to={config.routes.login}>
+                        Đăng nhập ngay
+                    </Link>
+                </div>
+            )}
             <div className={cx('all-checkout')}>
                 <div className={cx('checkout-billing-load')}>
                     <div className={cx('checkout-data')}>

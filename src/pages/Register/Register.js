@@ -49,21 +49,24 @@ function Register() {
 
     const handleSub = () => {
         if (
-            firstName !== '' &&
-            email !== '' &&
-            phone !== '' &&
-            userName !== '' &&
-            password !== '' &&
+            firstName.trim() !== '' &&
+            email.trim() !== '' &&
+            phone.trim() !== '' &&
+            userName.trim() !== '' &&
+            password.trim() !== '' &&
             password === confirmPassword
         ) {
             setDataUser({
-                firstName: firstName,
-                email: email,
-                phone: phone,
-                userName: userName,
-                password: password,
+                firstName: firstName.trim(),
+                email: email.trim(),
+                phone: phone.trim(),
+                userName: userName.trim(),
+                password: password.trim(),
                 gender: gender,
                 birthday: `${day}/${month}/${year}`,
+                day: day,
+                month: month,
+                year: year,
             });
             setReferralCode('');
             setFirstName('');
@@ -232,18 +235,18 @@ function Register() {
                                                     }}
                                                 >
                                                     <option value="0">tháng</option>
-                                                    <option value="1">Tháng Giêng</option>
-                                                    <option value="2">Tháng Hai</option>
-                                                    <option value="3">Tháng Ba</option>
-                                                    <option value="4">Tháng Tư</option>
-                                                    <option value="5">Tháng Năm</option>
-                                                    <option value="6">Tháng Sáu</option>
-                                                    <option value="7">Tháng Bảy</option>
-                                                    <option value="8">Tháng Tám</option>
-                                                    <option value="9">Tháng Chín</option>
-                                                    <option value="10">Tháng Mười</option>
-                                                    <option value="11">Tháng Mười Một</option>
-                                                    <option value="12">Tháng Mười Hai</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
                                                 </select>
                                                 <select
                                                     name="DateOfBirthYear"
