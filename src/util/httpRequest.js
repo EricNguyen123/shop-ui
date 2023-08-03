@@ -17,4 +17,12 @@ export const post = async (path, data = {}) => {
     return request.data;
 };
 
+export const put = async (path, data = {}) => {
+    let request;
+    if (Object.keys(data).length !== 0) {
+        request = await httpRequest.put(path, data);
+    }
+    return request.data;
+};
+
 export default httpRequest;

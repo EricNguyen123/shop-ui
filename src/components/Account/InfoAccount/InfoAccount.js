@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './InfoAccount.module.scss';
 import { useEffect, useState } from 'react';
 import * as DataUserService from '~/services/DataUserService';
+import { isEmptyObject } from 'jquery';
 
 const cx = classNames.bind(styles);
 
@@ -9,13 +10,24 @@ function InfoAccount() {
     const [checkChangePassword, setCheckChangePassword] = useState(false);
     const [checkChangeEmail, setCheckChangeEmail] = useState(false);
     const [data, setData] = useState({});
+    const [newData, setNewData] = useState({});
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
+    const [newEmail, setNewEmail] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newConfirmPassword, setNewConfirmPassword] = useState('');
+    const [newDay, setNewDay] = useState('');
+    const [newMonth, setNewMonth] = useState('');
+    const [newYear, setNewYear] = useState('');
+    const [checkUpload, setCheckUpload] = useState(false);
+    const [checkUploadPassword, setCheckUploadPassword] = useState(false);
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         DataUserService.getUser({ id: token })
             .then((res) => {
                 setData(res[0].dataUser);
+                setNewEmail(res[0].dataUser.email);
                 const nameUser = res[0].dataUser.firstName;
                 let i = nameUser.length - 1;
                 while (nameUser[i] !== ' ') {
@@ -30,6 +42,34 @@ function InfoAccount() {
                 return error;
             });
     }, []);
+
+    useEffect(() => {
+        setNewData({
+            ...data,
+            firstName: `${firstname.trim()} ${lastname.trim()}`,
+            email: newEmail,
+            day: newDay,
+            month: newMonth,
+            year: newYear,
+        });
+    }, [data, firstname, lastname, newDay, newEmail, newMonth, newYear]);
+
+    useEffect(() => {
+        if (checkUploadPassword && newPassword !== '') {
+            setNewData({ ...data, password: newPassword });
+            setNewConfirmPassword('');
+            setNewPassword('');
+        }
+    }, [checkUploadPassword, data, newPassword]);
+
+    useEffect(() => {
+        if (!isEmptyObject(newData) && (checkUpload || checkUploadPassword)) {
+            const token = localStorage.getItem('token');
+            DataUserService.putData({ id: token, dataUser: newData }).catch((error) => {
+                return error;
+            });
+        }
+    }, [checkUpload, checkUploadPassword, newData]);
 
     return (
         <div className={cx('wrapper')}>
@@ -98,12 +138,16 @@ function InfoAccount() {
                                         className={cx('input-text')}
                                         name="password"
                                         id="password2"
+                                        value={newPassword}
                                         data-password-min-length="6"
                                         data-password-min-character-sets="3"
                                         data-input="new-password"
                                         autoComplete="off"
                                         aria-required="true"
                                         data-validate="{required:true, 'validate-customer-password':true, 'password-not-equal-to-user-name':'undefined'}"
+                                        onChange={(e) => {
+                                            setNewPassword(e.target.value);
+                                        }}
                                     />
                                     <div
                                         id="password-strength-meter-container"
@@ -132,6 +176,7 @@ function InfoAccount() {
                                 </label>
                                 <div className={cx('control')}>
                                     <input
+                                        value={newConfirmPassword}
                                         type="password"
                                         className={cx('input-text')}
                                         name="password_confirmation"
@@ -140,12 +185,34 @@ function InfoAccount() {
                                         autoComplete="off"
                                         aria-required="true"
                                         data-validate='{required:true, equalTo:"[data-input=new-password]"}'
+                                        onChange={(e) => {
+                                            setNewConfirmPassword(e.target.value);
+                                        }}
                                     />
+                                    <div
+                                        htmlFor="password-confirmation2"
+                                        generated="true"
+                                        className={cx('mage-error')}
+                                        id="password-confirmation2-error"
+                                        style={{ display: newConfirmPassword !== newPassword ? 'block' : 'none' }}
+                                    >
+                                        Vui lòng nhập lại cùng giá trị của mật khẩu
+                                    </div>
                                 </div>
                             </div>
                             <div className={cx('actions-toolbar')}>
                                 <div className={cx('primary')}>
-                                    <button type="submit" className={cx('action', 'save', 'primary')} title="Cập nhật">
+                                    <button
+                                        type="submit"
+                                        className={cx('action', 'save', 'primary')}
+                                        title="Cập nhật"
+                                        onClick={() => {
+                                            if (newConfirmPassword === newPassword) {
+                                                setCheckUploadPassword(true);
+                                                window.location.reload();
+                                            }
+                                        }}
+                                    >
                                         <span>Cập nhật</span>
                                     </button>
                                 </div>
@@ -174,6 +241,9 @@ function InfoAccount() {
                                             className={cx('input-text', 'required-entry')}
                                             data-validate="{required:true}"
                                             aria-required="true"
+                                            onChange={(e) => {
+                                                setFirstname(e.target.value);
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -191,6 +261,9 @@ function InfoAccount() {
                                             className={cx('input-text', 'required-entry')}
                                             data-validate="{required:true}"
                                             aria-required="true"
+                                            onChange={(e) => {
+                                                setLastname(e.target.value);
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -241,12 +314,14 @@ function InfoAccount() {
                                             name="email"
                                             id="email2"
                                             autoComplete="email"
-                                            value={data.email}
+                                            value={newEmail}
                                             title="Email"
                                             className={cx('input-text', 'disabled')}
-                                            data-validate="{required:true, 'validate-email':true}"
-                                            aria-required="true"
                                             style={{ pointerEvents: checkChangeEmail ? 'auto' : 'none' }}
+                                            onChange={(e) => {
+                                                setNewEmail(e.target.value);
+                                            }}
+                                            disabled={false}
                                         />
                                     </div>
                                 </div>
@@ -313,6 +388,9 @@ function InfoAccount() {
                                         className={cx('days')}
                                         name="days"
                                         disabled={data.day !== '' ? true : false}
+                                        onChange={(e) => {
+                                            setNewDay(e.target.value);
+                                        }}
                                     >
                                         <option value="">{data.day}</option>
                                         <option value="1">01</option>
@@ -351,6 +429,9 @@ function InfoAccount() {
                                         className={cx('month')}
                                         name="month"
                                         disabled={data.month !== '' ? true : false}
+                                        onChange={(e) => {
+                                            setNewMonth(e.target.value);
+                                        }}
                                     >
                                         <option value="">{data.month}</option>
                                         <option value="01">01</option>
@@ -370,6 +451,9 @@ function InfoAccount() {
                                         className={cx('year')}
                                         name="year"
                                         disabled={data.year !== '' ? true : false}
+                                        onChange={(e) => {
+                                            setNewYear(e.target.value);
+                                        }}
                                     >
                                         <option value="">{data.year}</option>
                                         <option value="1940">1940</option>
@@ -466,6 +550,10 @@ function InfoAccount() {
                                     type="submit"
                                     className={cx('action', 'save', 'primary')}
                                     title="Cập nhập thông tin"
+                                    onClick={() => {
+                                        setCheckUpload(true);
+                                        window.location.reload();
+                                    }}
                                 >
                                     <span>Cập nhập thông tin</span>
                                 </button>

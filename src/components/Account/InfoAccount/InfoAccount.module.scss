@@ -186,6 +186,12 @@
     z-index: 1;
 }
 
+.mage-error[generated] {
+    color: #e74949;
+    font-size: 1.3rem;
+    margin-top: 7px;
+}
+
 .actions-toolbar > .primary {
     display: block;
     width: 100%;

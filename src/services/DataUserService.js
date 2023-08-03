@@ -38,3 +38,15 @@ export const getUser = async ({ id }) => {
         console.log(error);
     }
 };
+
+export const putData = async ({ id, dataUser }) => {
+    try {
+        const res = await httpRequest.put(`dataUsers/${id}`, {
+            dataUser: dataUser,
+        });
+
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
