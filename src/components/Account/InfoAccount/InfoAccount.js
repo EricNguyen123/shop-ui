@@ -351,7 +351,7 @@ function InfoAccount() {
                                     <label className={cx('label', 'gender-option-1')} htmlFor="gender-option-1">
                                         <input
                                             type="radio"
-                                            class="radio"
+                                            className={cx('radio')}
                                             id="gender-option-1"
                                             name="gender"
                                             data-selector="gender"
@@ -364,7 +364,7 @@ function InfoAccount() {
                                     <label className={cx('label', 'gender-option-2')} htmlFor="gender-option-2">
                                         <input
                                             type="radio"
-                                            class="radio"
+                                            className={cx('radio')}
                                             id="gender-option-2"
                                             name="gender"
                                             data-selector="gender"
