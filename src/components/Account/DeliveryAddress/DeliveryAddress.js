@@ -2,10 +2,62 @@
 import classNames from 'classnames/bind';
 import styles from './DeliveryAddress.module.scss';
 import { Link } from 'react-router-dom';
+import * as DataUserService from '~/services/DataUserService';
+import { useEffect, useState } from 'react';
+import { isEmptyObject } from 'jquery';
 
 const cx = classNames.bind(styles);
 
 function DeliveryAddress() {
+    const [newDataAddress, setNewDataAddress] = useState([]);
+    const [dataAddress, setDataAddress] = useState([]);
+    const [shippingAddress, setShippingAddress] = useState(0);
+    const [deleteAddress, setDeleteAddress] = useState(0);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        DataUserService.getAddress({ token })
+            .then((res) => {
+                setDataAddress(res);
+            })
+            .catch((error) => {
+                return error;
+            });
+    }, []);
+
+    useEffect(() => {
+        if (shippingAddress !== 0) {
+            let data = dataAddress;
+            let index = data.findIndex((obj) => obj.setShipping === true);
+            data[index].setShipping = false;
+            index = data.findIndex((obj) => obj.id === shippingAddress);
+            data[index].setShipping = true;
+            setNewDataAddress(data);
+        }
+    }, [dataAddress, shippingAddress]);
+
+    useEffect(() => {
+        if (deleteAddress !== 0) {
+            let newData = dataAddress.filter((obj) => obj.id !== deleteAddress);
+            setNewDataAddress(newData);
+        }
+    }, [dataAddress, deleteAddress]);
+
+    useEffect(() => {
+        if (!isEmptyObject(newDataAddress) && (shippingAddress !== 0 || deleteAddress !== 0)) {
+            const token = localStorage.getItem('token');
+            DataUserService.putAddress({ id: token, deliveryAddress: newDataAddress }).catch((error) => {
+                return error;
+            });
+            DataUserService.getAddress({ token })
+                .then((res) => {
+                    setDataAddress(res);
+                })
+                .catch((error) => {
+                    return error;
+                });
+        }
+    }, [deleteAddress, newDataAddress, shippingAddress]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('page-title-wrapper')}>
@@ -39,52 +91,70 @@ function DeliveryAddress() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td data-th="Tên" className={cx('col', 'firstname')}>
-                                        Nguyen Huy
-                                    </td>
+                                {dataAddress.map((data, index) => (
+                                    <tr key={index}>
+                                        <td data-th="Tên" className={cx('col', 'firstname')}>
+                                            {`${data.firstName} ${data.lastName}`}
+                                        </td>
 
-                                    <td data-th="Địa chỉ" className={cx('col', 'streetaddress')}>
-                                        155 Nguyễn Văn Trỗi, Mộ Lao, Hà Đông, Phường Mộ Lao, Quận Hà Đông, Thành phố Hà
-                                        Nội
-                                        <div className={cx('phone')}>0972457312</div>
-                                    </td>
+                                        <td data-th="Địa chỉ" className={cx('col', 'streetaddress')}>
+                                            {`${data.addrStreet}, ${data.addrDistrict}, ${data.addrCity}`}
+                                            <div className={cx('phone')}>{data.phoneNumber}</div>
+                                        </td>
 
-                                    <td data-th="Thao tác" className={cx('col', 'actions')}>
-                                        <div className={cx('addresses-actions')}>
-                                            <div className={cx('set-shipping')}>
-                                                <label>
-                                                    <input
-                                                        type="checkbox"
-                                                        defaultChecked
-                                                        className={cx('checked-default-address')}
-                                                        value="13501"
-                                                        style={{ display: 'block' }}
-                                                    />
-                                                    <span>Mặc định</span>
-                                                </label>
+                                        <td data-th="Thao tác" className={cx('col', 'actions')}>
+                                            <div className={cx('addresses-actions')}>
+                                                <div className={cx('set-shipping')}>
+                                                    <label>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={
+                                                                shippingAddress === 0
+                                                                    ? data.setShipping
+                                                                        ? true
+                                                                        : false
+                                                                    : shippingAddress === data.id
+                                                                    ? true
+                                                                    : false
+                                                            }
+                                                            className={cx('checked-default-address')}
+                                                            value={data.id}
+                                                            style={{ display: 'block' }}
+                                                            onClick={() => {
+                                                                setShippingAddress(data.id);
+                                                            }}
+                                                        />
+                                                        <span>Mặc định</span>
+                                                    </label>
+                                                </div>
+                                                <div className={cx('actions-edit')}>
+                                                    <a
+                                                        className={cx('action', 'edit', 'open-modal-edit-address')}
+                                                        data-address={data.id}
+                                                        data-addr-name={data.firstName}
+                                                        data-addr-telephone={data.phoneNumber}
+                                                        data-last-name={data.lastName}
+                                                        data-addr-street={data.addrStreet}
+                                                        data-addr-city={data.addrCity}
+                                                        data-addr-district={data.addrDistrict}
+                                                    >
+                                                        <span>Chỉnh sửa</span>
+                                                    </a>
+                                                    <a
+                                                        className={cx('action', 'delete')}
+                                                        href="#"
+                                                        data-address={data.id}
+                                                        onClick={() => {
+                                                            setDeleteAddress(data.id);
+                                                        }}
+                                                    >
+                                                        <span>Xóa</span>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div className={cx('actions-edit')}>
-                                                <a
-                                                    className={cx('action', 'edit', 'open-modal-edit-address')}
-                                                    data-address="13501"
-                                                    data-addr-name="Nguyen"
-                                                    data-addr-telephone="0972457312"
-                                                    data-last-name="Huy"
-                                                    data-addr-street="155 Nguyễn Văn Trỗi, Mộ Lao, Hà Đông"
-                                                    data-addr-city="Thành phố Hà Nội"
-                                                    data-addr-district="Quận Hà Đông"
-                                                    data-addr-ward="Phường Mộ Lao"
-                                                >
-                                                    <span>Chỉnh sửa</span>
-                                                </a>
-                                                <a className={cx('action', 'delete')} href="#" data-address="13501">
-                                                    <span>Xóa</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
