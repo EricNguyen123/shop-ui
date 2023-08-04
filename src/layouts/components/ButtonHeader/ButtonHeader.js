@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 
 const ButtonHeader = forwardRef(({ children, path }, ref) => {
     return (
-        <Link className={cx('wrapper')} to={path} ref={ref}>
+        <Link className={cx('wrapper')} to={path} ref={ref} reloadDocument>
             {children}
         </Link>
     );

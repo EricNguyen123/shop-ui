@@ -137,6 +137,7 @@
 
 .register,
 .login,
+.user-name,
 .wishlist,
 .cart,
 .logout {
@@ -145,4 +146,12 @@
     &:hover {
         color: #0066cc !important;
     }
+}
+
+.user-name {
+    font-weight: 800;
+}
+
+.item-bottom {
+    border-bottom: 0px solid #d2d2d7;
 }

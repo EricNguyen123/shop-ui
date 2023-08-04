@@ -33,11 +33,11 @@ function Item({ data, namePath }) {
                             <Image key={index} className={cx('icon-img')} src={result.link} alt="ctsv" />
                         ))}
                 </div>
-                <Link className={cx('item-img')} to={`/${namePath}/${data.path}`}>
+                <Link className={cx('item-img')} to={`/${namePath}/${data.path}`} reloadDocument>
                     <Image className={cx('product')} src={data.color.popular} alt="product" />
                 </Link>
                 <div className={cx('item-title')}>
-                    <Link className={cx('title')} to={`/${namePath}/${data.path}`}>
+                    <Link className={cx('title')} to={`/${namePath}/${data.path}`} reloadDocument>
                         {data.name}
                     </Link>
                 </div>

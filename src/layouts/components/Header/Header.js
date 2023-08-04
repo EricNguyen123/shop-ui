@@ -9,6 +9,7 @@ import Image from '~/components/Image';
 import config from '~/config';
 import ButtonHeader from '~/layouts/components/ButtonHeader';
 import { useEffect, useState } from 'react';
+import * as DataUserService from '~/services/DataUserService';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ function Header() {
     const [JSONQuantity, setJSONQuantity] = useState(localStorage.getItem('quantity'));
     const [checkLogin, setCheckLogin] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('token'));
+    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         if (JSONQuantity !== null) {
@@ -24,6 +26,13 @@ function Header() {
         }
         if (token !== null) {
             setCheckLogin(true);
+            DataUserService.getUser({ token })
+                .then((res) => {
+                    setUserName(res[0].dataUser.firstName);
+                })
+                .catch((error) => {
+                    return error;
+                });
         }
         window.addEventListener('storage', handleLocalStorageChange);
         return () => {
@@ -57,7 +66,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link className={cx('logo')} to={config.routes.home}>
+                <Link className={cx('logo')} to={config.routes.home} reloadDocument>
                     <Image
                         className={cx('logo-item')}
                         src="https://shopdunk.com/images/thumbs/0012445_Logo_ShopDunk.png"
@@ -135,14 +144,29 @@ function Header() {
                                     {checkLogin && (
                                         <>
                                             <div className={cx('menu-item-user')}>
-                                                <Link className={cx('wishlist')}>Danh sách yêu thích</Link>
+                                                <Link
+                                                    className={cx('user-name')}
+                                                    to={config.routes.account}
+                                                    reloadDocument
+                                                >
+                                                    {userName}
+                                                </Link>
+                                            </div>
+                                            <div className={cx('menu-item-user')}>
+                                                <Link
+                                                    className={cx('wishlist')}
+                                                    to={config.routes.favoriteProducts}
+                                                    reloadDocument
+                                                >
+                                                    Danh sách yêu thích
+                                                </Link>
                                             </div>
                                             <div className={cx('menu-item-user')}>
                                                 <Link className={cx('cart')} to={config.routes.cart}>
                                                     Giỏ hàng
                                                 </Link>
                                             </div>
-                                            <div className={cx('menu-item-user')}>
+                                            <div className={cx('menu-item-user', 'item-bottom')}>
                                                 <Link
                                                     className={cx('logout')}
                                                     to={config.routes.home}

@@ -14,6 +14,14 @@ function App() {
         }
         setLoading(false);
 
+        const sessionID = localStorage.getItem('sessionID');
+        if (token !== null || sessionID !== null) {
+            setTimeout(() => {
+                localStorage.clear();
+                window.location.reload();
+            }, 7200000);
+        }
+
         // Lắng nghe sự thay đổi của token trong localStorage
         window.addEventListener('storage', handleLocalStorageChange);
         return () => {

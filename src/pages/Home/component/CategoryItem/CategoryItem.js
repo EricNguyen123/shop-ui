@@ -27,7 +27,7 @@ function CategoryItem({ nameService, title, path }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('category-name')}>
-                <Link className={cx('category-link')} to={path}>
+                <Link className={cx('category-link')} to={path} reloadDocument>
                     {title}
                 </Link>
             </div>
@@ -41,7 +41,7 @@ function CategoryItem({ nameService, title, path }) {
             </div>
 
             <div className={cx('show-all')}>
-                <Link className={cx('show-btn')} to={path}>
+                <Link className={cx('show-btn')} to={path} reloadDocument>
                     Xem tất cả {title}
                     <FontAwesomeIcon className={cx('show-icon')} icon={faChevronRight} />
                 </Link>

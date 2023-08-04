@@ -4,6 +4,7 @@ export const post = async ({ dataUser }) => {
     try {
         const res = await httpRequest.post('dataUsers', {
             dataUser: dataUser,
+            deliveryAddress: [],
         });
         return res;
     } catch (error) {
