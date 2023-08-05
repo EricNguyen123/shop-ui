@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Account.module.scss';
 import Sidebar from './Sidebar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import config from '~/config';
 import TitleTab from '~/components/TitleTab';
 
@@ -15,13 +15,18 @@ function Account() {
     };
 
     const [data, setData] = useState({ title: 'Tài khoản của tôi' });
+
     const handleTitle = (newData) => {
         setData(newData);
     };
 
-    // useEffect(() => {
-    //     const pathName = window.location.pathname;
-    // }, []);
+    useEffect(() => {
+        const pathName = window.location.pathname;
+        let index = Object.values(config.routes).findIndex((e) => e === pathName);
+        const key = Object.keys(config.routes)[index];
+        index = Object.keys(config.viewUser).findIndex((e) => e === key);
+        setView({ Component: Object.values(config.viewUser)[index] });
+    }, []);
 
     return (
         <div className={cx('wrapper')}>

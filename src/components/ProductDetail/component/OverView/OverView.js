@@ -78,6 +78,7 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
             localStorage.setItem('dataItems', JSON.stringify(Items));
         } else {
             Items = JSON.parse(dataItems);
+
             let checkItem = false;
             for (let e of Items) {
                 if (
@@ -89,15 +90,20 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
                     e.quantity += 1;
                     e.totalItem = e.quantity * Number(priceItem);
                     checkItem = true;
+
                     break;
                 } else if (
                     e.id === JSON.parse(localStorage.getItem('idChange')) &&
                     e.name === item.name &&
                     e.capacity === item.capacity &&
                     e.color === item.color &&
+                    e.promotions === item.promotions &&
+                    e.price === item.price &&
+                    e.storeArea === item.storeArea &&
                     upOptions === false
                 ) {
                     checkItem = true;
+
                     break;
                 } else if (e.id === JSON.parse(localStorage.getItem('idChange')) && upOptions === false) {
                     e.capacity = item.capacity;
@@ -107,9 +113,11 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
                     e.storeArea = item.storeArea;
                     e.totalItem = e.quantity * Number(priceItem);
                     checkItem = true;
+
                     break;
                 }
             }
+
             if (checkItem === false) {
                 Items.push(item);
             }
@@ -175,10 +183,10 @@ function OverView({ className, data, colorNew, userReview, handleLoading }) {
                                     }}
                                 >
                                     <option value="0">Vui lòng chọn</option>
-                                    <option data-attr-value="5962" value="5962">
+                                    <option data-attr-value="5962" value="Khu vực miền Bắc">
                                         Khu vực miền Bắc
                                     </option>
-                                    <option data-attr-value="5963" value="5963">
+                                    <option data-attr-value="5963" value="Khu vực miền Nam">
                                         Khu vực miền Nam
                                     </option>
                                 </select>

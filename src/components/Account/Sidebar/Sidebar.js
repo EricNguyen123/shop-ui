@@ -33,6 +33,7 @@ function Sidebar({ handleView, handleTitle }) {
                                         handleView(config.viewUser.account);
                                         handleTitle({ title: 'Tài khoản của tôi' });
                                     }}
+                                    reloadDocument
                                 >
                                     <span>Thông tin tài khoản</span>
                                     <strong>Thông tin tài khoản</strong>
@@ -46,6 +47,7 @@ function Sidebar({ handleView, handleTitle }) {
                                         handleView(config.viewUser.orderHistory);
                                         handleTitle({ title: 'Lịch sử mua hàng' });
                                     }}
+                                    reloadDocument
                                 >
                                     <span>Lịch sử mua hàng</span>
                                     <strong>Lịch sử mua hàng</strong>
@@ -59,6 +61,7 @@ function Sidebar({ handleView, handleTitle }) {
                                         handleView(config.viewUser.deliveryAddress);
                                         handleTitle({ title: 'Địa chỉ giao hàng' });
                                     }}
+                                    reloadDocument
                                 >
                                     <span>Địa chỉ giao hàng</span>
                                     <strong>Địa chỉ giao hàng</strong>
@@ -72,6 +75,7 @@ function Sidebar({ handleView, handleTitle }) {
                                         handleView(config.viewUser.favoriteProducts);
                                         handleTitle({ title: 'Sản phẩm yêu thích' });
                                     }}
+                                    reloadDocument
                                 >
                                     <span>Sản phẩm yêu thích</span>
                                     <strong>Sản phẩm yêu thích</strong>
@@ -85,6 +89,7 @@ function Sidebar({ handleView, handleTitle }) {
                                         handleView(config.viewUser.giftYour);
                                         handleTitle({ title: 'Ưu đãi của bạn' });
                                     }}
+                                    reloadDocument
                                 >
                                     <span>Ưu đãi của bạn</span>
                                     <strong>Ưu đãi của bạn</strong>
