@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 function User() {
     return (
         <div className={cx('wrapper')}>
-            <Breadcrumb directive={true} />
+            <Breadcrumb directive={true} title="Tài khoản của tôi" />
             <Account />
         </div>
     );

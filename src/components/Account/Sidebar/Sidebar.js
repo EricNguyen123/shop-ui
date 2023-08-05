@@ -12,6 +12,7 @@ function Sidebar({ handleView, handleTitle }) {
         const linkUrl = event.currentTarget.getAttribute('href');
         window.location.href = linkUrl;
     };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('account-page-title')}>
@@ -30,7 +31,7 @@ function Sidebar({ handleView, handleTitle }) {
                                     to={config.routes.account}
                                     onClick={() => {
                                         handleView(config.viewUser.account);
-                                        handleTitle('Tài khoản của tôi');
+                                        handleTitle({ title: 'Tài khoản của tôi' });
                                     }}
                                 >
                                     <span>Thông tin tài khoản</span>
@@ -43,7 +44,7 @@ function Sidebar({ handleView, handleTitle }) {
                                     to={config.routes.orderHistory}
                                     onClick={() => {
                                         handleView(config.viewUser.orderHistory);
-                                        handleTitle('Lịch sử mua hàng');
+                                        handleTitle({ title: 'Lịch sử mua hàng' });
                                     }}
                                 >
                                     <span>Lịch sử mua hàng</span>
@@ -56,7 +57,7 @@ function Sidebar({ handleView, handleTitle }) {
                                     to={config.routes.deliveryAddress}
                                     onClick={() => {
                                         handleView(config.viewUser.deliveryAddress);
-                                        handleTitle('Địa chỉ giao hàng');
+                                        handleTitle({ title: 'Địa chỉ giao hàng' });
                                     }}
                                 >
                                     <span>Địa chỉ giao hàng</span>
@@ -69,7 +70,7 @@ function Sidebar({ handleView, handleTitle }) {
                                     to={config.routes.favoriteProducts}
                                     onClick={() => {
                                         handleView(config.viewUser.favoriteProducts);
-                                        handleTitle('Sản phẩm yêu thích');
+                                        handleTitle({ title: 'Sản phẩm yêu thích' });
                                     }}
                                 >
                                     <span>Sản phẩm yêu thích</span>
@@ -82,7 +83,7 @@ function Sidebar({ handleView, handleTitle }) {
                                     to={config.routes.giftYour}
                                     onClick={() => {
                                         handleView(config.viewUser.giftYour);
-                                        handleTitle('Ưu đãi của bạn');
+                                        handleTitle({ title: 'Ưu đãi của bạn' });
                                     }}
                                 >
                                     <span>Ưu đãi của bạn</span>

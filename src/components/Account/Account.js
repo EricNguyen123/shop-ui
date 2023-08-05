@@ -19,6 +19,10 @@ function Account() {
         setData(newData);
     };
 
+    // useEffect(() => {
+    //     const pathName = window.location.pathname;
+    // }, []);
+
     return (
         <div className={cx('wrapper')}>
             <TitleTab title={data.title} />

@@ -6,9 +6,6 @@ import config from '~/config';
 const cx = classNames.bind(styles);
 
 function Breadcrumb({ directive, title }) {
-    // const location = useLocation();
-    // const pathSegments = location.pathname.split('/').filter((item) => item !== '');
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('content-path')}>
@@ -20,17 +17,7 @@ function Breadcrumb({ directive, title }) {
                         </Link>
                     </div>
                 )}
-                {/* {pathSegments.map((segment, index) => {
-                    const link = `/${pathSegments.slice(0, index + 1).join('/')}`;
-                    return (
-                        <div key={index} className={cx('item')}>
-                            <span className={cx('deLimiter')}>{'>'}</span>
-                            <Link className={cx('itemName')} to={link}>
-                                {segment}
-                            </Link>
-                        </div>
-                    );
-                })} */}
+
                 <div className={cx('item')}>
                     <span className={cx('deLimiter')}>{'>'}</span>
                     <Link className={cx('itemName')}>{title}</Link>
