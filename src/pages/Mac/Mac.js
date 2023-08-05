@@ -4,6 +4,7 @@ import Product from '~/components/Products';
 import config from '~/config';
 import * as MacService from '~/services/MacService';
 import { useState } from 'react';
+import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ function Mac() {
     };
     return (
         <div className={cx('wrapper')}>
+            <TitleTab title={data.title} />
             <Product
                 nameService={MacService}
                 directive={true}

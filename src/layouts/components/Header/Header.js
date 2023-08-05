@@ -114,7 +114,7 @@ function Header() {
                 </div>
                 <div className={cx('button-user')}>
                     <div className={cx('search-icon')}></div>
-                    <Link className={cx('cart')} to={config.routes.cart}>
+                    <Link className={cx('cart')} to={config.routes.cart} reloadDocument>
                         <FontAwesomeIcon className={cx('cart-icon')} icon={faCartShopping} />
                         <span className={cx('badge')}>{badge}</span>
                     </Link>

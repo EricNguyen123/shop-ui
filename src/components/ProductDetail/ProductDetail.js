@@ -11,6 +11,7 @@ import TabDetail from './component/TabDetail';
 import Description from './component/Description';
 import { useEffect, useState } from 'react';
 import Loader from '~/components/Loader';
+import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
@@ -41,6 +42,7 @@ function ProductDetail({ directive, title, item }) {
 
     return (
         <div className={cx('wrapper')}>
+            <TitleTab title={title} />
             {loading === 1 && <Loader />}
             <Breadcrumb directive={directive} title={title} />
             <div className={cx('inner')}>

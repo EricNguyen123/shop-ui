@@ -4,6 +4,7 @@ import Product from '~/components/Products';
 import config from '~/config';
 import * as AccessoryService from '~/services/AccessoryService';
 import { useState } from 'react';
+import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ function SoundPage() {
     };
     return (
         <div className={cx('wrapper')}>
+            <TitleTab title={data.title} />
             <Product
                 nameService={AccessoryService}
                 directive={true}

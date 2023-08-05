@@ -6,6 +6,7 @@ import CheckBilling from './component/CheckBilling';
 import CartFooter from './component/CartFooter';
 import Loader from '~/components/Loader';
 import { useEffect, useState } from 'react';
+import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
@@ -74,6 +75,7 @@ function CartUser() {
 
     return (
         <div className={cx('wrapper')}>
+            <TitleTab title={'Giỏ hàng'} />
             {loading === 1 && <Loader />}
             <Breadcrumb directive={true} title="Giỏ hàng" />
             <div className={cx('inner')}>

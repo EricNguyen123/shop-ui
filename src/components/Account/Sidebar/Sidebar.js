@@ -5,7 +5,7 @@ import config from '~/config';
 
 const cx = classNames.bind(styles);
 
-function Sidebar({ handleView }) {
+function Sidebar({ handleView, handleTitle }) {
     const handleLogout = (event) => {
         event.preventDefault();
         localStorage.clear();
@@ -30,6 +30,7 @@ function Sidebar({ handleView }) {
                                     to={config.routes.account}
                                     onClick={() => {
                                         handleView(config.viewUser.account);
+                                        handleTitle('Tài khoản của tôi');
                                     }}
                                 >
                                     <span>Thông tin tài khoản</span>
@@ -42,6 +43,7 @@ function Sidebar({ handleView }) {
                                     to={config.routes.orderHistory}
                                     onClick={() => {
                                         handleView(config.viewUser.orderHistory);
+                                        handleTitle('Lịch sử mua hàng');
                                     }}
                                 >
                                     <span>Lịch sử mua hàng</span>
@@ -54,6 +56,7 @@ function Sidebar({ handleView }) {
                                     to={config.routes.deliveryAddress}
                                     onClick={() => {
                                         handleView(config.viewUser.deliveryAddress);
+                                        handleTitle('Địa chỉ giao hàng');
                                     }}
                                 >
                                     <span>Địa chỉ giao hàng</span>
@@ -66,6 +69,7 @@ function Sidebar({ handleView }) {
                                     to={config.routes.favoriteProducts}
                                     onClick={() => {
                                         handleView(config.viewUser.favoriteProducts);
+                                        handleTitle('Sản phẩm yêu thích');
                                     }}
                                 >
                                     <span>Sản phẩm yêu thích</span>
@@ -78,6 +82,7 @@ function Sidebar({ handleView }) {
                                     to={config.routes.giftYour}
                                     onClick={() => {
                                         handleView(config.viewUser.giftYour);
+                                        handleTitle('Ưu đãi của bạn');
                                     }}
                                 >
                                     <span>Ưu đãi của bạn</span>

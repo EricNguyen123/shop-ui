@@ -4,6 +4,7 @@ import Product from '~/components/Products';
 import config from '~/config';
 import * as IphoneService from '~/services/IphoneService';
 import { useState } from 'react';
+import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ function Iphone() {
     };
     return (
         <div className={cx('wrapper')}>
+            <TitleTab title={data.title} />
             <Product
                 nameService={IphoneService}
                 directive={true}
