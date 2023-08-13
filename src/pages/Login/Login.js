@@ -20,11 +20,11 @@ function Login() {
         if (checkSubmit && userName !== '' && password !== '') {
             DataUserService.getLogin({ userName: userName, password: password })
                 .then((res) => {
-                    if (res.length === 0) {
+                    if (!res) {
                         setCheckLogin(true);
                     } else {
                         setSuccess(true);
-                        setToken(res[0].id);
+                        setToken(String(res[0]._id));
                     }
                 })
                 .catch((error) => {

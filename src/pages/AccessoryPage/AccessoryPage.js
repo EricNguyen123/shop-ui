@@ -3,13 +3,24 @@ import styles from './AccessoryPage.module.scss';
 import Product from '~/components/Products';
 import config from '~/config';
 import * as AccessoryService from '~/services/AccessoryService';
-import { useState } from 'react';
+import * as SeriesService from '~/services/SeriesService';
+import { useState, useEffect } from 'react';
 import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
 function SoundPage() {
     const [data, setData] = useState({ title: 'Phụ kiện' });
+    const path = window.location.pathname;
+    useEffect(() => {
+        SeriesService.getTitle({ name: 'Phụ kiện', path: path.slice(1, path.length) })
+            .then((res) => {
+                setData({ title: res.title === undefined ? 'Phụ kiện' : res.title });
+            })
+            .catch((error) => {
+                return error;
+            });
+    }, [path]);
     const handleView = (newData) => {
         setData(newData);
     };

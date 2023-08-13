@@ -18,7 +18,7 @@ function ProductReview({ title }) {
 
     useEffect(() => {
         if (!check) {
-            CommentService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+            CommentService.get({ title, _sort: '_id', _order: 'desc', _page: 1, _limit: 10000 })
                 .then((res) => {
                     if (res.length !== 0) {
                         setCheck(true);
@@ -126,6 +126,7 @@ function ProductReview({ title }) {
                                 setPhoneNumber('');
                                 setComment('');
                                 setCheck(true);
+                                window.location.reload();
                             }
                         }}
                     >

@@ -43,7 +43,7 @@ function AllRatingList({ title, sendChildData }) {
                     return error;
                 });
             }
-            await RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+            await RatingService.get({ title, _sort: '_id', _order: 'desc', _page: 1, _limit: 10000 })
                 .then((res) => {
                     sendChildData(res);
                     setCmt(res.length);

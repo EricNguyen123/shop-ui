@@ -14,13 +14,12 @@ export const post = async ({ dataUser }) => {
 
 export const getLogin = async ({ userName, password }) => {
     try {
-        const res = await httpRequest.get('dataUsers', {
-            params: {},
+        const res = await httpRequest.post('dataUsers/confirmDataUsers', {
+            userName: userName,
+            password: password,
         });
-        const data = res.filter(
-            (result) => result.dataUser.userName === userName && result.dataUser.password === password,
-        );
-        return data;
+
+        return res;
     } catch (error) {
         console.log(error);
     }

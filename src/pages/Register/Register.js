@@ -369,17 +369,17 @@ function Register() {
                                                 </select>
                                             </div>
                                             <span
-                                                classNames={cx('field-validation-valid')}
+                                                className={cx('field-validation-valid')}
                                                 data-valmsg-for="DateOfBirthDay"
                                                 data-valmsg-replace="true"
                                             ></span>
                                             <span
-                                                classNames={cx('field-validation-valid')}
+                                                className={cx('field-validation-valid')}
                                                 data-valmsg-for="DateOfBirthMonth"
                                                 data-valmsg-replace="true"
                                             ></span>
                                             <span
-                                                classNames={cx('field-validation-valid')}
+                                                className={cx('field-validation-valid')}
                                                 data-valmsg-for="DateOfBirthYear"
                                                 data-valmsg-replace="true"
                                             ></span>
@@ -539,7 +539,7 @@ function Register() {
                                                             height="78"
                                                             role="presentation"
                                                             name="a-4j1klxu4gvrn"
-                                                            frameborder="0"
+                                                            frameBorder="0"
                                                             scrolling="no"
                                                             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
                                                             onClick={() => {
@@ -550,7 +550,7 @@ function Register() {
                                                     <textarea
                                                         id="g-recaptcha-response"
                                                         name="g-recaptcha-response"
-                                                        class="g-recaptcha-response"
+                                                        className={cx('g-recaptcha-response')}
                                                         style={{
                                                             width: '250px',
                                                             height: '40px',

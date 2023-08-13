@@ -61,7 +61,7 @@ function AllRatingList({ title, sendChildData }) {
                 }).catch((error) => {
                     return error;
                 });
-                await RatingService.get({ title, _sort: 'id', _order: 'desc', _page: 1, _limit: 10000 })
+                await RatingService.get({ title, _sort: '_id', _order: 'desc', _page: 1, _limit: 10000 })
                     .then((res) => {
                         sendChildData(res);
                         setCmt(res.length);
@@ -247,6 +247,7 @@ function AllRatingList({ title, sendChildData }) {
                             setStars([true, true, true, true, true]);
                             setNStars(5);
                             setCheck(true);
+                            window.location.reload();
                         }
                     }}
                 >

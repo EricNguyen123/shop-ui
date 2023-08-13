@@ -3,13 +3,24 @@ import styles from './Watch.module.scss';
 import Product from '~/components/Products';
 import config from '~/config';
 import * as WatchService from '~/services/WatchService';
-import { useState } from 'react';
+import * as SeriesService from '~/services/SeriesService';
+import { useState, useEffect } from 'react';
 import TitleTab from '~/components/TitleTab';
 
 const cx = classNames.bind(styles);
 
 function Watch() {
     const [data, setData] = useState({ title: 'Watch' });
+    const path = window.location.pathname;
+    useEffect(() => {
+        SeriesService.getTitle({ name: 'Watch', path: path.slice(1, path.length) })
+            .then((res) => {
+                setData({ title: res.title === undefined ? 'Watch' : res.title });
+            })
+            .catch((error) => {
+                return error;
+            });
+    }, [path]);
     const handleView = (newData) => {
         setData(newData);
     };

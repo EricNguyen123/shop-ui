@@ -40,10 +40,8 @@ export const getItem = async ({ name, path }) => {
         default:
     }
     try {
-        const res = await httpRequest.get(name, {
-            params: {
-                path: path,
-            },
+        const res = await httpRequest.get(`${name}/${path}`, {
+            params: {},
         });
         return res;
     } catch (error) {

@@ -29,7 +29,7 @@ function DeliveryAddress() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        DataUserService.getAddress({ token })
+        DataUserService.getAddress({ id: token })
             .then((res) => {
                 setDataAddress(res);
             })
@@ -91,7 +91,7 @@ function DeliveryAddress() {
                 await DataUserService.putAddress({ id: token, deliveryAddress: newDataAddress }).catch((error) => {
                     return error;
                 });
-                await DataUserService.getAddress({ token })
+                await DataUserService.getAddress({ id: token })
                     .then((res) => {
                         setDataAddress(res);
                     })
@@ -526,6 +526,9 @@ function DeliveryAddress() {
                                                 setProvince('');
                                                 setDistrict('');
                                                 setPopupAddress(false);
+                                                setTimeout(() => {
+                                                    window.location.reload();
+                                                }, 500);
                                             }
                                         }}
                                     >

@@ -12,3 +12,16 @@ export const getSeries = async ({ name }) => {
         console.log(error);
     }
 };
+
+export const getTitle = async ({ name, path }) => {
+    try {
+        const res = await httpRequest.get(`series/${name}`, {
+            params: {
+                path,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

@@ -37,6 +37,9 @@ function InfoAccount() {
                 const y = nameUser.slice(i + 1, nameUser.length);
                 setFirstname(x);
                 setLastname(y);
+                setNewDay(res[0].dataUser.day);
+                setNewMonth(res[0].dataUser.month);
+                setNewYear(res[0].dataUser.year);
             })
             .catch((error) => {
                 return error;
